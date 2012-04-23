@@ -1,0 +1,12 @@
+name: rodolffoUtils Reloaded
+version: 0.1
+author: Rodolffo
+description: Various utilities for server admins. Rewrite by Zolli
+main: com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded
+commands:
+  fakechat:
+    description: Fakes a chat message
+    usage: /<command> name message
+  achat:
+    description: Sends a message for online admins
+    usage: /<command> message

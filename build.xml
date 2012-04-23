@@ -1,0 +1,40 @@
+<project name="rodolffoUtilsReloaded" default="distribution" basedir=".">
+	<property name="src" location="."/>
+	<property name="resources" location="resources"/>
+	<property name="lib" location="../lib"/>
+	<property name="target" location="target"/>
+	<property name="classes" location="${target}/classes"/>
+	<property name="build" location="${target}/"/>
+	<property name="bukkit" value="bukkit.jar"/>
+	<property name="Vault" value="vault.jar"/>
+	
+	<target name="init">
+		<mkdir dir="${lib}"/>
+		<mkdir dir="${target}"/>
+		<mkdir dir="${classes}"/>
+	</target>
+	
+	<target name="get_libs" depends="init">
+		<get src="http://dl.bukkit.org/downloads/bukkit/get/01025_1.2.5-R1.0/bukkit.jar" dest="${lib}/${bukkit}" usetimestamp="true"/>
+		<get src="http://dev.bukkit.org/media/files/587/723/Vault.jar" dest="${lib}/${Vault}" usetimestamp="true"/>
+	</target>
+	
+	<target name="compile" depends="get_libs">
+		<javac srcdir="${src}" destdir="${classes}" includeantruntime="false" debug="on">
+		<classpath>
+			<pathelement location="${lib}/${bukkit}"/>
+			<pathelement location="${lib}/${Vault}"/>
+		</classpath>
+		</javac>
+	</target>
+	
+	<target name="distribution" depends="compile">
+		<mkdir dir="${build}"/>
+		<jar jarfile="${build}/rodolffoUtilsReloaded.jar" update="true">
+			<fileset dir="${classes}/"/>
+			<fileset dir="${resources}/"/>
+		</jar>
+		<delete dir="${target}/classes"/>
+	</target>
+	
+</project>
