@@ -10,6 +10,7 @@ import org.bukkit.entity.Spider;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -46,7 +47,7 @@ public class playerListener implements Listener {
 		
 	}
 	
-	@EventHandler(priority = EventPriority.LOWEST)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void giveBackSaddle(PlayerInteractEntityEvent e) {
 		
 		Entity entity = e.getRightClicked();
@@ -71,6 +72,25 @@ public class playerListener implements Listener {
 			
 			if(plugin.perm.has(player, "rur.rideSpider") && (entitySpider.getPassenger() == null)) {
 				entitySpider.setPassenger(player);
+			}
+			
+		}
+		
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void giveBackSaddleOnDeath(EntityDeathEvent e) {
+		
+		Entity entity = e.getEntity();
+		
+		if(e.getEntity() instanceof Pig) {
+			
+			Pig entityPig = (Pig) entity;
+			
+			if(plugin.perm.has(entityPig.getKiller(), "rur.getBackSaddle") && plugin.config.getBoolean("pigDropSaddleOnDeath")) {
+				
+				e.getDrops().add(new ItemStack(Material.SADDLE, 1));
+				
 			}
 			
 		}
