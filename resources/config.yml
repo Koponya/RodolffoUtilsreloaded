@@ -1,1 +1,2 @@
 pigDropSaddleOnDeath: false
+adminChatFormat: '§4[AdminChat] §2(NAME)§f: (MSG)'
