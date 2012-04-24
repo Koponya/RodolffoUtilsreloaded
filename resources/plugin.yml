@@ -6,6 +6,7 @@ main: com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded
 depend: [Vault]
 commands:
   fakechat:
+    aliases: [fc]
     description: Fakes a chat message
     usage: /<command> name message
   achat:
