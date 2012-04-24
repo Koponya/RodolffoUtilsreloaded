@@ -45,12 +45,13 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		pm = getServer().getPluginManager();
 		commandExec = new commandExecutor(this);
 		
+		config.options().copyDefaults(true);
+		
 	}
 	
 	public void onEnable() {
 		
 		final playerListener playerListener = new playerListener(this);
-		
 		pm.registerEvents(playerListener, this);
 		
 		getCommand("achat").setExecutor(commandExec);
@@ -66,13 +67,14 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 			pm.disablePlugin(this);
 		}
 		
-		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully Enabled!");
+		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully enabled!");
 		
 	}
 	
 	public void onDisable() {
 		
-		
+		saveConfig();
+		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully disabled!");
 		
 	}
 	
