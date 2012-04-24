@@ -1,8 +1,9 @@
 name: rodolffoUtils Reloaded
-version: 0.1
-author: Rodolffo
+version: 1.0
+authors: [Rodolffo, Zolli]
 description: Various utilities for server admins. Rewrite by Zolli
 main: com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded
+depend: [Vault]
 commands:
   fakechat:
     description: Fakes a chat message
