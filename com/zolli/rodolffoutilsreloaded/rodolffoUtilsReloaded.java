@@ -1,12 +1,17 @@
 package com.zolli.rodolffoutilsreloaded;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.command.CommandExecutor;
-import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -20,7 +25,13 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	private PluginManager pm;
 	public Economy econ = null;
 	public Permission perm = null;
-	public Configuration config;
+	
+	private File configFile;
+	private File messagesFile;
+	
+	public FileConfiguration config;
+	public FileConfiguration messages;
+	
 	public Logger log;
 	private PluginDescriptionFile pdfile;
 	private CommandExecutor commandExec;
@@ -37,15 +48,70 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
         return econ != null;
     }
 	
+	private void copy(InputStream in, File file) {
+        try {
+            OutputStream out = new FileOutputStream(file);
+            byte[] buf = new byte[1024];
+            int len;
+            while((len=in.read(buf))>0){
+                out.write(buf,0,len);
+            }
+            out.close();
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
+	private void firstRun() {
+		if(!configFile.exists()) {
+			configFile.getParentFile().mkdirs();
+			copy(getResource("config.yml"), configFile);
+		}
+		if(!messagesFile.exists()) {
+			messagesFile.getParentFile().mkdirs();
+			copy(getResource("messages.yml"), messagesFile);
+		}
+	}
+	
+	public void loadConfiguration() {
+		try {
+			config.load(configFile);
+			messages.load(messagesFile);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveConfiguration() {
+		try {
+			config.save(configFile);
+			messages.save(messagesFile);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void onLoad() {
 		
+		config = new YamlConfiguration();
+		messages = new YamlConfiguration();
+		configFile = new File(getDataFolder(), "config.yml");
+		messagesFile = new File(getDataFolder(), "messages.yml");
+		
+		try {
+            this.firstRun();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+		this.loadConfiguration();
+		
 		log = Logger.getLogger("Minecraft");
-		config = getConfig();
 		pdfile = getDescription();
 		pm = getServer().getPluginManager();
 		commandExec = new commandExecutor(this);
 		
-		config.options().copyDefaults(true);
 		
 	}
 	
@@ -73,7 +139,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	
 	public void onDisable() {
 		
-		saveConfig();
+		this.saveConfiguration();
 		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully disabled!");
 		
 	}
