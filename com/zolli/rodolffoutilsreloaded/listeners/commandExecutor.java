@@ -22,7 +22,7 @@ public class commandExecutor implements CommandExecutor {
 	
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		
-		if(command.getName().equalsIgnoreCase("achat")) {
+		if(command.getName().equalsIgnoreCase("achat") || command.getName().equalsIgnoreCase("ac")) {
 			
 			if(args.length < 1) {
 				return false;

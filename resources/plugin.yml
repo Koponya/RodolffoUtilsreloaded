@@ -9,5 +9,6 @@ commands:
     description: Fakes a chat message
     usage: /<command> name message
   achat:
+    aliases: [ac]
     description: Sends a message for online admins
     usage: /<command> message
