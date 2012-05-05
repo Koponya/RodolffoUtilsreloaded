@@ -109,11 +109,11 @@ public class playerListener implements Listener {
 		
 		if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 			
-			if(e.getClickedBlock().getType().equals(Material.STONE_BUTTON) && plugin.SelectorPlayer != "") {
+			if(e.getClickedBlock().getType().equals(Material.STONE_BUTTON) && plugin.SelectorPlayer != null) {
 					
 				Location buttonLoc = e.getClickedBlock().getLocation();
 				cu.setLocation(buttonLoc, plugin.selectType, plugin.selectName);
-				plugin.SelectorPlayer = "";
+				plugin.SelectorPlayer = null;
 				plugin.saveConfiguration();
 				
 				e.getPlayer().sendMessage("A gomb sikeresen felvéve!");

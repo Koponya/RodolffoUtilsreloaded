@@ -39,7 +39,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	private PluginDescriptionFile pdfile;
 	private CommandExecutor commandExec;
 	
-	public String SelectorPlayer;
+	public String SelectorPlayer = null;
 	public String selectType;
 	public String selectName;
 	public Location selectLoc;
@@ -114,7 +114,6 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		configFile = new File(getDataFolder(), "config.yml");
 		messagesFile = new File(getDataFolder(), "messages.yml");
 		buttonFile = new File(getDataFolder(), "buttons.yml");
-		SelectorPlayer = "";
 		
 		try {
             this.firstRun();
