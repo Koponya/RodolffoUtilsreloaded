@@ -95,6 +95,36 @@ public class commandExecutor implements CommandExecutor {
 			
 		}
 		
+		if(command.getName().equalsIgnoreCase("definebutton")) {
+			
+			if(sender.isOp() || plugin.perm.has(sender, "rur.defineButton")) {
+				
+				if(args.length < 2) {
+					return false;
+				}
+				
+				if(args[0].equalsIgnoreCase("timeday") || args[0].equalsIgnoreCase("promote")) {
+				
+					plugin.SelectorPlayer = sender.getName();
+					plugin.selectType = args[0];
+					plugin.selectName = args[1];
+					sender.sendMessage("A gomb tipusa: " + args[0]);
+					sender.sendMessage("Válaszd ki a gombot jobb kattintással!");
+					
+				} else {
+					
+					sender.sendMessage("A gomb csak a következö tipusu lehet: promote, timeday!");
+					
+				}
+				
+			} else {
+				return false;
+			}
+			
+			return true;
+			
+		}
+		
 		return false;
 	}
 

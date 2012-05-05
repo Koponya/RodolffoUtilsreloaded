@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
+import org.bukkit.Location;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -28,13 +29,20 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	
 	private File configFile;
 	private File messagesFile;
+	private File buttonFile;
 	
 	public FileConfiguration config;
 	public FileConfiguration messages;
+	public FileConfiguration button;
 	
 	public Logger log;
 	private PluginDescriptionFile pdfile;
 	private CommandExecutor commandExec;
+	
+	public String SelectorPlayer;
+	public String selectType;
+	public String selectName;
+	public Location selectLoc;
 	
 	private boolean setupPermissions() {
         RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
@@ -72,12 +80,17 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 			messagesFile.getParentFile().mkdirs();
 			copy(getResource("messages.yml"), messagesFile);
 		}
+		if(!buttonFile.exists()) {
+			buttonFile.getParentFile().mkdirs();
+			copy(getResource("buttons.yml"), buttonFile);
+		}
 	}
 	
 	public void loadConfiguration() {
 		try {
 			config.load(configFile);
 			messages.load(messagesFile);
+			button.load(buttonFile);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -87,6 +100,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		try {
 			config.save(configFile);
 			messages.save(messagesFile);
+			button.save(buttonFile);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -96,8 +110,11 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		config = new YamlConfiguration();
 		messages = new YamlConfiguration();
+		button = new YamlConfiguration();
 		configFile = new File(getDataFolder(), "config.yml");
 		messagesFile = new File(getDataFolder(), "messages.yml");
+		buttonFile = new File(getDataFolder(), "buttons.yml");
+		SelectorPlayer = "";
 		
 		try {
             this.firstRun();
@@ -122,6 +139,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		getCommand("achat").setExecutor(commandExec);
 		getCommand("fakechat").setExecutor(commandExec);
+		getCommand("definebutton").setExecutor(commandExec);
 		
 		if(pm.isPluginEnabled("Vault")) {
 			setupPermissions();

@@ -1,6 +1,8 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Pig;
@@ -9,19 +11,25 @@ import org.bukkit.entity.Spider;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
+import com.zolli.rodolffoutilsreloaded.utils.configUtils;
 
 public class playerListener implements Listener {
 	
 	private rodolffoUtilsReloaded plugin;
+	public configUtils cu;
 	public playerListener(rodolffoUtilsReloaded instance) {
 		plugin = instance;
+		cu = new configUtils(instance);
 	}
+	
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void overrideBukkitDefaults(PlayerCommandPreprocessEvent e) {
@@ -90,6 +98,26 @@ public class playerListener implements Listener {
 				
 				e.getDrops().add(new ItemStack(Material.SADDLE, 1));
 				
+			}
+			
+		}
+		
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void buttonPress(PlayerInteractEvent e) {
+		
+		if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+			
+			if(e.getClickedBlock().getType().equals(Material.STONE_BUTTON) && plugin.SelectorPlayer != "") {
+					
+				Location buttonLoc = e.getClickedBlock().getLocation();
+				cu.setLocation(buttonLoc, plugin.selectType, plugin.selectName);
+				plugin.SelectorPlayer = "";
+				plugin.saveConfiguration();
+				
+				e.getPlayer().sendMessage("A gomb sikeresen felvéve!");
+					
 			}
 			
 		}

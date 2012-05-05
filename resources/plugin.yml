@@ -8,8 +8,11 @@ commands:
   fakechat:
     aliases: [fc]
     description: Fakes a chat message
-    usage: /<command> name message
+    usage: /<command> [name] [message]
+  definebutton:
+    description: Define a new special button
+    usage: /<command> [type] [name]
   achat:
     aliases: [ac]
     description: Sends a message for online admins
-    usage: /<command> message
+    usage: /<command> [message]
