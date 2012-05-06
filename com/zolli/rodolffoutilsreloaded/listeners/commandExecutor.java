@@ -103,7 +103,7 @@ public class commandExecutor implements CommandExecutor {
 					return false;
 				}
 				
-				if(args[0].equalsIgnoreCase("timeday") || args[0].equalsIgnoreCase("promote")) {
+				if(args[0].equalsIgnoreCase("weathersun") || args[0].equalsIgnoreCase("promote")) {
 				
 					plugin.SelectorPlayer = sender.getName();
 					plugin.selectType = args[0];
@@ -113,7 +113,7 @@ public class commandExecutor implements CommandExecutor {
 					
 				} else {
 					
-					sender.sendMessage("A gomb csak a következö tipusu lehet: promote, timeday!");
+					sender.sendMessage("A gomb csak a következö tipusu lehet: promote, weathersun!");
 					
 				}
 				

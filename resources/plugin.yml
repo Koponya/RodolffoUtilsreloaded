@@ -16,3 +16,9 @@ commands:
     aliases: [ac]
     description: Sends a message for online admins
     usage: /<command> [message]
+  idban:
+    description: Ban player UID
+    usage: /<command> [name]
+  idunban:
+    description: Unban player UID
+    usage: /<command> [name]

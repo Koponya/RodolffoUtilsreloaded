@@ -123,18 +123,18 @@ public class playerListener implements Listener {
 				
 				if(scanResult != null) {
 					
-					if(scanResult.equalsIgnoreCase("timeday") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.timeday"))) {
+					if(scanResult.equalsIgnoreCase("weathersun") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.weathersun"))) {
 						
 						World currentWorld = pl.getLocation().getWorld();
-						currentWorld.setTime(300L);
-						pl.sendMessage("Nappalt csináltál ebben a világban!");
+						currentWorld.setStorm(false);
+						pl.sendMessage("Elállítottad az esöt ebben a világban!");
 						List<Player> players = currentWorld.getPlayers();
 						
 						for(Player p : players) {
 							
 							if(p.getName() != pl.getName()) {
 								
-								p.sendMessage(pl.getName() + " nappalt csinált ebben a világban!");
+								p.sendMessage(pl.getName() + " elállította az esöt ebben a világban!");
 								
 							}
 							
