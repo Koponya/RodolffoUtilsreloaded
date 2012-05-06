@@ -140,6 +140,8 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		getCommand("achat").setExecutor(commandExec);
 		getCommand("fakechat").setExecutor(commandExec);
 		getCommand("definebutton").setExecutor(commandExec);
+		getCommand("idban").setExecutor(commandExec);
+		getCommand("idunban").setExecutor(commandExec);
 		
 		if(pm.isPluginEnabled("Vault")) {
 			setupPermissions();
