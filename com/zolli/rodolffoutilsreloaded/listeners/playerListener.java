@@ -2,7 +2,6 @@ package com.zolli.rodolffoutilsreloaded.listeners;
 
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -23,11 +22,13 @@ import org.bukkit.inventory.ItemStack;
 
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 import com.zolli.rodolffoutilsreloaded.utils.configUtils;
+import com.zolli.rodolffoutilsreloaded.utils.webUtils;
 
 public class playerListener implements Listener {
 	
 	private rodolffoUtilsReloaded plugin;
 	public configUtils cu;
+	public webUtils wu = new webUtils();
 	public playerListener(rodolffoUtilsReloaded instance) {
 		plugin = instance;
 		cu = new configUtils(instance);
@@ -112,7 +113,7 @@ public class playerListener implements Listener {
 		
 		Player pl = e.getPlayer();
 			
-		if(e.getClickedBlock().getType().equals(Material.STONE_BUTTON)) {
+		if(e.getClickedBlock().getTypeId() == 77 && e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 			
 			Location buttonLoc = e.getClickedBlock().getLocation();
 			String scanResult = cu.scanButton(buttonLoc);
@@ -122,7 +123,7 @@ public class playerListener implements Listener {
 				
 				if(scanResult != null) {
 					
-					if(scanResult.equalsIgnoreCase("timeday") && (pl.isOp() || plugin.perm.has(pl, "rur.specialbutton.use.timeday"))) {
+					if(scanResult.equalsIgnoreCase("timeday") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.timeday"))) {
 						
 						World currentWorld = pl.getLocation().getWorld();
 						currentWorld.setTime(300L);
@@ -141,9 +142,34 @@ public class playerListener implements Listener {
 						
 					}
 					
-					if(scanResult.equalsIgnoreCase("promote") && (pl.isOp() || plugin.perm.has(pl, "rur.specialbutton.use.promote"))) {
+					if(scanResult.equalsIgnoreCase("promote") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.promote"))) {
 						
+						String introductionStatus = wu.hasIntroduction(pl);
 						
+						if(introductionStatus.equalsIgnoreCase("ok")) {
+							
+							if(plugin.perm.getPrimaryGroup(pl).equalsIgnoreCase("ujonc")) {
+								
+								plugin.perm.playerRemoveGroup(pl, "ujonc");
+								plugin.perm.playerAddGroup(pl, "Tag");
+								
+								pl.sendMessage("Gratulálunk. Sikeresen tagságot szereztél szerverünkön.");
+								pl.performCommand("spawn");
+								pl.sendMessage("Üdvözlünk a Spawn ponton!");
+								
+							} else {
+								
+								pl.sendMessage("Már tag vagy!");
+								pl.performCommand("spawn");
+								
+							}
+							
+						}  else {
+							
+							pl.sendMessage("Még nem rendelkezel elfogadott bemutatkozással. Kérlek pótold ezt!");
+							pl.sendMessage("Olvasd el a szerver.minecraft.hu/wiki oldalon az újoncoknak részt.");
+							
+						}
 						
 					}
 					
