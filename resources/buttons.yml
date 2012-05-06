@@ -1,1 +1,12 @@
-test: propery
+# A "weathersun" tipusu gomboknak adhato meg "value" ertek, ha megadodod akkor a gombot megnyomva levona a megadott osszeget a jatekostol
+# Amikor beallitod ezt legyen leallitva a szerver
+# Pelda:
+#
+# specialbutton:
+#   gomb_neve:
+#     type: weathersun
+#     value: 10
+#     world: world
+#     x: -37.0
+#     y: 66.0
+#     z: -487.0
