@@ -28,7 +28,7 @@ public class playerListener implements Listener {
 	
 	private rodolffoUtilsReloaded plugin;
 	public configUtils cu;
-	public webUtils wu = new webUtils();
+	private webUtils wu = new webUtils();
 	public playerListener(rodolffoUtilsReloaded instance) {
 		plugin = instance;
 		cu = new configUtils(instance);
