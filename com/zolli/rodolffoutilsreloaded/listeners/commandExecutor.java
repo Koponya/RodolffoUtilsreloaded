@@ -97,7 +97,7 @@ public class commandExecutor implements CommandExecutor {
 		
 		if(command.getName().equalsIgnoreCase("definebutton")) {
 			
-			if(sender.isOp() || plugin.perm.has(sender, "rur.defineButton")) {
+			if(sender.isOp() || plugin.perm.has(sender, "rur.specialButton.define")) {
 				
 				if(args.length < 2) {
 					return false;
