@@ -116,33 +116,44 @@ public class playerListener implements Listener {
 		if(e.getClickedBlock() != null && e.getAction() != null && e.getClickedBlock().getTypeId() == 77 && e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 			
 			Location buttonLoc = e.getClickedBlock().getLocation();
-			String scanResult = cu.scanButton(buttonLoc);
+			String[] scanResult = cu.scanButton(buttonLoc);
 			
 			
 			if(pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use")) {
 				
 				if(scanResult != null) {
 					
-					if(scanResult.equalsIgnoreCase("weathersun") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.weathersun"))) {
+					if(scanResult[0].equalsIgnoreCase("weathersun") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.weathersun"))) {
 						
 						World currentWorld = pl.getLocation().getWorld();
-						currentWorld.setStorm(false);
-						pl.sendMessage("Elállítottad az esöt ebben a világban!");
-						List<Player> players = currentWorld.getPlayers();
 						
-						for(Player p : players) {
+						if(plugin.econ.getBalance(pl.getName()) >= Integer.parseInt(scanResult[1])) {
 							
-							if(p.getName() != pl.getName()) {
+							plugin.econ.withdrawPlayer(pl.getName(), Integer.parseInt(scanResult[1]));
+							currentWorld.setStorm(false);
+							pl.sendMessage("Elállítottad az esöt ebben a világban!");
+							
+							List<Player> players = currentWorld.getPlayers();
+							
+							for(Player p : players) {
 								
-								p.sendMessage(pl.getName() + " elállította az esöt ebben a világban!");
+								if(p.getName() != pl.getName()) {
+									
+									p.sendMessage(pl.getName() + " elállította az esöt ebben a világban!");
+									
+								}
 								
 							}
+							
+						} else {
+							
+							pl.sendMessage("Nincs elegendö pénzed elállítani az esöt!");
 							
 						}
 						
 					}
 					
-					if(scanResult.equalsIgnoreCase("promote") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.promote"))) {
+					if(scanResult[0].equalsIgnoreCase("promote") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.promote"))) {
 						
 						String introductionStatus = wu.hasIntroduction(pl);
 						

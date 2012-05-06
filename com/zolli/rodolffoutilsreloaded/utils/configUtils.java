@@ -8,6 +8,7 @@ import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 
 public class configUtils {
 	
+	public String[] returnArray = new String[2];
 	private rodolffoUtilsReloaded plugin;
 	public configUtils(rodolffoUtilsReloaded instance) {
 		plugin = instance;
@@ -28,7 +29,7 @@ public class configUtils {
 		
 	}
 	
-	public String scanButton(Location loc) {
+	public String[] scanButton(Location loc) {
 		
 		Set<String> names = plugin.button.getConfigurationSection("specialbutton").getKeys(false);
 		String WorldButton = loc.getWorld().getName().toString();
@@ -45,7 +46,11 @@ public class configUtils {
 			
 			if(WorldButton.equalsIgnoreCase(WorldConfig) && xButton == xConfig && yButton == yConfig && zButton == zConfig) {
 				
-				return plugin.button.getString("specialbutton." + s + ".type");
+				returnArray[0] = plugin.button.getString("specialbutton." + s + ".type");
+				returnArray[1] = plugin.button.getString("specialbutton." + s + ".value", null);
+				
+				return returnArray;
+				
 				
 			} 
 			
