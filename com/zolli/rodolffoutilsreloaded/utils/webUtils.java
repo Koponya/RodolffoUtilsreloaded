@@ -9,11 +9,11 @@ import org.bukkit.entity.Player;
 
 public class webUtils {
 	
-	public String hasIntroduction(Player pl) {
+	private String getLine(String uri) {
 		
 		try {
 			
-            URL url = new URL("http://szerver.minecraft.hu/login/game/get.php?hasIntroduction=" + pl.getName());
+            URL url = new URL(uri);
             URLConnection yc = url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
             String inputLine;
@@ -26,6 +26,19 @@ public class webUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+		
+		return null;
+		
+	}
+	
+	public String hasIntroduction(Player pl) {
+		
+		String returnLine = getLine("http://szerver.minecraft.hu/login/game/get.php?hasIntroduction=" + pl.getName());
+		
+		if(returnLine != null) {
+			System.out.println(returnLine);
+			return returnLine;
+		}
 		
 		return null;
 		
