@@ -17,6 +17,7 @@ public class commandExecutor implements CommandExecutor {
 
 	private String matchedPlayers;
 	private Player bannedPlayer;
+	private Player unbannedPlayer;
 	private rodolffoUtilsReloaded plugin;
 	private textUtils tu = new textUtils();
 	public webUtils wu = new webUtils();
@@ -213,7 +214,71 @@ public class commandExecutor implements CommandExecutor {
 			
 			if(sender.isOp() || plugin.perm.has(sender, "rur.idunban")) {
 				
-				sender.sendMessage("ghjfghfhgf");
+				if(args.length < 1) {
+					return false;
+				}
+				
+				List<Player> mathcPlayerList = Bukkit.matchPlayer(args[0]);
+				
+				if(mathcPlayerList.isEmpty() == false) {
+					
+					if(mathcPlayerList.size() == 1) {
+						
+						unbannedPlayer = mathcPlayerList.get(0);
+						String answer = wu.idunBan(unbannedPlayer.getName());
+						
+						if(answer.equalsIgnoreCase("ok")) {
+							
+							sender.sendMessage(unbannedPlayer.getName() + " kitiltása feloldva!");
+							
+							if(plugin.config.getBoolean("idUnbanAlsoUnbanPlayer")) {
+								plugin.getServer().getPlayer(sender.getName()).performCommand("unban " + args[0]);
+							}
+							
+						} else {
+							
+							sender.sendMessage("Hiba " + args[0] + " unbannolása közben: " + answer);
+							
+						}
+						
+					} else {
+						
+						sender.sendMessage("Több játékos is illeszkedik erre a névre:");
+						
+						for(Player p : mathcPlayerList) {
+							matchedPlayers = matchedPlayers + p.getName() + ", ";
+						}
+						
+						sender.sendMessage(matchedPlayers);
+						
+					}
+					
+				} else {
+					
+					OfflinePlayer offlinePl = plugin.getServer().getOfflinePlayer(args[0]);
+					
+					if(offlinePl != null) {
+						
+						unbannedPlayer = offlinePl.getPlayer();
+						String answer = wu.idBan(unbannedPlayer.getName());
+						
+						if(answer.equalsIgnoreCase("ok")) {
+							
+							sender.sendMessage(unbannedPlayer.getName() + " kitiltása feloldva!");
+							
+							if(unbannedPlayer.isBanned() == true && plugin.config.getBoolean("idUnbanAlsoUnbanPlayer")) {
+								plugin.getServer().getPlayer(sender.getName()).performCommand("unban " + args[0]);
+							}
+							
+						} else {
+							
+							sender.sendMessage("Hiba " + args[0] + " unbannolása közben: " + answer);
+							
+						}
+						
+					}
+					
+				}
 				
 			} else {
 				return false;
