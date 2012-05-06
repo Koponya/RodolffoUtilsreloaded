@@ -113,7 +113,7 @@ public class playerListener implements Listener {
 		
 		Player pl = e.getPlayer();
 			
-		if(e.getClickedBlock().getTypeId() == 77 && e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+		if(e.getClickedBlock() != null && e.getAction() != null && e.getClickedBlock().getTypeId() == 77 && e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 			
 			Location buttonLoc = e.getClickedBlock().getLocation();
 			String scanResult = cu.scanButton(buttonLoc);
@@ -174,11 +174,6 @@ public class playerListener implements Listener {
 					}
 					
 				}
-				
-			}
-			
-			if(pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.timeday")) {
-				
 				
 			}
 			
