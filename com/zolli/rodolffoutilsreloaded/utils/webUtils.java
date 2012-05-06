@@ -4,10 +4,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Random;
 
 import org.bukkit.entity.Player;
 
 public class webUtils {
+	
+	private Random randomGenerator = new Random();
 	
 	private String getLine(String uri) {
 		
@@ -36,7 +39,22 @@ public class webUtils {
 		String returnLine = getLine("http://szerver.minecraft.hu/login/game/get.php?hasIntroduction=" + pl.getName());
 		
 		if(returnLine != null) {
-			System.out.println(returnLine);
+			return returnLine;
+		}
+		
+		return null;
+		
+	}
+	
+	public String idBan(String name) {
+		
+		String teszt = "http://szerver.minecraft.hu/login/game/get.php?banPlayer=" + randomGenerator.nextInt(100000) + "&name=" + name;
+		
+		System.out.println(teszt);
+		
+		String returnLine = getLine(teszt);
+		
+		if(returnLine != null) {
 			return returnLine;
 		}
 		

@@ -1,6 +1,9 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,12 +11,15 @@ import org.bukkit.entity.Player;
 
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 import com.zolli.rodolffoutilsreloaded.utils.textUtils;
+import com.zolli.rodolffoutilsreloaded.utils.webUtils;
 
 public class commandExecutor implements CommandExecutor {
 
-	
+	private String matchedPlayers;
+	private Player bannedPlayer;
 	private rodolffoUtilsReloaded plugin;
 	private textUtils tu = new textUtils();
+	public webUtils wu = new webUtils();
 	public commandExecutor(rodolffoUtilsReloaded instance) {
 		plugin = instance;
 	}
@@ -116,6 +122,98 @@ public class commandExecutor implements CommandExecutor {
 					sender.sendMessage("A gomb csak a következö tipusu lehet: promote, weathersun!");
 					
 				}
+				
+			} else {
+				return false;
+			}
+			
+			return true;
+			
+		}
+		
+		if(command.getName().equalsIgnoreCase("idban")) {
+			
+			if(sender.isOp() || plugin.perm.has(sender, "rur.idban")) {
+				
+				if(args.length < 1) {
+					return false;
+				}
+				
+				List<Player> mathcPlayerList = Bukkit.matchPlayer(args[0]);
+				
+				if(mathcPlayerList.isEmpty() == false) {
+					
+					if(mathcPlayerList.size() == 1) {
+						
+						bannedPlayer = mathcPlayerList.get(0);
+						String answer = wu.idBan(bannedPlayer.getName());
+						
+						if(answer.equalsIgnoreCase("ok")) {
+							
+							sender.sendMessage(bannedPlayer.getName() + " örökre ki lett tiltva!");
+							
+							if(bannedPlayer.isBanned() == false && plugin.config.getBoolean("idbanAlsoBanPlayer")) {
+								plugin.getServer().getPlayer(sender.getName()).performCommand("ban " + args[0]);
+							}
+							
+						} else {
+							
+							sender.sendMessage("Hiba " + args[0] + " bannolása közben: " + answer);
+							
+						}
+						
+					} else {
+						
+						sender.sendMessage("Több játékos is illeszkedik erre a névre:");
+						
+						for(Player p : mathcPlayerList) {
+							matchedPlayers = matchedPlayers + p.getName() + ", ";
+						}
+						
+						sender.sendMessage(matchedPlayers);
+						
+					}
+					
+				} else {
+					
+					OfflinePlayer offlinePl = plugin.getServer().getOfflinePlayer(args[0]);
+					
+					if(offlinePl != null) {
+						
+						bannedPlayer = offlinePl.getPlayer();
+						String answer = wu.idBan(bannedPlayer.getName());
+						
+						if(answer.equalsIgnoreCase("ok")) {
+							
+							sender.sendMessage(bannedPlayer.getName() + " örökre ki lett tiltva!");
+							
+							if(bannedPlayer.isBanned() == false && plugin.config.getBoolean("idbanAlsoBanPlayer")) {
+								plugin.getServer().getPlayer(sender.getName()).performCommand("ban " + args[0]);
+							}
+							
+						} else {
+							
+							sender.sendMessage("Hiba " + args[0] + " bannolása közben: " + answer);
+							
+						}
+						
+					}
+					
+				}
+				
+			} else {
+				return false;
+			}
+			
+			return true;
+			
+		}
+		
+		if(command.getName().equalsIgnoreCase("idunban")) {
+			
+			if(sender.isOp() || plugin.perm.has(sender, "rur.idunban")) {
+				
+				sender.sendMessage("ghjfghfhgf");
 				
 			} else {
 				return false;
