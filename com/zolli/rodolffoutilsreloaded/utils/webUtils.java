@@ -48,11 +48,21 @@ public class webUtils {
 	
 	public String idBan(String name) {
 		
-		String teszt = "http://szerver.minecraft.hu/login/game/get.php?banPlayer=" + randomGenerator.nextInt(100000) + "&name=" + name;
+		String url = "http://szerver.minecraft.hu/login/game/get.php?banPlayer=" + randomGenerator.nextInt(100000) + "&name=" + name;
+		String returnLine = getLine(url);
 		
-		System.out.println(teszt);
+		if(returnLine != null) {
+			return returnLine;
+		}
 		
-		String returnLine = getLine(teszt);
+		return null;
+		
+	}
+	
+	public String idunBan(String name) {
+		
+		String url = "http://szerver.minecraft.hu/login/game/get.php?unbanPlayer=" + randomGenerator.nextInt(100000) + "&name=" + name;
+		String returnLine = getLine(url);
 		
 		if(returnLine != null) {
 			return returnLine;
