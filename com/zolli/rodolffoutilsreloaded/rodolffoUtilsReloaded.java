@@ -40,6 +40,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	private CommandExecutor commandExec;
 	
 	public String SelectorPlayer = null;
+	public String selectValue = null;
 	public String selectType;
 	public String selectName;
 	public Location selectLoc;

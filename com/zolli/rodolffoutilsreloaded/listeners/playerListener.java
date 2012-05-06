@@ -1,9 +1,12 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
@@ -107,19 +110,61 @@ public class playerListener implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void buttonPress(PlayerInteractEvent e) {
 		
-		if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+		Player pl = e.getPlayer();
 			
-			if(e.getClickedBlock().getType().equals(Material.STONE_BUTTON) && plugin.SelectorPlayer != null) {
+		if(e.getClickedBlock().getType().equals(Material.STONE_BUTTON)) {
+			
+			Location buttonLoc = e.getClickedBlock().getLocation();
+			String scanResult = cu.scanButton(buttonLoc);
+			
+			
+			if(pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use")) {
+				
+				if(scanResult != null) {
 					
-				Location buttonLoc = e.getClickedBlock().getLocation();
+					if(scanResult.equalsIgnoreCase("timeday") && (pl.isOp() || plugin.perm.has(pl, "rur.specialbutton.use.timeday"))) {
+						
+						World currentWorld = pl.getLocation().getWorld();
+						currentWorld.setTime(300L);
+						pl.sendMessage("Nappalt csináltál ebben a világban!");
+						List<Player> players = currentWorld.getPlayers();
+						
+						for(Player p : players) {
+							
+							if(p.getName() != pl.getName()) {
+								
+								p.sendMessage(pl.getName() + " nappalt csinált ebben a világban!");
+								
+							}
+							
+						}
+						
+					}
+					
+					if(scanResult.equalsIgnoreCase("promote") && (pl.isOp() || plugin.perm.has(pl, "rur.specialbutton.use.promote"))) {
+						
+						
+						
+					}
+					
+				}
+				
+			}
+			
+			if(pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.timeday")) {
+				
+				
+			}
+			
+			if(plugin.SelectorPlayer != null) {
+				
 				cu.setLocation(buttonLoc, plugin.selectType, plugin.selectName);
 				plugin.SelectorPlayer = null;
 				plugin.saveConfiguration();
-				
 				e.getPlayer().sendMessage("A gomb sikeresen felvéve!");
-					
-			}
 			
+			}
+				
 		}
 		
 	}
