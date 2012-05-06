@@ -47,7 +47,7 @@ public class configUtils {
 			if(WorldButton.equalsIgnoreCase(WorldConfig) && xButton == xConfig && yButton == yConfig && zButton == zConfig) {
 				
 				returnArray[0] = plugin.button.getString("specialbutton." + s + ".type");
-				returnArray[1] = plugin.button.getString("specialbutton." + s + ".value", null);
+				returnArray[1] = plugin.button.getString("specialbutton." + s + ".value", "0");
 				
 				return returnArray;
 				
