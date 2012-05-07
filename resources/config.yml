@@ -2,3 +2,4 @@ pigDropSaddleOnDeath: false
 adminChatFormat: '§4[AdminChat] §2(NAME)§f: (MSG)'
 idUnbanAlsoUnbanPlayer: true
 mushroomSoupRegain: 20
+fixPistonBug: true

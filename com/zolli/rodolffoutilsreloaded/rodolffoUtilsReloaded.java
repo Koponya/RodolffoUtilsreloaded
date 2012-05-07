@@ -10,6 +10,7 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -18,6 +19,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.zolli.rodolffoutilsreloaded.listeners.blockListener;
 import com.zolli.rodolffoutilsreloaded.listeners.commandExecutor;
 import com.zolli.rodolffoutilsreloaded.listeners.entityListener;
 import com.zolli.rodolffoutilsreloaded.listeners.playerListener;
@@ -47,6 +49,10 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public String selectType;
 	public String selectName;
 	public Location selectLoc;
+	
+	public Block pistonBugBlock;
+	public int pistonBugId;
+	public byte pistonBugData;
 	
 	private boolean setupPermissions() {
         RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
@@ -141,9 +147,11 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		final playerListener playerListener = new playerListener(this);
 		final entityListener entityListener = new entityListener(this);
+		final blockListener blockListener = new blockListener(this);
 		
 		pm.registerEvents(playerListener, this);
 		pm.registerEvents(entityListener, this);
+		pm.registerEvents(blockListener, this);
 		
 		getCommand("achat").setExecutor(commandExec);
 		getCommand("fakechat").setExecutor(commandExec);
