@@ -19,6 +19,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.zolli.rodolffoutilsreloaded.listeners.commandExecutor;
+import com.zolli.rodolffoutilsreloaded.listeners.entityListener;
 import com.zolli.rodolffoutilsreloaded.listeners.playerListener;
 import com.zolli.rodolffoutilsreloaded.utils.recipes;
 
@@ -134,14 +135,15 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		recipes.createRecipes(this);
 		
-		
-		
 	}
 	
 	public void onEnable() {
 		
 		final playerListener playerListener = new playerListener(this);
+		final entityListener entityListener = new entityListener(this);
+		
 		pm.registerEvents(playerListener, this);
+		pm.registerEvents(entityListener, this);
 		
 		getCommand("achat").setExecutor(commandExec);
 		getCommand("fakechat").setExecutor(commandExec);
