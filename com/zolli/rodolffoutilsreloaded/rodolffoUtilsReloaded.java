@@ -20,6 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.zolli.rodolffoutilsreloaded.listeners.commandExecutor;
 import com.zolli.rodolffoutilsreloaded.listeners.playerListener;
+import com.zolli.rodolffoutilsreloaded.utils.recipes;
 
 public class rodolffoUtilsReloaded extends JavaPlugin {
 	
@@ -38,6 +39,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public Logger log;
 	private PluginDescriptionFile pdfile;
 	private CommandExecutor commandExec;
+	private recipes recipes;
 	
 	public String SelectorPlayer = null;
 	public String selectValue = null;
@@ -128,6 +130,10 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		pdfile = getDescription();
 		pm = getServer().getPluginManager();
 		commandExec = new commandExecutor(this);
+		recipes = new recipes();
+		
+		recipes.createRecipes(this);
+		
 		
 		
 	}
