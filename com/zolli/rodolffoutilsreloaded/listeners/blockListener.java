@@ -55,8 +55,8 @@ public class blockListener implements Listener {
 								
 								if(!blockListener.this.plugin.perm.has(pl[i], "rur.seePistonBugInfo"))
 									continue;
-								pl[i].sendMessage("§cPiston bug kihasználás megakadályozva! (" + b.getLocation().getWorld().getName() + "|" + b.getLocation().getX() + ", " + b.getLocation().getY() + ", " + b.getLocation().getZ() + ")");
-				                pl[i].sendMessage("§cHelyszínen vannak: " + bugPlayer.toString());
+								pl[i].sendMessage(blockListener.this.plugin.messages.getString("pistonbug.adminInfo1") + b.getLocation().getWorld().getName() + " | " + b.getLocation().getX() + ", " + b.getLocation().getY() + ", " + b.getLocation().getZ());
+				                pl[i].sendMessage(blockListener.this.plugin.messages.getString("pistonbug.adminInfo2") + bugPlayer.toString());
 								
 							}
 							

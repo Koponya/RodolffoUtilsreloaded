@@ -2,7 +2,6 @@ package com.zolli.rodolffoutilsreloaded.listeners;
 
 import java.util.List;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -52,7 +51,7 @@ public class playerListener implements Listener {
 		}
 		
 		if(command.equalsIgnoreCase("/reload")) {
-			commandSender.sendMessage(ChatColor.DARK_RED + "Ne használd ezt a prancsot, inkább indítsd újra a szervert!");
+			commandSender.sendMessage(plugin.messages.getString("common.noreload"));
 			e.setCancelled(true);
 		}
 		
@@ -131,7 +130,7 @@ public class playerListener implements Listener {
 							
 							plugin.econ.withdrawPlayer(pl.getName(), Integer.parseInt(scanResult[1]));
 							currentWorld.setStorm(false);
-							pl.sendMessage("Elállítottad az esöt ebben a világban!");
+							pl.sendMessage(plugin.messages.getString("othercommand.sunny"));
 							
 							List<Player> players = currentWorld.getPlayers();
 							
@@ -139,7 +138,7 @@ public class playerListener implements Listener {
 								
 								if(p.getName() != pl.getName()) {
 									
-									p.sendMessage(pl.getName() + " elállította az esöt ebben a világban!");
+									p.sendMessage(pl.getName() + plugin.messages.getString("othercommand.sunnybroadcast"));
 									
 								}
 								
@@ -147,7 +146,7 @@ public class playerListener implements Listener {
 							
 						} else {
 							
-							pl.sendMessage("Nincs elegendö pénzed elállítani az esöt!");
+							pl.sendMessage(plugin.messages.getString("common.noPerm"));
 							
 						}
 						
@@ -164,21 +163,25 @@ public class playerListener implements Listener {
 								plugin.perm.playerRemoveGroup(pl, "ujonc");
 								plugin.perm.playerAddGroup(pl, "Tag");
 								
-								pl.sendMessage("Gratulálunk. Sikeresen tagságot szereztél szerverünkön.");
-								pl.performCommand("spawn");
-								pl.sendMessage("Üdvözlünk a Spawn ponton!");
+								pl.sendMessage(plugin.messages.getString("promotion.successpromotion1"));
+								
+								if(plugin.config.getBoolean("promotedtospawn")) {	
+									pl.performCommand("spawn");
+								}
+								
+								pl.sendMessage(plugin.messages.getString("promotion.successpromotion2"));
 								
 							} else {
 								
-								pl.sendMessage("Már tag vagy!");
+								pl.sendMessage(plugin.messages.getString("promotion.alredymember"));
 								pl.performCommand("spawn");
 								
 							}
 							
-						}  else {
+						} else {
 							
-							pl.sendMessage("Még nem rendelkezel elfogadott bemutatkozással. Kérlek pótold ezt!");
-							pl.sendMessage("Olvasd el a szerver.minecraft.hu/wiki oldalon az újoncoknak részt.");
+							pl.sendMessage(plugin.messages.getString("promotion.nointroduction1"));
+							pl.sendMessage(plugin.messages.getString("promotion.nointroduction2"));
 							
 						}
 						
@@ -193,7 +196,7 @@ public class playerListener implements Listener {
 				cu.setLocation(buttonLoc, plugin.selectType, plugin.selectName);
 				plugin.SelectorPlayer = null;
 				plugin.saveConfiguration();
-				e.getPlayer().sendMessage("A gomb sikeresen felvéve!");
+				e.getPlayer().sendMessage(plugin.messages.getString("definebutton.successadded"));
 			
 			}
 				

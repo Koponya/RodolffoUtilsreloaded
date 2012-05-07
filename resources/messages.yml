@@ -1,1 +1,39 @@
-test: propery
+common:
+  noPerm: '§4Nincs jogosultságod a parancs használatához!'
+  multipleMatch: '§6Több játékos is illeszkedik erre a névre:'
+  noPlayerFound: '§4Nem található játékos ezen a néven!'
+  badSyntax: '§4Hibás paraméter: '
+  noreload: '§4Nem használd a /reload parancsot, inkább indítsd újra a szervert!'
+  
+pistonbug:
+  adminInfo1: '§4Piston bug kihasználás megakadályozva! Helyszín: '
+  adminInfo2: '§4Játékosok a közelben: '
+  
+fekechat:
+  fakechatexempt: '§4Nem beszélhetsz sezen játékos nevében!'
+  
+definebutton:
+  defineproc1: '§2A gomb tipusa§f: '
+  defineproc2: '§2Válaszd ki a gombot jobb kattintással';
+  definefinish: '§2A gomb sikeresen felvéve!'
+  onlytype: '§6A gomb csak a következö tipusu lehet: promote, weathersun'
+  successadded: 'A gomb sikeresen hozzáadva!'
+
+banning:
+  successbanned: ' §2örökre ki lett tiltva!'
+  warningBan: '§4Hiba (NAME) bannolása közben: '
+  successunbanned: ' §2kitiltása feloldva!'
+  warningUnBan: '§4Hiba (NAME) unbannolása közben: '
+  
+othercommand:
+  day: '§4Nappalt csináltál ebben a világban'
+  daybroadcast: ' §4nappalt csinált ebben a világban'
+  sunny: '§4Elállitotta az esöt ebben a világban'
+  sunnybroadcast: ' §4elállította az esöt ebben a világban'
+  
+promotion:
+  successpromotion1: '§4Gratulálunk. Sikeresen tagságot szereztél szerverünkön.'
+  successpromotion1: '§4Üdvözlünk a Spawn ponton!'
+  alredymember: '§2Már tag vagy!'
+  nointroduction1: '§2Még nem rendelkezel elfogadott bemutatkozással. Kérlek pótold ezt!'
+  nointroduction2: '§2Olvasd el a szerver.minecraft.hu/wiki oldalon az újoncoknak részt.'

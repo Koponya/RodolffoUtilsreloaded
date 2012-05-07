@@ -32,7 +32,10 @@ public class commandExecutor implements CommandExecutor {
 		if(command.getName().equalsIgnoreCase("achat") || command.getName().equalsIgnoreCase("ac")) {
 			
 			if(args.length < 1) {
+				
+				sender.sendMessage(plugin.messages.getString("common.badSyntax") + "/ac [üzenet]");
 				return false;
+				
 			}
 			
 			if(sender.isOp() || plugin.perm.has(sender, "rur.adminChat")) {
@@ -52,6 +55,7 @@ public class commandExecutor implements CommandExecutor {
 				
 			} else {
 				
+				sender.sendMessage(plugin.messages.getString("common.noPerm"));
 				return false;
 				
 			}
@@ -67,7 +71,10 @@ public class commandExecutor implements CommandExecutor {
 			if(sender.isOp() || plugin.perm.has(sender, "rur.fakeChat")) {
 			
 				if(args.length < 2) {
+					
+					sender.sendMessage(plugin.messages.getString("common.badSyntax") + "/fc [név] [üzenet]");
 					return false;
+					
 				}
 				
 				
@@ -95,30 +102,33 @@ public class commandExecutor implements CommandExecutor {
 							
 						} else {
 							
-							sender.sendMessage("Nem beszélhetsz ezen játékos nevében!");
+							sender.sendMessage(plugin.messages.getString("fekechat.fakechatexempt"));
 							
 						}
 						
 					} else {
 						
-						sender.sendMessage("Több játékos is illeszkedik erre a névre: ");
+						sender.sendMessage(plugin.messages.getString("common.multipleMatch"));
 						
 						for(Player matched : matchedPlayerList) {
 							matchedPlayers = matchedPlayers + matched.getName() + ", ";
 						}
 						
-						sender.sendMessage(matchedPlayers);
+						sender.sendMessage("§2" + matchedPlayers);
 						
 					}
 					
 				} else {
 					
-					sender.sendMessage("Nem található játékos ezen a néven!");
+					sender.sendMessage(plugin.messages.getString("common.noPlayerFound"));
 					
 				}
 				
 			} else {
+				
+				sender.sendMessage(plugin.messages.getString("common.noPerm"));
 				return false;
+				
 			}
 			
 			return true;
@@ -130,7 +140,10 @@ public class commandExecutor implements CommandExecutor {
 			if(sender.isOp() || plugin.perm.has(sender, "rur.specialButton.define")) {
 				
 				if(args.length < 2) {
+					
+					sender.sendMessage(plugin.messages.getString("common.badSyntax") + "/definebutton [tipus] [név]");
 					return false;
+					
 				}
 				
 				if(args[0].equalsIgnoreCase("weathersun") || args[0].equalsIgnoreCase("promote")) {
@@ -138,17 +151,20 @@ public class commandExecutor implements CommandExecutor {
 					plugin.SelectorPlayer = sender.getName();
 					plugin.selectType = args[0];
 					plugin.selectName = args[1];
-					sender.sendMessage("A gomb tipusa: " + args[0]);
-					sender.sendMessage("Válaszd ki a gombot jobb kattintással!");
+					sender.sendMessage(plugin.messages.getString("definebutton.defineproc1") + args[0]);
+					sender.sendMessage(plugin.messages.getString("definebutton.defineproc2"));
 					
 				} else {
 					
-					sender.sendMessage("A gomb csak a következö tipusu lehet: promote, weathersun!");
+					sender.sendMessage(plugin.messages.getString("definebutton.onlytype"));
 					
 				}
 				
 			} else {
+				
+				sender.sendMessage(plugin.messages.getString("common.noPerm"));
 				return false;
+				
 			}
 			
 			return true;
@@ -160,7 +176,10 @@ public class commandExecutor implements CommandExecutor {
 			if(sender.isOp() || plugin.perm.has(sender, "rur.idban")) {
 				
 				if(args.length < 1) {
+					
+					sender.sendMessage(plugin.messages.getString("common.badSyntax") + "/idban [név]");
 					return false;
+					
 				}
 				
 				List<Player> mathcPlayerList = Bukkit.matchPlayer(args[0]);
@@ -174,27 +193,28 @@ public class commandExecutor implements CommandExecutor {
 						
 						if(answer.equalsIgnoreCase("ok")) {
 							
-							sender.sendMessage(bannedPlayer.getName() + " örökre ki lett tiltva!");
+							sender.sendMessage(bannedPlayer.getDisplayName() + plugin.messages.getString("banning.successbanned"));
 							
 							if(bannedPlayer.isBanned() == false && plugin.config.getBoolean("idbanAlsoBanPlayer")) {
-								plugin.getServer().getPlayer(sender.getName()).performCommand("ban " + args[0]);
+								plugin.getServer().getPlayer(sender.getName()).performCommand("ban " + bannedPlayer.getName());
 							}
 							
 						} else {
 							
-							sender.sendMessage("Hiba " + args[0] + " bannolása közben: " + answer);
+							String result = plugin.messages.getString("banning.warningBan").replace("(NAME)", bannedPlayer.getName());
+							sender.sendMessage(result + answer);
 							
 						}
 						
 					} else {
 						
-						sender.sendMessage("Több játékos is illeszkedik erre a névre:");
+						sender.sendMessage(plugin.messages.getString("common.multipleMatch"));
 						
 						for(Player p : mathcPlayerList) {
 							matchedPlayers = matchedPlayers + p.getName() + ", ";
 						}
 						
-						sender.sendMessage(matchedPlayers);
+						sender.sendMessage("§2" + matchedPlayers);
 						
 					}
 					
@@ -209,7 +229,7 @@ public class commandExecutor implements CommandExecutor {
 						
 						if(answer.equalsIgnoreCase("ok")) {
 							
-							sender.sendMessage(bannedPlayer.getName() + " örökre ki lett tiltva!");
+							sender.sendMessage(bannedPlayer.getName() + plugin.messages.getString("banning.successbanned"));
 							
 							if(bannedPlayer.isBanned() == false && plugin.config.getBoolean("idbanAlsoBanPlayer")) {
 								plugin.getServer().getPlayer(sender.getName()).performCommand("ban " + args[0]);
@@ -217,7 +237,8 @@ public class commandExecutor implements CommandExecutor {
 							
 						} else {
 							
-							sender.sendMessage("Hiba " + args[0] + " bannolása közben: " + answer);
+							String result = plugin.messages.getString("banning.warningBan").replace("(NAME)", bannedPlayer.getName());
+							sender.sendMessage(result + answer);
 							
 						}
 						
@@ -226,7 +247,10 @@ public class commandExecutor implements CommandExecutor {
 				}
 				
 			} else {
+				
+				sender.sendMessage(plugin.messages.getString("common.noPerm"));
 				return false;
+				
 			}
 			
 			return true;
@@ -238,7 +262,10 @@ public class commandExecutor implements CommandExecutor {
 			if(sender.isOp() || plugin.perm.has(sender, "rur.idunban")) {
 				
 				if(args.length < 1) {
+					
+					sender.sendMessage(plugin.messages.getString("common.badSyntax") + "/idunban [név]");
 					return false;
+					
 				}
 				
 				List<Player> mathcPlayerList = Bukkit.matchPlayer(args[0]);
@@ -252,27 +279,28 @@ public class commandExecutor implements CommandExecutor {
 						
 						if(answer.equalsIgnoreCase("ok")) {
 							
-							sender.sendMessage(unbannedPlayer.getName() + " kitiltása feloldva!");
+							sender.sendMessage(unbannedPlayer.getDisplayName() + plugin.messages.getString("banning.successunbanned"));
 							
 							if(plugin.config.getBoolean("idUnbanAlsoUnbanPlayer")) {
-								plugin.getServer().getPlayer(sender.getName()).performCommand("unban " + args[0]);
+								plugin.getServer().getPlayer(sender.getName()).performCommand("unban " + unbannedPlayer.getName());
 							}
 							
 						} else {
 							
-							sender.sendMessage("Hiba " + args[0] + " unbannolása közben: " + answer);
+							String result = plugin.messages.getString("banning.warningUnBan").replace("(NAME)", unbannedPlayer.getName());
+							sender.sendMessage(result + answer);
 							
 						}
 						
 					} else {
 						
-						sender.sendMessage("Több játékos is illeszkedik erre a névre:");
+						sender.sendMessage(plugin.messages.getString("common.multipleMatch"));
 						
 						for(Player p : mathcPlayerList) {
 							matchedPlayers = matchedPlayers + p.getName() + ", ";
 						}
 						
-						sender.sendMessage(matchedPlayers);
+						sender.sendMessage("§2" + matchedPlayers);
 						
 					}
 					
@@ -287,15 +315,16 @@ public class commandExecutor implements CommandExecutor {
 						
 						if(answer.equalsIgnoreCase("ok")) {
 							
-							sender.sendMessage(unbannedPlayer.getName() + " kitiltása feloldva!");
+							sender.sendMessage(unbannedPlayer.getName() + plugin.messages.getString("banning.successunbanned"));
 							
 							if(unbannedPlayer.isBanned() == true && plugin.config.getBoolean("idUnbanAlsoUnbanPlayer")) {
-								plugin.getServer().getPlayer(sender.getName()).performCommand("unban " + args[0]);
+								plugin.getServer().getPlayer(sender.getName()).performCommand("unban " + unbannedPlayer.getName());
 							}
 							
 						} else {
 							
-							sender.sendMessage("Hiba " + args[0] + " unbannolása közben: " + answer);
+							String result = plugin.messages.getString("banning.warningUnBan").replace("(NAME)", unbannedPlayer.getName());
+							sender.sendMessage(result + answer);
 							
 						}
 						
@@ -304,7 +333,10 @@ public class commandExecutor implements CommandExecutor {
 				}
 				
 			} else {
+				
+				sender.sendMessage(plugin.messages.getString("common.noPerm"));
 				return false;
+				
 			}
 			
 			return true;
@@ -317,20 +349,21 @@ public class commandExecutor implements CommandExecutor {
 				
 				Player pl = plugin.getServer().getPlayer(sender.getName());
 				pl.getWorld().setTime(200L);
-				pl.sendMessage("Nappalt csináltál ebben a világban!");
+				pl.sendMessage(plugin.messages.getString("othercommand.day"));
 				List<Player> players = pl.getWorld().getPlayers();
 				
 				for(Player msgTaker : players) {
 					
 					if(!msgTaker.getName().equalsIgnoreCase(pl.getName())) {
-						msgTaker.sendMessage(pl.getName() + " nappalt csinált ebben a világban!");
+						msgTaker.sendMessage(pl.getName() + plugin.messages.getString("othercommand.daybroadcast"));
 					}
 					
 				}
 				
 			} else {
 				
-				sender.sendMessage("Nincs elég jogosutlságod a parancs használatához!");
+				sender.sendMessage(plugin.messages.getString("common.noPerm"));
+				return false;
 				
 			}
 			
@@ -343,20 +376,21 @@ public class commandExecutor implements CommandExecutor {
 				
 				Player pl = plugin.getServer().getPlayer(sender.getName());
 				pl.getWorld().setStorm(false);
-				pl.sendMessage("Elállítottad az esöt ebben a világban!");
+				pl.sendMessage(plugin.messages.getString("othercommand.sunny"));
 				List<Player> players = pl.getWorld().getPlayers();
 				
 				for(Player msgTaker : players) {
 					
 					if(!msgTaker.getName().equalsIgnoreCase(pl.getName())) {
-						msgTaker.sendMessage(pl.getName() + " elállította az esöt ebben a világban!");
+						msgTaker.sendMessage(pl.getName() + plugin.messages.getString("othercommand.sunnybroadcast"));
 					}
 					
 				}
 				
 			} else {
 				
-				sender.sendMessage("Nincs elég jogosutlságod a parancs használatához!");
+				sender.sendMessage(plugin.messages.getString("common.noPerm"));
+				return false;
 				
 			}
 			

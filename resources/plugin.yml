@@ -8,23 +8,16 @@ commands:
   fakechat:
     aliases: [fc]
     description: Fakes a chat message
-    usage: /<command> [name] [message]
   definebutton:
     description: Define a new special button
-    usage: /<command> [type] [name]
   achat:
     aliases: [ac]
     description: Sends a message for online admins
-    usage: /<command> [message]
   idban:
     description: Ban player UID
-    usage: /<command> [name]
   idunban:
     description: Unban player UID
-    usage: /<command> [name]
   napos:
     description: Make a sunny day
-    usage: /<command>
   nappal:
     description: Set the world time
-    usage: /<command>

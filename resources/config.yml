@@ -3,3 +3,6 @@ adminChatFormat: '§4[AdminChat] §2(NAME)§f: (MSG)'
 idUnbanAlsoUnbanPlayer: true
 mushroomSoupRegain: 20
 fixPistonBug: true
+fakePluginsList: 'Plugins: §2Essentials, Valami2'
+fakeBukkitVerString: 'CraftBukkit for Minecraft v1.2.5'
+promotedtospawn: true
