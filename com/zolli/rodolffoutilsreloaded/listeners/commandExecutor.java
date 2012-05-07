@@ -70,28 +70,51 @@ public class commandExecutor implements CommandExecutor {
 					return false;
 				}
 				
-				if(Bukkit.matchPlayer(args[0]) == null) {
-					sender.sendMessage("Nem található játékos ezen a néven!");
-				} else {
-					p = plugin.getServer().getPlayer(args[0]);
-				}
 				
-				if(!plugin.perm.has(p, "rur.fakeChat.exempt") && p != null) {
+				List<Player> matchedPlayerList = Bukkit.getServer().matchPlayer(args[0]);
 				
-					for(Player pl : Bukkit.getServer().getOnlinePlayers()) {
+				if(matchedPlayerList.isEmpty() == false) {
+					
+					if(matchedPlayerList.size() == 1) {
 						
-						if(plugin.perm.has(pl, "rur.fakeChat")) {
+						p = matchedPlayerList.get(0);
+						
+						if(!plugin.perm.has(p, "rur.fakeChat.exempt") && p != null) {
 							
-							pl.sendMessage(pl.getName().toString() + " írta:");
+							for(Player pl : plugin.getServer().getOnlinePlayers()) {
+								
+								if(pl.isOp() || plugin.perm.has(pl, "rur.fakeChat.showname")) {
+									
+									pl.sendMessage(pl.getDisplayName() + " írta:");
+									
+								}
+								
+							}
+							
+							p.chat(message);
+							
+						} else {
+							
+							sender.sendMessage("Nem beszélhetsz ezen játékos nevében!");
 							
 						}
 						
+					} else {
+						
+						sender.sendMessage("Több játékos is illeszkedik erre a névre: ");
+						
+						for(Player matched : matchedPlayerList) {
+							matchedPlayers = matchedPlayers + matched.getName() + ", ";
+						}
+						
+						sender.sendMessage(matchedPlayers);
+						
 					}
 					
-					p.chat(message);
-				
 				} else {
-					sender.sendMessage("Nem beszélhetsz ezen játékos nevében!");
+					
+					sender.sendMessage("Nem található játékos ezen a néven!");
+					
 				}
 				
 			} else {
