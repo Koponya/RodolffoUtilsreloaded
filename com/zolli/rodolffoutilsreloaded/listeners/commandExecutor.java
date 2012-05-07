@@ -311,6 +311,58 @@ public class commandExecutor implements CommandExecutor {
 			
 		}
 		
+		if(command.getName().equalsIgnoreCase("nappal")) {
+			
+			if(sender.isOp() || plugin.perm.has(sender, "rur.nappal")) {
+				
+				Player pl = plugin.getServer().getPlayer(sender.getName());
+				pl.getWorld().setTime(200L);
+				pl.sendMessage("Nappalt csináltál ebben a világban!");
+				List<Player> players = pl.getWorld().getPlayers();
+				
+				for(Player msgTaker : players) {
+					
+					if(!msgTaker.getName().equalsIgnoreCase(pl.getName())) {
+						msgTaker.sendMessage(pl.getName() + " nappalt csinált ebben a világban!");
+					}
+					
+				}
+				
+			} else {
+				
+				sender.sendMessage("Nincs elég jogosutlságod a parancs használatához!");
+				
+			}
+			
+			return true;
+		}
+		
+		if(command.getName().equalsIgnoreCase("napos")) {
+			
+			if(sender.isOp() || plugin.perm.has(sender, "rur.napos")) {
+				
+				Player pl = plugin.getServer().getPlayer(sender.getName());
+				pl.getWorld().setStorm(false);
+				pl.sendMessage("Elállítottad az esöt ebben a világban!");
+				List<Player> players = pl.getWorld().getPlayers();
+				
+				for(Player msgTaker : players) {
+					
+					if(!msgTaker.getName().equalsIgnoreCase(pl.getName())) {
+						msgTaker.sendMessage(pl.getName() + " elállította az esöt ebben a világban!");
+					}
+					
+				}
+				
+			} else {
+				
+				sender.sendMessage("Nincs elég jogosutlságod a parancs használatához!");
+				
+			}
+			
+			return true;
+		}
+		
 		return false;
 	}
 

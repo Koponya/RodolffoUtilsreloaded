@@ -150,6 +150,8 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		getCommand("definebutton").setExecutor(commandExec);
 		getCommand("idban").setExecutor(commandExec);
 		getCommand("idunban").setExecutor(commandExec);
+		getCommand("napos").setExecutor(commandExec);
+		getCommand("nappal").setExecutor(commandExec);
 		
 		if(pm.isPluginEnabled("Vault")) {
 			setupPermissions();

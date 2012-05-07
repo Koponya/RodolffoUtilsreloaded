@@ -22,3 +22,9 @@ commands:
   idunban:
     description: Unban player UID
     usage: /<command> [name]
+  napos:
+    description: Make a sunny day
+    usage: /<command>
+  nappal:
+    description: Set the world time
+    usage: /<command>
