@@ -108,8 +108,6 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	
 	public void saveConfiguration() {
 		try {
-			config.save(configFile);
-			messages.save(messagesFile);
 			button.save(buttonFile);
 		} catch(Exception e) {
 			e.printStackTrace();

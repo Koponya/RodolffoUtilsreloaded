@@ -1,8 +1,22 @@
-pigDropSaddleOnDeath: false
-adminChatFormat: 'Â§4[AdminChat] Â§2(NAME)Â§f: (MSG)'
-idUnbanAlsoUnbanPlayer: true
-mushroomSoupRegain: 20
-fixPistonBug: true
-fakePluginsList: 'Plugins: Â§2Essentials, Valami2'
+# fakePluginsList: A tagok által látott plugin lista adható itt meg
+# fakeBukkitVerString: A tagok által látott hamis Bukkit verzió adható meg
+# adminChatFormat: Az AdminChat formátuma. Használhtó a (NAME) és az (MSG) konstans
+fakePluginsList: 'Plugins: §2Essentials, Valami2'
 fakeBukkitVerString: 'CraftBukkit for Minecraft v1.2.5'
+adminChatFormat: '§4[AdminChat] §2(NAME)§f: (MSG)'
+
+# idUnbanAlsoUnbanPlayer: Az ID-re bannolt játékos a játékbol is automatikusan kitiltásra kerüljön-e 
+# idUnbanAlsoBanPlayer: Az unbannolt ID-jü játékos automatikusan unbannolódjon-e a játékban is
+idUnbanAlsoUnbanPlayer: true
+idUnbanAlsoBanPlayer: true
+
+# pigDropSaddleOnDeath: A disznó halálkor is eldobja-e a rajta lévõ nyerget vagy csak jobbklikkel lehessen levenni
+# mushroomSoupRegain: Mennyi idõnként lehessen leest venni a gombatehéntõl (másodpercben)
+pigDropSaddleOnDeath: false
+mushroomSoupRegain: 20
+
+# A promote gomb álal elöléptetett járékosok a spawn pontra kerüljenek-e
 promotedtospawn: true
+
+# A piston bugok kivédése (damage érték változtatás)
+fixPistonBug: true
