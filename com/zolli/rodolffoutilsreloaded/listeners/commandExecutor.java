@@ -200,7 +200,7 @@ public class commandExecutor implements CommandExecutor {
 							
 							sender.sendMessage(bannedPlayer.getDisplayName() + plugin.messages.getString("banning.successbanned"));
 							
-							if(bannedPlayer.isBanned() == false && plugin.config.getBoolean("idbanAlsoBanPlayer")) {
+							if(!bannedPlayer.isBanned() && plugin.config.getBoolean("idbanAlsoBanPlayer")) {
 								plugin.getServer().getPlayer(sender.getName()).performCommand("ban " + bannedPlayer.getName());
 							}
 							
