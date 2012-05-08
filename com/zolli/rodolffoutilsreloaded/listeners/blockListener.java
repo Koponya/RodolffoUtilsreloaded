@@ -1,13 +1,18 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
 import java.util.List;
+import java.util.Random;
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
+import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.inventory.ItemStack;
 
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 
@@ -75,6 +80,22 @@ public class blockListener implements Listener {
 			
 		}
 		
-	}	
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void appleDrop(LeavesDecayEvent e) {
+		
+		if(e.getBlock().getTypeId() == 18) {
+			
+			Random rand = new Random();
+			float num = rand.nextFloat()*100.0F;
+			
+			if(num <= plugin.config.getInt("appledropchance")) {
+				e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(Material.APPLE, 1));
+			}
+			
+		}
+		
+	}
 	
 }
