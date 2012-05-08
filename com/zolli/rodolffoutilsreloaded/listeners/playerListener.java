@@ -28,6 +28,7 @@ public class playerListener implements Listener {
 	private rodolffoUtilsReloaded plugin;
 	public configUtils cu;
 	private webUtils wu = new webUtils();
+	private Player pl;
 	public playerListener(rodolffoUtilsReloaded instance) {
 		plugin = instance;
 		cu = new configUtils(instance);
@@ -110,7 +111,7 @@ public class playerListener implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void buttonPress(PlayerInteractEvent e) {
 		
-		Player pl = e.getPlayer();
+		pl = e.getPlayer();
 			
 		if(e.getClickedBlock() != null && e.getAction() != null && e.getClickedBlock().getTypeId() == 77 && e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 			
@@ -152,6 +153,8 @@ public class playerListener implements Listener {
 						
 					}
 					
+					
+					
 					if(scanResult[0].equalsIgnoreCase("promote") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.promote"))) {
 						
 						String introductionStatus = wu.hasIntroduction(pl);
@@ -166,10 +169,19 @@ public class playerListener implements Listener {
 								pl.sendMessage(plugin.messages.getString("promotion.successpromotion1"));
 								
 								if(plugin.config.getBoolean("promotedtospawn")) {	
-									pl.performCommand("spawn");
+									
+									plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+										
+										public void run() {
+											
+											playerListener.this.pl.performCommand("spawn");
+											pl.sendMessage(plugin.messages.getString("promotion.successpromotion2"));
+											
+										}
+										
+									}, plugin.config.getLong("spawncooldown")*10L);
+									
 								}
-								
-								pl.sendMessage(plugin.messages.getString("promotion.successpromotion2"));
 								
 							} else {
 								
@@ -184,6 +196,13 @@ public class playerListener implements Listener {
 							pl.sendMessage(plugin.messages.getString("promotion.nointroduction2"));
 							
 						}
+						
+					}
+					
+					
+					if(scanResult[0].equalsIgnoreCase("spawn") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.spawn"))) {
+
+						playerListener.this.pl.performCommand("spawn");
 						
 					}
 					

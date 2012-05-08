@@ -16,7 +16,9 @@ pigDropSaddleOnDeath: false
 mushroomSoupRegain: 20
 
 # A promote gomb álal elöléptetett járékosok a spawn pontra kerüljenek-e
+# spawncooldown: Mennyi idöt várjon a spawnra teelportálás elött
 promotedtospawn: true
+spawncooldown: 5
 
 # A piston bugok kivédése (damage érték változtatás)
 fixPistonBug: true

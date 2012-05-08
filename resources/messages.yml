@@ -39,7 +39,7 @@ othercommand:
 
 # promote gomb üzenetei
 promotion:
-  successpromotion1: '§4Gratulálunk. Sikeresen tagságot szereztél szerverünkön.'
+  successpromotion1: '§2Gratulálunk. Sikeresen tagságot szereztél szerverünkön. Hamarosan teleportálunk!'
   successpromotion2: '§4Üdvözlünk a Spawn ponton!'
   alredymember: '§2Már tag vagy!'
   nointroduction1: '§2Még nem rendelkezel elfogadott bemutatkozással. Kérlek pótold ezt!'

@@ -151,7 +151,7 @@ public class commandExecutor implements CommandExecutor {
 					
 				}
 				
-				if(args[0].equalsIgnoreCase("weathersun") || args[0].equalsIgnoreCase("promote")) {
+				if(args[0].equalsIgnoreCase("weathersun") || args[0].equalsIgnoreCase("promote")|| args[0].equalsIgnoreCase("spawn")) {
 				
 					plugin.SelectorPlayer = sender.getName();
 					plugin.selectType = args[0];
