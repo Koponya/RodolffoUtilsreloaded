@@ -12,8 +12,13 @@ idbanAlsoBanPlayer: true
 
 # pigDropSaddleOnDeath: A disznó halálkor is eldobja-e a rajta lévõ nyerget vagy csak jobbklikkel lehessen levenni
 # mushroomSoupRegain: Mennyi idõnként lehessen leest venni a gombatehéntõl (másodpercben)
+# effecttimeonlevechange: Menny ideig jelenjen meg az effek szintlépéskor (másodpercben, 0 = kikapcsolva)
+# showlevelchange: Kapjon-e értesítést a szintlépésröl a felhasznalo
 pigDropSaddleOnDeath: false
 mushroomSoupRegain: 20
+effecttimeonlevechange: 10
+showlevelchange: true
+showeffectonlevelchange: true
 
 # A promote gomb álal elöléptetett járékosok a spawn pontra kerüljenek-e
 # spawncooldown: Mennyi idöt várjon a spawnra teelportálás elött

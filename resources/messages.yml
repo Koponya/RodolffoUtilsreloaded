@@ -5,6 +5,7 @@ common:
   noPlayerFound: '§4Nem található játékos ezen a néven!'
   badSyntax: '§4Hibás paraméter: '
   noreload: '§4Nem használd a /reload parancsot, inkább indítsd újra a szervert!'
+  levelchangemsg: '§6Gratulálunk elérted a (LVL). szintet!'
 
 # Piston bug értesítés üzenetei  
 pistonbug:
