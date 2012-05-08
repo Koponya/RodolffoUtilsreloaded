@@ -15,7 +15,7 @@ import com.zolli.rodolffoutilsreloaded.utils.webUtils;
 
 public class commandExecutor implements CommandExecutor {
 
-	private String matchedPlayers;
+	private String matchedPlayers = null;
 	private Player bannedPlayer;
 	private Player unbannedPlayer;
 	private rodolffoUtilsReloaded plugin;
@@ -111,10 +111,15 @@ public class commandExecutor implements CommandExecutor {
 						sender.sendMessage(plugin.messages.getString("common.multipleMatch"));
 						
 						for(Player matched : matchedPlayerList) {
-							matchedPlayers = matchedPlayers + matched.getName() + ", ";
+							if(matchedPlayers == null) {
+								matchedPlayers = matched.getName() + ", ";
+							} else {
+								matchedPlayers = matchedPlayers + matched.getName() + ", ";
+							}
 						}
 						
 						sender.sendMessage("§2" + matchedPlayers);
+						matchedPlayers = null;
 						
 					}
 					
@@ -211,10 +216,15 @@ public class commandExecutor implements CommandExecutor {
 						sender.sendMessage(plugin.messages.getString("common.multipleMatch"));
 						
 						for(Player p : mathcPlayerList) {
-							matchedPlayers = matchedPlayers + p.getName() + ", ";
+							if(matchedPlayers == null) {
+								matchedPlayers = p.getName() + ", ";
+							} else {
+								matchedPlayers = matchedPlayers + p.getName() + ", ";
+							}
 						}
 						
 						sender.sendMessage("§2" + matchedPlayers);
+						matchedPlayers = null;
 						
 					}
 					
@@ -297,10 +307,15 @@ public class commandExecutor implements CommandExecutor {
 						sender.sendMessage(plugin.messages.getString("common.multipleMatch"));
 						
 						for(Player p : mathcPlayerList) {
-							matchedPlayers = matchedPlayers + p.getName() + ", ";
+							if(matchedPlayers == null) {
+								matchedPlayers = p.getName() + ", ";
+							} else {
+								matchedPlayers = matchedPlayers + p.getName() + ", ";
+							}
 						}
 						
 						sender.sendMessage("§2" + matchedPlayers);
+						matchedPlayers = null;
 						
 					}
 					
