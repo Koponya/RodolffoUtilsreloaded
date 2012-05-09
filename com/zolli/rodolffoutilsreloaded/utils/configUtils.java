@@ -14,6 +14,12 @@ public class configUtils {
 		plugin = instance;
 	}
 	
+	/**
+	 * Write a location object to configuration
+	 * @param loc The location
+	 * @param type Some extra parameter to specify type
+	 * @param name configuration section path. Must be unique
+	 */
 	public void setLocation(Location loc, String type, String name) {
 		
 		double x = loc.getX();
@@ -29,6 +35,11 @@ public class configUtils {
 		
 	}
 	
+	/**
+	 * When player press a button this function get coordinates from buttons resource and return an array when location is found
+	 * @param loc The location of the pressed button
+	 * @return A string array contains the name and optional the value
+	 */
 	public String[] scanButton(Location loc) {
 		
 		Set<String> names = plugin.button.getConfigurationSection("specialbutton").getKeys(false);

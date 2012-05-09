@@ -12,6 +12,11 @@ public class webUtils {
 	
 	private Random randomGenerator = new Random();
 	
+	/**
+	 * Get the text from webpage
+	 * @param uri The url want to open and read
+	 * @return the readed string when query is sucess, on error null
+	 */
 	private String getLine(String uri) {
 		
 		try {
@@ -34,6 +39,11 @@ public class webUtils {
 		
 	}
 	
+	/**
+	 * Check the specified player has a valid introduction
+	 * @param pl The checked player object
+	 * @return The value returned by website
+	 */
 	public String hasIntroduction(Player pl) {
 		
 		String returnLine = getLine("http://szerver.minecraft.hu/login/game/get.php?hasIntroduction=" + pl.getName());
@@ -46,6 +56,11 @@ public class webUtils {
 		
 	}
 	
+	/**
+	 * Ban the player UID
+	 * @param name The players name
+	 * @return the wbsite response on success or null when error
+	 */
 	public String idBan(String name) {
 		
 		String url = "http://szerver.minecraft.hu/login/game/get.php?banPlayer=" + randomGenerator.nextInt(100000) + "&name=" + name;
@@ -59,6 +74,11 @@ public class webUtils {
 		
 	}
 	
+	/**
+	 * Unban the player UID
+	 * @param name The player name
+	 * @return the website response on success or null on error
+	 */
 	public String idunBan(String name) {
 		
 		String url = "http://szerver.minecraft.hu/login/game/get.php?unbanPlayer=" + randomGenerator.nextInt(100000) + "&name=" + name;

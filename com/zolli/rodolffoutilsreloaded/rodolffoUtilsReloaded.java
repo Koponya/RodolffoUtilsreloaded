@@ -25,6 +25,13 @@ import com.zolli.rodolffoutilsreloaded.listeners.entityListener;
 import com.zolli.rodolffoutilsreloaded.listeners.playerListener;
 import com.zolli.rodolffoutilsreloaded.utils.recipes;
 
+/**
+ * 
+ * @author Zolli
+ * @version 1.2
+ * @since 2012-05-09
+ */
+
 public class rodolffoUtilsReloaded extends JavaPlugin {
 	
 	private PluginManager pm;
@@ -54,18 +61,31 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public int pistonBugId;
 	public byte pistonBugData;
 	
+	/**
+	 * Get the most valuable permission system
+	 * @return perm null if service not found
+	 */
 	private boolean setupPermissions() {
         RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
         perm = rsp.getProvider();
         return perm != null;
     }
 	
+	/**
+	 * Get the most valuable economy system
+	 * @return econ null if valubale service not found
+	 */
 	private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
         econ = rsp.getProvider();
         return econ != null;
     }
 	
+	/**
+	 * Copy a file to another location
+	 * @param in an inputStream object
+	 * @param file file to copy
+	 */
 	private void copy(InputStream in, File file) {
         try {
             OutputStream out = new FileOutputStream(file);
@@ -81,6 +101,9 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
         }
     }
 	
+	/**
+	 * If configuration files dont exist this function is copy all the resource
+	 */
 	private void firstRun() {
 		if(!configFile.exists()) {
 			configFile.getParentFile().mkdirs();
@@ -96,6 +119,9 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		}
 	}
 	
+	/**
+	 * Load all configuration to object
+	 */
 	public void loadConfiguration() {
 		try {
 			config.load(configFile);
@@ -106,6 +132,9 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		}
 	}
 	
+	/**
+	 * Saving configuration object to disk. THis only save the buttons resource
+	 */
 	public void saveConfiguration() {
 		try {
 			button.save(buttonFile);
