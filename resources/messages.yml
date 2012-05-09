@@ -11,6 +11,10 @@ login:
   login: 'Üdvözlünk a szerveren kedves (NAME)! Kellemes játékot kivánunk.'
   logout: '(NAME) itthagyta ezt a világot!'
 
+xpbank:
+  successstored: '§2 Sikeresen eltároltál (XP) tapasztalati pontot!'
+  notenoughtexp: '§4Nincs elég tapasztalati pontod XP üveg készítéséhez!'
+
 # Piston bug értesítés üzenetei  
 pistonbug:
   adminInfo1: '§4Piston bug kihasználás megakadályozva! Helyszín: '

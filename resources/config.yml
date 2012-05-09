@@ -23,7 +23,9 @@ showlevelchange: true
 showeffectonlevelchange: true
 
 # appledropchance: Alma dobás esélye levél elbomláskor
+# xpbottlecrafting: Megszabja mennyi XP kell az XPBottle kraftolásához és hogy mennyit dobjon az
 appledropchance: 80
+xpbottlecrafting: 50
 
 # A promote gomb álal elöléptetett járékosok a spawn pontra kerüljenek-e
 # spawncooldown: Mennyi idöt várjon a spawnra teelportálás elött
