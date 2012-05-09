@@ -88,9 +88,9 @@ public class blockListener implements Listener {
 			
 			Random rand = new Random();
 			float num = rand.nextFloat()*100.0F;
-			
+						
 			if(num <= plugin.config.getInt("appledropchance")) {
-				e.getBlock().getDrops().add(new ItemStack(Material.APPLE, 1));
+				e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(Material.APPLE, 1));
 			}
 			
 		}
