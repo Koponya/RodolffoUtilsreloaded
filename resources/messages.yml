@@ -7,6 +7,10 @@ common:
   noreload: '§4Nem használd a /reload parancsot, inkább indítsd újra a szervert!'
   levelchangemsg: '§6Gratulálunk elérted a (LVL). szintet!'
 
+login:
+  login: 'Üdvözlünk a szerveren kedves (NAME)! Kellemes játékot kivánunk.'
+  logout: '(NAME) itthagyta ezt a világot!'
+
 # Piston bug értesítés üzenetei  
 pistonbug:
   adminInfo1: '§4Piston bug kihasználás megakadályozva! Helyszín: '

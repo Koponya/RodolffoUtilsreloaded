@@ -31,4 +31,8 @@ promotedtospawn: true
 spawncooldown: 5
 
 # A piston bugok kivédése (damage érték változtatás)
+# onlyxpdropwhenkill: Az enderman és a Blaze csak akkor dob XP-t ha player öli meg.
+# alsodisabledrops: Ha nem dob XP-t akkor itemet dobjon-e?
 fixPistonBug: true
+onlyxpdropwhenkill: true
+alsodisabledrops: true

@@ -2,13 +2,18 @@ package com.zolli.rodolffoutilsreloaded.listeners;
 
 import java.util.Date;
 
+import org.bukkit.entity.Blaze;
+import org.bukkit.entity.Enderman;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -58,6 +63,41 @@ public class entityListener implements Listener {
 		if(plugin.config.getBoolean("showlevelchange")) {
 			pl.sendMessage(plugin.messages.getString("common.levelchangemsg").replace("(LVL)", Integer.toString(e.getNewLevel())));
 		}
+		
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void noXpDrop(EntityDeathEvent e) {
+		
+		if((e.getEntity() instanceof Enderman) || (e.getEntity() instanceof Blaze) && plugin.config.getBoolean("onlyxpdropwhenkill")) {
+			
+			if(!(e.getEntity().getKiller() instanceof Player)) {
+				
+				e.setDroppedExp(0);
+				
+				if(plugin.config.getBoolean("alsodisabledrops")) {
+					
+					e.getDrops().clear();
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void loginMessage(PlayerJoinEvent e) {
+		
+		e.setJoinMessage(plugin.messages.getString("login.login").replace("(NAME)", e.getPlayer().getName()));
+		
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void logoutMessage(PlayerQuitEvent e) {
+		
+		e.setQuitMessage(plugin.messages.getString("login.logout").replace("(NAME)", e.getPlayer().getName()));
 		
 	}
 	
