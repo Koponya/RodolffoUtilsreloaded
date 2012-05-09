@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.ExpBottleEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
@@ -55,13 +56,19 @@ public class entityListener implements Listener {
 	public void levelChange(PlayerLevelChangeEvent e) {
 		
 		Player pl = e.getPlayer();
+		int newLevel = e.getNewLevel();
+		int oldLevel = e.getOldLevel();
 		
-		if(plugin.config.getBoolean("showeffectonlevelchange")) {
-			pl.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, plugin.config.getInt("effecttimeonlevechange")*10, 10));
-		}
+		if((newLevel>oldLevel) && newLevel>0) {
+			
+			if(plugin.config.getBoolean("showeffectonlevelchange")) {
+				pl.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, plugin.config.getInt("effecttimeonlevechange")*10, 10));
+			}
+			
+			if(plugin.config.getBoolean("showlevelchange")) {
+				pl.sendMessage(plugin.messages.getString("common.levelchangemsg").replace("(LVL)", Integer.toString(e.getNewLevel())));
+			}
 		
-		if(plugin.config.getBoolean("showlevelchange")) {
-			pl.sendMessage(plugin.messages.getString("common.levelchangemsg").replace("(LVL)", Integer.toString(e.getNewLevel())));
 		}
 		
 	}
@@ -98,6 +105,13 @@ public class entityListener implements Listener {
 	public void logoutMessage(PlayerQuitEvent e) {
 		
 		e.setQuitMessage(plugin.messages.getString("login.logout").replace("(NAME)", e.getPlayer().getName()));
+		
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void xpBottleThrow(ExpBottleEvent e) {
+		
+		e.setExperience(plugin.config.getInt("xpbottlecrafting"));
 		
 	}
 	
