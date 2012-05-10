@@ -223,4 +223,26 @@ public class playerListener implements Listener {
 		
 	}
 	
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void command(PlayerCommandPreprocessEvent e) {
+		
+		if(e.getMessage().startsWith("/home")) {
+			
+			String[] part = e.getMessage().split(" ", 3);
+			
+			if (part.length == 2) {
+				
+				if (part[1].equalsIgnoreCase("bed") && !((plugin.perm.has(e.getPlayer(), "rur.bedhome")) || (e.getPlayer().isOp()))) {
+					
+					e.setCancelled(true);
+					e.getPlayer().sendMessage(plugin.messages.getString("common.noPerm"));
+					
+				} 
+				
+			}
+			
+		}
+		
+	}
+	
 }
