@@ -1,40 +1,20 @@
-# fakePluginsList: A tagok által látott plugin lista adható itt meg
-# fakeBukkitVerString: A tagok által látott hamis Bukkit verzió adható meg
-# adminChatFormat: Az AdminChat formátuma. Használhtó a (NAME) és az (MSG) konstans
-fakePluginsList: 'Plugins: §2Essentials, Valami2'
-fakeBukkitVerString: 'CraftBukkit for Minecraft v1.2.5'
-adminChatFormat: '§4[AdminChat] §2(NAME)§f: (MSG)'
-
-# idUnbanAlsoUnbanPlayer: Az ID-re bannolt játékos a játékbol is automatikusan kitiltásra kerüljön-e 
-# idbanAlsoBanPlayer: Az unbannolt ID-jü játékos automatikusan unbannolódjon-e a játékban is
+# fakePluginsList: A tagok Ã¡ltal lÃ¡tott plugin lista adhatÃ³ itt meg
+# fakeBukkitVerString: A tagok Ã¡ltal lÃ¡tott hamis Bukkit verziÃ³ adhatÃ³ meg
+# adminChatFormat: Az AdminChat formÃ¡tuma. HasznÃ¡lhtÃ³ a (NAME) Ã©s az (MSG) konstans
+fakePluginsList: 'Plugins: Â§2Essentials, Valami2'
+fakeBukkitVerString: CraftBukkit for Minecraft v1.2.5
+adminChatFormat: 'Â§4[AdminChat] Â§2(NAME)Â§f: (MSG)'
 idUnbanAlsoUnbanPlayer: true
 idbanAlsoBanPlayer: true
-
-# pigDropSaddleOnDeath: A disznó halálkor is eldobja-e a rajta lévõ nyerget vagy csak jobbklikkel lehessen levenni
-# mushroomSoupRegain: Mennyi idõnként lehessen leest venni a gombatehéntõl (másodpercben)
 pigDropSaddleOnDeath: false
 mushroomSoupRegain: 20
-
-# effecttimeonlevechange: Menny ideig jelenjen meg az effek szintlépéskor (másodpercben, 0 = kikapcsolva)
-# showlevelchange: Kapjon-e értesítést a szintlépésröl a felhasznalo
-# showeffectonlevelchange: Megjelenjen-e az effekt szintlépéskor
 effecttimeonlevechange: 10
 showlevelchange: true
 showeffectonlevelchange: true
-
-# appledropchance: Alma dobás esélye levél elbomláskor
-# xpbottlecrafting: Megszabja mennyi XP kell az XPBottle kraftolásához és hogy mennyit dobjon az
-appledropchance: 80
-xpbottlecrafting: 50
-
-# A promote gomb álal elöléptetett járékosok a spawn pontra kerüljenek-e
-# spawncooldown: Mennyi idöt várjon a spawnra teelportálás elött
-promotedtospawn: true
+appledropchance: 0
+xpbottlecrafting: 10
+promotedtospawn: false
 spawncooldown: 5
-
-# A piston bugok kivédése (damage érték változtatás)
-# onlyxpdropwhenkill: Az enderman és a Blaze csak akkor dob XP-t ha player öli meg.
-# alsodisabledrops: Ha nem dob XP-t akkor itemet dobjon-e?
 fixPistonBug: true
 onlyxpdropwhenkill: true
 alsodisabledrops: true

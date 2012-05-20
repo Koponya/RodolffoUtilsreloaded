@@ -1,55 +1,41 @@
-# Alltalános üzenetek
+# AlltalÃ¡nos Ã¼zenetek
 common:
-  noPerm: '§4Nincs jogosultságod a parancs használatához!'
-  multipleMatch: '§6Több játékos is illeszkedik erre a névre:'
-  noPlayerFound: '§4Nem található játékos ezen a néven!'
-  badSyntax: '§4Hibás paraméter: '
-  noreload: '§4Nem használd a /reload parancsot, inkább indítsd újra a szervert!'
-  levelchangemsg: '§6Gratulálunk elérted a (LVL). szintet!'
-
+  noPerm: Â§4Nincs jogosultsÃ¡god a parancs hasznÃ¡latÃ¡hoz!
+  multipleMatch: 'Â§6TÃ¶bb jÃ¡tÃ©kos is illeszkedik erre a nÃ©vre:'
+  noPlayerFound: Â§4Nem talÃ¡lhatÃ³ jÃ¡tÃ©kos ezen a nÃ©ven!
+  badSyntax: 'Â§4HibÃ¡s paramÃ©ter: '
+  noreload: Â§4Nem hasznÃ¡ld a /reload parancsot, inkÃ¡bb indÃ­tsd Ãºjra a szervert!
+  levelchangemsg: Â§6GratulÃ¡lunk elÃ©rted a (LVL). szintet!
 login:
-  login: 'Üdvözlünk a szerveren kedves (NAME)! Kellemes játékot kivánunk.'
-  logout: '(NAME) itthagyta ezt a világot!'
-
+  login: Â§e(NAME) csatlakozott a jÃ¡tÃ©khoz
+  logout: Â§e(NAME) itthagyta ezt a vilÃ¡got!
 xpbank:
-  successstored: '§2 Sikeresen eltároltál (XP) tapasztalati pontot!'
-  notenoughtexp: '§4Nincs elég tapasztalati pontod XP üveg készítéséhez!'
-
-# Piston bug értesítés üzenetei  
+  successstored: Â§2 Sikeresen eltÃ¡roltÃ¡l (XP) tapasztalati pontot!
+  notenoughtexp: Â§4Nincs elÃ©g tapasztalati pontod XP Ã¼veg kÃ©szÃ­tÃ©sÃ©hez!
 pistonbug:
-  adminInfo1: '§4Piston bug kihasználás megakadályozva! Helyszín: '
-  adminInfo2: '§4Játékosok a közelben: '
-
-# FakeChat üzenete
+  adminInfo1: 'Â§4Piston bug kihasznÃ¡lÃ¡s megakadÃ¡lyozva! HelyszÃ­n: '
+  adminInfo2: 'Â§4JÃ¡tÃ©kosok a kÃ¶zelben: '
 fekechat:
-  fakechatexempt: '§4Nem beszélhetsz ezen játékos nevében!'
-  
-# Spec gomb létrehozásának üzenetei
+  fakechatexempt: Â§4Nem beszÃ©lhetsz ezen jÃ¡tÃ©kos nevÃ©ben!
 definebutton:
-  defineproc1: '§2A gomb tipusa§f: '
-  defineproc2: '§2Válaszd ki a gombot jobb kattintással'
-  definefinish: '§2A gomb sikeresen felvéve!'
-  onlytype: '§6A gomb csak a következö tipusu lehet: promote, weathersun'
-  successadded: '§2A gomb sikeresen hozzáadva!'
-  
-# Bannolás üzenetei
+  defineproc1: 'Â§2A gomb tipusaÂ§f: '
+  defineproc2: Â§2VÃ¡laszd ki a gombot jobb kattintÃ¡ssal
+  definefinish: Â§2A gomb sikeresen felvÃ©ve!
+  onlytype: 'Â§6A gomb csak a kÃ¶vetkezÃ¶ tipusu lehet: promote, weathersun'
+  successadded: Â§2A gomb sikeresen hozzÃ¡adva!
 banning:
-  successbanned: ' §2örökre ki lett tiltva!'
-  warningBan: '§4Hiba (NAME) bannolása közben: '
-  successunbanned: ' §2kitiltása feloldva!'
-  warningUnBan: '§4Hiba (NAME) unbannolása közben: '
-
-# Extra parancsok üzenetei
+  successbanned: ' Â§2Ã¶rÃ¶kre ki lett tiltva!'
+  warningBan: 'Â§4Hiba (NAME) bannolÃ¡sa kÃ¶zben: '
+  successunbanned: ' Â§2kitiltÃ¡sa feloldva!'
+  warningUnBan: 'Â§4Hiba (NAME) unbannolÃ¡sa kÃ¶zben: '
 othercommand:
-  day: '§2Nappalt csináltál ebben a világban'
-  daybroadcast: ' §2nappalt csinált ebben a világban'
-  sunny: '§2Elállitottad az esöt ebben a világban'
-  sunnybroadcast: ' §2elállította az esöt ebben a világban'
-
-# promote gomb üzenetei
+  day: Â§2Nappalt csinÃ¡ltÃ¡l ebben a vilÃ¡gban
+  daybroadcast: ' Â§2nappalt csinÃ¡lt ebben a vilÃ¡gban'
+  sunny: Â§2ElÃ¡llitottad az esÃ¶t ebben a vilÃ¡gban
+  sunnybroadcast: ' Â§2elÃ¡llÃ­totta az esÃ¶t ebben a vilÃ¡gban'
 promotion:
-  successpromotion1: '§2Gratulálunk. Sikeresen tagságot szereztél szerverünkön. Hamarosan teleportálunk!'
-  successpromotion2: '§4Üdvözlünk a Spawn ponton!'
-  alredymember: '§2Már tag vagy!'
-  nointroduction1: '§2Még nem rendelkezel elfogadott bemutatkozással. Kérlek pótold ezt!'
-  nointroduction2: '§2Olvasd el a szerver.minecraft.hu/wiki oldalon az újoncoknak részt.'
+  successpromotion1: Â§2GratulÃ¡lunk. Sikeresen tagsÃ¡got szereztÃ©l szerverÃ¼nkÃ¶n. Hamarosan teleportÃ¡lunk!
+  successpromotion2: Â§4ÃœdvÃ¶zlÃ¼nk a Spawn ponton!
+  alredymember: Â§2MÃ¡r tag vagy!
+  nointroduction1: Â§2MÃ©g nem rendelkezel elfogadott bemutatkozÃ¡ssal. KÃ©rlek pÃ³told ezt!
+  nointroduction2: Â§2Olvasd el a szerver.minecraft.hu/wiki oldalon az Ãºjoncoknak rÃ©szt.

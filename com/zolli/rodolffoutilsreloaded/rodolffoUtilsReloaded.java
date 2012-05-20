@@ -14,11 +14,13 @@ import org.bukkit.block.Block;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.miykeal.showCaseStandalone.ShowCaseStandalone;
 import com.zolli.rodolffoutilsreloaded.listeners.blockListener;
 import com.zolli.rodolffoutilsreloaded.listeners.commandExecutor;
 import com.zolli.rodolffoutilsreloaded.listeners.entityListener;
@@ -38,6 +40,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	private PluginManager pm;
 	public Economy econ = null;
 	public Permission perm = null;
+	public ShowCaseStandalone scs = null;
 	
 	private File configFile;
 	private File messagesFile;
@@ -61,6 +64,21 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public Block pistonBugBlock;
 	public int pistonBugId;
 	public byte pistonBugData;
+	
+	private void setupScs() {	
+		for(Plugin p : getServer().getPluginManager().getPlugins()) {
+			
+			String cName = p.getClass().getName();
+			
+			if(cName.equals("com.miykeal.showCaseStandalone.ShowCaseStandalone")) {
+				
+				scs = (ShowCaseStandalone) p;
+				
+			}
+			
+		}
+	}
+	
 	
 	/**
 	 * Get the most valuable permission system
@@ -138,6 +156,8 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	 */
 	public void saveConfiguration() {
 		try {
+			config.save(configFile);
+			messages.save(messagesFile);
 			button.save(buttonFile);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -196,12 +216,15 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 			log.info("[" + pdfile.getName() + "] Hooked with " + perm.getName() + "!");
 			setupEconomy();
 			log.info("[" + pdfile.getName() + "] Hooked with " + econ.getName() + "!");
+			setupScs();
 		} else {
 			log.warning("[" + pdfile.getName() + "] Vault not found! Disabling plugin...");
 			pm.disablePlugin(this);
 		}
 		
 		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully enabled!");
+		
+		System.out.println("Teszt String: " + messages.getString("common.noPerm", "alap"));
 		
 	}
 	

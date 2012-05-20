@@ -1,7 +1,9 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import org.bukkit.block.Block;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.MushroomCow;
@@ -12,19 +14,57 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ExpBottleEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.miykeal.showCaseStandalone.Exceptions.ShopNotFoundException;
+import com.miykeal.showCaseStandalone.ShopInternals.Shop.Activities;
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 
 public class entityListener implements Listener {
 	
 	private rodolffoUtilsReloaded plugin;
+	
+	ArrayList<Player> showcaseUsers = new ArrayList<Player>();
+	
 	public entityListener(rodolffoUtilsReloaded instance) {
 		plugin = instance;
+	}
+	
+	private int countPlayersInList(Player pl, ArrayList<Player> al) {
+		
+		int count = 0;
+		
+		for(int i=0 ; i<al.size() ; i++) {
+			
+			Player p = (Player) al.get(i);
+			
+			if(p.getName().equalsIgnoreCase(pl.getName())) {
+				count++;
+			}
+			
+		}
+		
+		return count;
+		
+	}
+	
+	private void DeletePlayerFromList(Player pl, ArrayList<Player> al) {
+		
+		for(int i=0 ; i<al.size() ; i++) {
+			
+			Player p = (Player) al.get(i);
+			
+			if(p.getName().equalsIgnoreCase(pl.getName())) {
+				al.remove(i);
+			}
+			
+		}
+		
 	}
 	
 	@EventHandler(priority=EventPriority.HIGH)
@@ -49,6 +89,33 @@ public class entityListener implements Listener {
 			
 		}
 		
+		
+	}
+	
+	@EventHandler(priority=EventPriority.HIGH)
+	public void showcase(PlayerInteractEvent e) {
+		
+		Player pl = e.getPlayer();
+		Block b = e.getClickedBlock();
+		
+		try {
+			
+			if(e.getAction() != null && b != null && plugin.scs.getShopHandler().isShopBlock(b) && (plugin.scs.getShopHandler().getShopForBlock(b).getAtivitie() == Activities.BUY)) {
+				
+				showcaseUsers.add(pl);
+				
+				if(countPlayersInList(pl, showcaseUsers) >= 5) {
+					
+					pl.kickPlayer("Olvasd el a bolt elötti táblálákat!");
+					DeletePlayerFromList(pl, showcaseUsers);
+					
+				}
+				
+			}
+			
+		} catch (ShopNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		
 	}
 	

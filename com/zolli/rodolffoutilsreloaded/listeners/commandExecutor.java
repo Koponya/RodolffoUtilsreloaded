@@ -92,7 +92,7 @@ public class commandExecutor implements CommandExecutor {
 								
 								if(pl.isOp() || plugin.perm.has(pl, "rur.fakeChat.showname")) {
 									
-									pl.sendMessage(pl.getDisplayName() + " írta:");
+									pl.sendMessage(sender.getName() + " írta:");
 									
 								}
 								

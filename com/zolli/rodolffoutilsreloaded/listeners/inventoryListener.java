@@ -33,18 +33,27 @@ public class inventoryListener implements Listener {
 			
 			if(craftingResult.getTypeId() == 384) {
 				
-				if(pl.getTotalExperience() >= plugin.config.getInt("xpbottlecrafting")) {
+				if(!(e.isShiftClick())) {
 				
-					exp.awardExperience(pl, -plugin.config.getInt("xpbottlecrafting"));
-					pl.sendMessage(plugin.messages.getString("xpbank.successstored").replace("(XP)", Integer.toString(plugin.config.getInt("xpbottlecrafting"))));
+					if(pl.getTotalExperience() >= plugin.config.getInt("xpbottlecrafting")) {
+						
+						exp.awardExperience(pl, -plugin.config.getInt("xpbottlecrafting"));
+						pl.sendMessage(plugin.messages.getString("xpbank.successstored").replace("(XP)", Integer.toString(plugin.config.getInt("xpbottlecrafting"))));
+						
+					} else {
+							
+						e.setCancelled(true);
+						pl.sendMessage(plugin.messages.getString("xpbank.notenoughtexp"));
+							
+					}
 				
 				} else {
 					
+					pl.sendMessage("§4Kérlek egyesével vedd ki az itemeket. ;)");
 					e.setCancelled(true);
-					pl.sendMessage(plugin.messages.getString("xpbank.notenoughtexp"));
 					
 				}
-				
+					
 			} 
 			
 		}	

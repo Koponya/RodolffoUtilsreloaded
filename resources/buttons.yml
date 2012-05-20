@@ -5,3 +5,153 @@ specialbutton:
     x: 1
     y: 1
     z: 1
+  spawn_button:
+    type: promote
+    world: world
+    x: -84.0
+    y: 48.0
+    z: 267.0
+  spawn1:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 265.0
+  spawn2:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 267.0
+  spawn3:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 265.0
+  spawn4:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 257.0
+  spawn5:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 257.0
+  spawn6:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 255.0
+  spawn7:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 247.0
+  spawn8:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 247.0
+  spawn9:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 245.0
+  spawn10:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 237.0
+  spawn11:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 237.0
+  spawn12:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 235.0
+  spawn13:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 225.0
+  spawn14:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 227.0
+  spawn15:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 225.0
+  spawn16:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 217.0
+  spawn17:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 217.0
+  spawn18:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 215.0
+  spawn19:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 205.0
+  spawn20:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 207.0
+  spawn21:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 205.0
+  spawn22:
+    type: spawn
+    world: world
+    x: -78.0
+    y: 48.0
+    z: 195.0
+  spawn23:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 197.0
+  spawn24:
+    type: spawn
+    world: world
+    x: -70.0
+    y: 48.0
+    z: 195.0
