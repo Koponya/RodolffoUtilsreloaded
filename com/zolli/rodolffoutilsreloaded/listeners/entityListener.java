@@ -106,7 +106,7 @@ public class entityListener implements Listener {
 				
 				if(countPlayersInList(pl, showcaseUsers) >= 5) {
 					
-					pl.kickPlayer("Olvasd el a bolt elötti táblálákat!");
+					pl.kickPlayer(plugin.messages.getString("common.read"));
 					DeletePlayerFromList(pl, showcaseUsers);
 					
 				}

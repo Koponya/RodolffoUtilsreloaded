@@ -49,7 +49,7 @@ public class inventoryListener implements Listener {
 				
 				} else {
 					
-					pl.sendMessage("§4Kérlek egyesével vedd ki az itemeket. ;)");
+					pl.sendMessage(plugin.messages.getString("common.oneonly"));
 					e.setCancelled(true);
 					
 				}
