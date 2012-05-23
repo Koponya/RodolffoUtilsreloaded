@@ -2,6 +2,8 @@ package com.zolli.rodolffoutilsreloaded.listeners;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Blaze;
@@ -21,8 +23,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.miykeal.showCaseStandalone.Exceptions.ShopNotFoundException;
-import com.miykeal.showCaseStandalone.ShopInternals.Shop.Activities;
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 
 public class entityListener implements Listener {
@@ -30,41 +30,10 @@ public class entityListener implements Listener {
 	private rodolffoUtilsReloaded plugin;
 	
 	ArrayList<Player> showcaseUsers = new ArrayList<Player>();
+	public Map<String, Integer> showcase = new HashMap<String, Integer>();
 	
 	public entityListener(rodolffoUtilsReloaded instance) {
 		plugin = instance;
-	}
-	
-	private int countPlayersInList(Player pl, ArrayList<Player> al) {
-		
-		int count = 0;
-		
-		for(int i=0 ; i<al.size() ; i++) {
-			
-			Player p = (Player) al.get(i);
-			
-			if(p.getName().equalsIgnoreCase(pl.getName())) {
-				count++;
-			}
-			
-		}
-		
-		return count;
-		
-	}
-	
-	private void DeletePlayerFromList(Player pl, ArrayList<Player> al) {
-		
-		for(int i=0 ; i<al.size() ; i++) {
-			
-			Player p = (Player) al.get(i);
-			
-			if(p.getName().equalsIgnoreCase(pl.getName())) {
-				al.remove(i);
-			}
-			
-		}
-		
 	}
 	
 	@EventHandler(priority=EventPriority.HIGH)
@@ -92,30 +61,36 @@ public class entityListener implements Listener {
 		
 	}
 	
-	@EventHandler(priority=EventPriority.HIGH)
+	@EventHandler(priority=EventPriority.LOWEST)
 	public void showcase(PlayerInteractEvent e) {
 		
 		Player pl = e.getPlayer();
 		Block b = e.getClickedBlock();
 		
-		try {
 			
-			if(e.getAction() != null && b != null && plugin.scs.getShopHandler().isShopBlock(b) && (plugin.scs.getShopHandler().getShopForBlock(b).getAtivitie() == Activities.BUY)) {
+		if(e.getAction() != null && b != null && plugin.scs.getShopHandler().isShopBlock(b)) {
 				
-				showcaseUsers.add(pl);
-				
-				if(countPlayersInList(pl, showcaseUsers) >= 5) {
+			if(showcase.containsKey(pl.getName())) {
 					
-					pl.kickPlayer(plugin.messages.getString("common.read"));
-					DeletePlayerFromList(pl, showcaseUsers);
-					
+				if((showcase.get(pl.getName()) + plugin.config.getInt("scsdelay")/10) >= (int) (new Date().getTime() / 1000L)) {
+						
+					e.setCancelled(true);
+						
+				} else {
+						
+					showcase.remove(pl.getName());
+					showcase.put(pl.getName(), (int) (new Date().getTime() / 1000L));
+						
 				}
-				
+					
+			} else {
+					
+				showcase.put(pl.getName(), (int) (new Date().getTime() / 1000L));
+					
 			}
-			
-		} catch (ShopNotFoundException e1) {
-			e1.printStackTrace();
+				
 		}
+			
 		
 	}
 	

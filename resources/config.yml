@@ -7,14 +7,15 @@ adminChatFormat: '§4[AdminChat] §2(NAME)§f: (MSG)'
 idUnbanAlsoUnbanPlayer: true
 idbanAlsoBanPlayer: true
 pigDropSaddleOnDeath: false
-mushroomSoupRegain: 20
+mushroomSoupRegain: 120
 effecttimeonlevechange: 10
 showlevelchange: true
 showeffectonlevelchange: true
-appledropchance: 0
+appledropchance: 0.5
 xpbottlecrafting: 10
 promotedtospawn: false
 spawncooldown: 5
 fixPistonBug: true
 onlyxpdropwhenkill: true
 alsodisabledrops: true
+scsdelay: 2

@@ -155,3 +155,9 @@ specialbutton:
     x: -70.0
     y: 48.0
     z: 195.0
+  spawn_teszt1:
+    type: weathersun
+    world: world
+    x: -80.0
+    y: 85.0
+    z: 139.0
