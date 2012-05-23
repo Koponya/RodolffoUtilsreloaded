@@ -6,6 +6,7 @@ common:
   badSyntax: '§4Hibás paraméter: '
   noreload: §4Nem használd a /reload parancsot, inkább indítsd újra a szervert!
   levelchangemsg: §6Gratulálunk elérted a (LVL). szintet!
+  oneonly: §4Kérlek egyesével vedd ki az üvegeket!
 login:
   login: §e(NAME) csatlakozott a játékhoz
   logout: §e(NAME) itthagyta ezt a világot
