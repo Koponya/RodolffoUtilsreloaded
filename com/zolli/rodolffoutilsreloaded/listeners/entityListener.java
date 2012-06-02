@@ -8,6 +8,7 @@ import java.util.Map;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -118,7 +119,7 @@ public class entityListener implements Listener {
 	@EventHandler(priority=EventPriority.NORMAL)
 	public void noXpDrop(EntityDeathEvent e) {
 		
-		if((e.getEntity() instanceof Enderman) || (e.getEntity() instanceof Blaze) && plugin.config.getBoolean("onlyxpdropwhenkill")) {
+		if(((e.getEntity() instanceof IronGolem) || (e.getEntity() instanceof Enderman) || (e.getEntity() instanceof Blaze)) && plugin.config.getBoolean("onlyxpdropwhenkill")) {
 			
 			if(!(e.getEntity().getKiller() instanceof Player)) {
 				
