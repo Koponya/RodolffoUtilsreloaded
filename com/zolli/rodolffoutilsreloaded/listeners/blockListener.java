@@ -98,6 +98,7 @@ public class blockListener implements Listener {
 		
 	}
 	
+	@EventHandler(priority=EventPriority.NORMAL)
 	public void sandGravity(BlockPhysicsEvent e) {
 		
 		if((e.getBlock().getLocation().getWorld().getName().equalsIgnoreCase("miner")) && (e.getBlock().getTypeId() == 12)) {
