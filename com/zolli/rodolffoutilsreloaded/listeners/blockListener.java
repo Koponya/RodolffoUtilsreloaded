@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.inventory.ItemStack;
@@ -92,6 +93,16 @@ public class blockListener implements Listener {
 			if(num <= plugin.config.getInt("appledropchance")) {
 				e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(Material.APPLE, 1));
 			}
+			
+		}
+		
+	}
+	
+	public void sandGravity(BlockPhysicsEvent e) {
+		
+		if((e.getBlock().getLocation().getWorld().getName().equalsIgnoreCase("miner")) && (e.getBlock().getTypeId() == 12)) {
+			
+			e.setCancelled(true);
 			
 		}
 		
