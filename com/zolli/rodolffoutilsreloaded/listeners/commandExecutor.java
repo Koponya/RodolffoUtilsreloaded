@@ -412,6 +412,21 @@ public class commandExecutor implements CommandExecutor {
 			return true;
 		}
 		
+		if (command.getName().equalsIgnoreCase("rur")) {
+			if (!sender.isOp() && !plugin.perm.has(sender, "rur.admin"))
+				return true;
+			if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+				plugin.loadConfiguration();
+				sender.sendMessage("§aKonfig betése sikeres.");
+			} else if (args.length == 1 && args[0].equalsIgnoreCase("save")) {
+				plugin.saveConfiguration();
+				sender.sendMessage("§aKonfig mentése sikeres.");
+			} else {
+				sender.sendMessage("§eHasználat: /rur reload|save");
+			}
+			return true;
+		}
+		
 		return false;
 	}
 

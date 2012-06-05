@@ -213,6 +213,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		getCommand("idunban").setExecutor(commandExec);
 		getCommand("napos").setExecutor(commandExec);
 		getCommand("nappal").setExecutor(commandExec);
+		getCommand("rur").setExecutor(commandExec);
 		
 		if(pm.isPluginEnabled("Vault")) {
 			setupPermissions();
@@ -227,7 +228,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully enabled!");
 		
-		System.out.println("Teszt String: " + messages.getString("common.noPerm", "alap"));
+		//System.out.println("Teszt String: " + messages.getString("common.noPerm", "alap"));
 		
 	}
 	

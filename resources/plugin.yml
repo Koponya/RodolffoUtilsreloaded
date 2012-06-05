@@ -21,3 +21,5 @@ commands:
     description: Make a sunny day
   nappal:
     description: Set the world time
+  rur:
+    description: Save or reload config
