@@ -26,6 +26,7 @@ import com.zolli.rodolffoutilsreloaded.listeners.commandExecutor;
 import com.zolli.rodolffoutilsreloaded.listeners.entityListener;
 import com.zolli.rodolffoutilsreloaded.listeners.inventoryListener;
 import com.zolli.rodolffoutilsreloaded.listeners.playerListener;
+import com.zolli.rodolffoutilsreloaded.listeners.tamedMobHelperListener;
 import com.zolli.rodolffoutilsreloaded.utils.recipes;
 
 /**
@@ -197,11 +198,13 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		final entityListener entityListener = new entityListener(this);
 		final blockListener blockListener = new blockListener(this);
 		final inventoryListener inventoryListener = new inventoryListener(this);
+		final tamedMobHelperListener tamedMobHelperListener = new tamedMobHelperListener(this);
 		
 		pm.registerEvents(playerListener, this);
 		pm.registerEvents(entityListener, this);
 		pm.registerEvents(blockListener, this);
 		pm.registerEvents(inventoryListener, this);
+		pm.registerEvents(tamedMobHelperListener, this);
 		
 		getCommand("achat").setExecutor(commandExec);
 		getCommand("fakechat").setExecutor(commandExec);
