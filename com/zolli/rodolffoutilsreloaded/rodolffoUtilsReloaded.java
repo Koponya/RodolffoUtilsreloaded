@@ -228,8 +228,6 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully enabled!");
 		
-		//System.out.println("Teszt String: " + messages.getString("common.noPerm", "alap"));
-		
 	}
 	
 	public void onDisable() {
