@@ -56,6 +56,18 @@ public class webUtils {
 		
 	}
 	
+	public String multiUsers(Player pl) {
+		
+		String returnLine = getLine("http://szerver.minecraft.hu/login/ajax.php?multiUsers=" + randomGenerator.nextInt(10000000) + "&user=" + pl.getName());
+		
+		if(returnLine != null) {
+			return returnLine;
+		}
+		
+		return null;
+		
+	}
+	
 	/**
 	 * Ban the player UID
 	 * @param name The players name

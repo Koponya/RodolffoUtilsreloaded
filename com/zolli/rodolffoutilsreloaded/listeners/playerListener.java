@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
@@ -240,6 +241,38 @@ public class playerListener implements Listener {
 				} 
 				
 			}
+			
+		}
+		
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void getPlayers(PlayerJoinEvent e) {
+		
+		if(plugin.perm.getPrimaryGroup(e.getPlayer()).equalsIgnoreCase("ujonc")) {
+			
+			String multiUsers = wu.multiUsers(e.getPlayer());
+				
+			Player[] Players = plugin.getServer().getOnlinePlayers();
+				
+			for(Player p : Players) {
+					
+				if((plugin.perm.has(p, "rur.seemultiaccount")) || p.isOp()) {
+						
+					if(multiUsers.equalsIgnoreCase("null")) {
+						
+						p.sendMessage(plugin.messages.getString("common.nomultiple") + e.getPlayer().getName());
+						
+					} else {
+						
+						p.sendMessage(plugin.messages.getString("common.multiusers") + e.getPlayer().getName());
+						p.sendMessage("§4" + multiUsers);
+						
+					}
+						
+				}
+					
+			}	
 			
 		}
 		
