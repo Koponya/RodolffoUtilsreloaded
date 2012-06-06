@@ -261,12 +261,11 @@ public class playerListener implements Listener {
 						
 					if(multiUsers.equalsIgnoreCase("null")) {
 						
-						p.sendMessage(plugin.messages.getString("common.nomultiple") + e.getPlayer().getName());
+						p.sendMessage(plugin.messages.getString("common.nomultiple").replace("%n", e.getPlayer().getName()));
 						
 					} else {
 						
-						p.sendMessage(plugin.messages.getString("common.multiusers") + e.getPlayer().getName());
-						p.sendMessage("§4" + multiUsers);
+						p.sendMessage(plugin.messages.getString("common.multiusers").replace("%n", e.getPlayer().getName()) + multiUsers);
 						
 					}
 						
