@@ -37,6 +37,7 @@ othercommand:
   sunny: §2Elállitottad az esöt ebben a világban
   sunnybroadcast: ' §2elállította az esöt ebben a világban'
   animalowner: '§dEz egy §e%m§d, melynek tulajdonosa: §f%n'
+  fullenchant: '§d%i§a enchant felkerült az itemre!'
 promotion:
   successpromotion1: §2Gratulálunk. Sikeresen tagságot szereztél szerverünkön, írd be, /spawn!
   successpromotion2: §4Üdvözlünk a Spawn ponton!

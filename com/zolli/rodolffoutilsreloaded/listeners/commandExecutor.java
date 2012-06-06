@@ -7,7 +7,9 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 import com.zolli.rodolffoutilsreloaded.utils.textUtils;
@@ -427,6 +429,26 @@ public class commandExecutor implements CommandExecutor {
 			return true;
 		}
 		
+		if (command.getName().equalsIgnoreCase("fullenchant")) {
+			if (!sender.isOp() && !plugin.perm.has(sender, "rur.fullenchant"))
+				return true;
+			if(!(sender instanceof Player))
+			{
+				sender.sendMessage("This command you can use only ingame!");
+				return true;
+			}
+			Player p = (Player)sender;
+			ItemStack is = p.getItemInHand();
+			Enchantment[] enc = Enchantment.values();
+			int num = 0;
+			for(int i=0;i<enc.length;i++)
+				try {
+					is.addEnchantment(enc[i], enc[i].getMaxLevel());
+					num++;
+				} catch (Exception ex) { /* ignore errors */ }
+			p.sendMessage(plugin.messages.getString("othercommand.fullenchant").replace("%i", Integer.toString(num)));
+			plugin.log.info(p.getName()+" enchanted a "+is.getType().name().toLowerCase().replace("_", " ")+" to full!");
+		}
 		return false;
 	}
 
