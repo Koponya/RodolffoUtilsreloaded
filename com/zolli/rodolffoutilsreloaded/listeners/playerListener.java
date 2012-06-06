@@ -99,7 +99,7 @@ public class playerListener implements Listener {
 			
 			Pig entityPig = (Pig) entity;
 			
-			if(plugin.perm.has(entityPig.getKiller(), "rur.getBackSaddle") && plugin.config.getBoolean("pigDropSaddleOnDeath")) {
+			if(entityPig.getKiller()!=null && plugin.perm.has(entityPig.getKiller(), "rur.getBackSaddle") && plugin.config.getBoolean("pigDropSaddleOnDeath")) {
 				
 				e.getDrops().add(new ItemStack(Material.SADDLE, 1));
 				
