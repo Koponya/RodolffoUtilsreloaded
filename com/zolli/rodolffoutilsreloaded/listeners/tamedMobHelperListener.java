@@ -1,5 +1,6 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Player;
@@ -29,9 +30,10 @@ public class tamedMobHelperListener implements Listener {
 		{
 			if(e.getRightClicked() instanceof Tameable && e.getRightClicked() instanceof Animals)
 			{
-				Tameable ent = (Tameable)e.getRightClicked();
+				Tameable tam = (Tameable)e.getRightClicked();
+				OfflinePlayer owner = (OfflinePlayer)tam.getOwner();
 				String name = e.getRightClicked().getType().getName().equals("Wolf")?"farkas":"macska";
-				p.sendMessage(plugin.messages.getString("othercommand.animalowner").replace("%m", name).replace("%n", ((Player)ent.getOwner()).getName()));
+				p.sendMessage(plugin.messages.getString("othercommand.animalowner").replace("%m", name).replace("%n", (owner.getPlayer()!=null?owner.getPlayer().getDisplayName():owner.getName())));
 			}
 		}
 	}
