@@ -1,6 +1,8 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -413,18 +415,66 @@ public class commandExecutor implements CommandExecutor {
 		}
 		
 		if (command.getName().equalsIgnoreCase("rur")) {
-			if (!sender.isOp() && !plugin.perm.has(sender, "rur.admin"))
+			
+			if (!sender.isOp() && !plugin.perm.has(sender, "rur.admin")) {
 				return true;
+			}
+			
 			if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+				
 				plugin.loadConfiguration();
 				sender.sendMessage(plugin.messages.getString("rurcommand.reload"));
+				
 			} else if (args.length == 1 && args[0].equalsIgnoreCase("save")) {
+				
 				plugin.saveConfiguration();
 				sender.sendMessage(plugin.messages.getString("rurcommand.save"));
+				
+			} else if(args.length == 3 && args[0].equalsIgnoreCase("set")) {
+				
+				String key = args[1];
+				String value = args[2];
+				Set<String> confKeys = plugin.config.getKeys(false);
+				Iterator<String> it = confKeys.iterator();
+				
+				while(it.hasNext()) {
+					
+					if(it.next().toString().equalsIgnoreCase(key)) {
+						
+						plugin.config.set(key, value);
+						plugin.saveConfiguration();
+						sender.sendMessage("Érték sikeresen módoítva");
+						
+					} else {
+						
+						sender.sendMessage("Nincs ilyen kulcs a konfigurációs fájlban!");
+						
+					}
+					
+				}
+				
+				
+				
+				/*if(plugin.config.contains("key")) {
+					
+					plugin.config.set(key, value);
+					plugin.saveConfiguration();
+					sender.sendMessage("Érték sikeresen módoítva");
+					
+				} else {
+					
+					sender.sendMessage("Nincs ilyen kulcs a konfigurációs fájlban!");
+					
+				}*/
+				
 			} else {
+				
 				sender.sendMessage(plugin.messages.getString("rurcommand.usage"));
+				
 			}
+			
 			return true;
+			
 		}
 		
 		return false;
