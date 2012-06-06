@@ -226,6 +226,20 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 			pm.disablePlugin(this);
 		}
 		
+		if(this.config.getInt("savealldelay")>0)
+		{
+			log.info("[" + pdfile.getName() + "] Auto save enabled for "+this.config.getInt("savealldelay")+" minutes!");
+			getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() 
+	    	{
+	    	    public void run() 
+	    	    {
+	    	    	log.info("[" + pdfile.getName() + "] Auto save start...");
+	    	    	getServer().dispatchCommand(getServer().getConsoleSender(), "save-all");
+	    	    }
+	    	}, 200L, this.config.getLong("savealldelay")*60*20L);
+		}
+		
+		
 		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully enabled!");
 		
 	}

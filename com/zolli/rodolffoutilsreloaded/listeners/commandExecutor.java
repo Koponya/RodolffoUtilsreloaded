@@ -417,7 +417,7 @@ public class commandExecutor implements CommandExecutor {
 				return true;
 			if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
 				plugin.loadConfiguration();
-				sender.sendMessage("§aKonfig betése sikeres.");
+				sender.sendMessage("§aKonfig betöltése sikeres.");
 			} else if (args.length == 1 && args[0].equalsIgnoreCase("save")) {
 				plugin.saveConfiguration();
 				sender.sendMessage("§aKonfig mentése sikeres.");

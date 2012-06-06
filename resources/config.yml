@@ -19,3 +19,4 @@ fixPistonBug: true
 onlyxpdropwhenkill: true
 alsodisabledrops: true
 scsdelay: 2
+savealldelay: 30
