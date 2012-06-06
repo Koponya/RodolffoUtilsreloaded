@@ -36,9 +36,14 @@ othercommand:
   daybroadcast: ' §2nappalt csinált ebben a világban'
   sunny: §2Elállitottad az esöt ebben a világban
   sunnybroadcast: ' §2elállította az esöt ebben a világban'
+  animalowner: '§dEz egy §e%m§d, melynek tulajdonosa: §f%n'
 promotion:
   successpromotion1: §2Gratulálunk. Sikeresen tagságot szereztél szerverünkön, írd be, /spawn!
   successpromotion2: §4Üdvözlünk a Spawn ponton!
   alredymember: §2Már tag vagy!
   nointroduction1: §2Még nem rendelkezel elfogadott bemutatkozással. Kérlek pótold ezt!
   nointroduction2: §2Olvasd el a szerver.minecraft.hu/wiki oldalon az újoncoknak részt.
+rurcommand:
+  usage: '§eHasználat: /rur reload|save'
+  save: §aKonfig mentése sikeres
+  reload: §aKonfig betöltése sikeres

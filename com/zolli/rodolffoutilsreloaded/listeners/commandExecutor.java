@@ -417,12 +417,12 @@ public class commandExecutor implements CommandExecutor {
 				return true;
 			if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
 				plugin.loadConfiguration();
-				sender.sendMessage("§aKonfig betöltése sikeres.");
+				sender.sendMessage(plugin.messages.getString("rurcommand.reload"));
 			} else if (args.length == 1 && args[0].equalsIgnoreCase("save")) {
 				plugin.saveConfiguration();
-				sender.sendMessage("§aKonfig mentése sikeres.");
+				sender.sendMessage(plugin.messages.getString("rurcommand.save"));
 			} else {
-				sender.sendMessage("§eHasználat: /rur reload|save");
+				sender.sendMessage(plugin.messages.getString("rurcommand.usage"));
 			}
 			return true;
 		}

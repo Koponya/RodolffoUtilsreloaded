@@ -31,7 +31,7 @@ public class tamedMobHelperListener implements Listener {
 			{
 				Tameable ent = (Tameable)e.getRightClicked();
 				String name = e.getRightClicked().getType().getName().equals("Wolf")?"farkas":"macska";
-				p.sendMessage("§dEz egy §e"+name+"§d, melynek tulaja: §f"+((Player)ent.getOwner()).getDisplayName());
+				p.sendMessage(plugin.messages.getString("othercommand.animalowner").replace("%m", name).replace("%n", ((Player)ent.getOwner()).getName()));
 			}
 		}
 	}
