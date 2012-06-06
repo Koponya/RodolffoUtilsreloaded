@@ -214,6 +214,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		getCommand("napos").setExecutor(commandExec);
 		getCommand("nappal").setExecutor(commandExec);
 		getCommand("rur").setExecutor(commandExec);
+		getCommand("fullenchant").setExecutor(commandExec);
 		
 		if(pm.isPluginEnabled("Vault")) {
 			setupPermissions();

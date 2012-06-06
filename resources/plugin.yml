@@ -23,3 +23,5 @@ commands:
     description: Set the world time
   rur:
     description: Save or reload config
+  fullenchant:
+    description: Set the holding item all enchantment to max level
