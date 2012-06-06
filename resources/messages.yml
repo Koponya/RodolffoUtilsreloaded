@@ -45,6 +45,9 @@ promotion:
   nointroduction1: §2Még nem rendelkezel elfogadott bemutatkozással. Kérlek pótold ezt!
   nointroduction2: §2Olvasd el a szerver.minecraft.hu/wiki oldalon az újoncoknak részt.
 rurcommand:
-  usage: '§eHasználat: /rur reload|save'
+  usage: '§eHasználat: /rur reload|save|set [key] [value]'
   save: §aKonfig mentése sikeres
   reload: §aKonfig betöltése sikeres
+config:
+  sucess: '§2A (KEY) értéke sikeresen módosult erre: (VAL)'
+  nokey: §4Nincs ilyen kulcs!

@@ -1,6 +1,5 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -437,37 +436,34 @@ public class commandExecutor implements CommandExecutor {
 				String key = args[1];
 				String value = args[2];
 				Set<String> confKeys = plugin.config.getKeys(false);
-				Iterator<String> it = confKeys.iterator();
 				
-				while(it.hasNext()) {
+				if(confKeys.contains(key)) {
 					
-					if(it.next().toString().equalsIgnoreCase(key)) {
+					if(plugin.config.isBoolean(key)) {
+						
+						plugin.config.set(key, Boolean.parseBoolean(value));
+						plugin.saveConfiguration();
+						sender.sendMessage(plugin.messages.getString("config.sucess").replace("(KEY)", key).replace("(VAL)", value));
+						
+					} else if(plugin.config.isInt(key)) {
+						
+						plugin.config.set(key, Integer.parseInt(value));
+						plugin.saveConfiguration();
+						sender.sendMessage(plugin.messages.getString("config.sucess").replace("(KEY)", key).replace("(VAL)", value));
+						
+					} else if (plugin.config.isString(key)) {
 						
 						plugin.config.set(key, value);
 						plugin.saveConfiguration();
-						sender.sendMessage("Érték sikeresen módoítva");
-						
-					} else {
-						
-						sender.sendMessage("Nincs ilyen kulcs a konfigurációs fájlban!");
+						sender.sendMessage(plugin.messages.getString("config.sucess").replace("(KEY)", key).replace("(VAL)", value));
 						
 					}
 					
-				}
-				
-				
-				
-				/*if(plugin.config.contains("key")) {
-					
-					plugin.config.set(key, value);
-					plugin.saveConfiguration();
-					sender.sendMessage("Érték sikeresen módoítva");
-					
 				} else {
 					
-					sender.sendMessage("Nincs ilyen kulcs a konfigurációs fájlban!");
+					sender.sendMessage(plugin.messages.getString("config.nokey"));
 					
-				}*/
+				}
 				
 			} else {
 				
