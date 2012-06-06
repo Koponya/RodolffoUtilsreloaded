@@ -51,3 +51,7 @@ rurcommand:
 config:
   sucess: '§2A (KEY) értéke sikeresen módosult erre: (VAL)'
   nokey: §4Nincs ilyen kulcs!
+entitylist:
+  usage: '§dHasználat: /entitylist [körzet]'
+  color: §a
+  msg: §aÖsszesen %i entitás

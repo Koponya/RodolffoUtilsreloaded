@@ -1,7 +1,11 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -9,6 +13,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -494,6 +499,60 @@ public class commandExecutor implements CommandExecutor {
 				} catch (Exception ex) { /* ignore errors */ }
 			p.sendMessage(plugin.messages.getString("othercommand.fullenchant").replace("%i", Integer.toString(num)));
 			plugin.log.info(p.getName()+" enchanted a "+is.getType().name().toLowerCase().replace("_", " ")+" to full!");
+		}
+
+		if (command.getName().equalsIgnoreCase("entitylist") || command.getName().equalsIgnoreCase("el")) {
+			if (!sender.isOp() && !plugin.perm.has(sender, "rur.entitylist"))
+			{
+				sender.sendMessage(plugin.messages.getString("entitylist.noperm"));
+				return true;
+			}
+			if(!(sender instanceof Player))
+			{
+				sender.sendMessage("This command you can use only ingame!");
+				return true;
+			}
+			if(args.length>1)
+			{
+				sender.sendMessage(plugin.messages.getString("entitylist.usage"));
+				return true;
+			}
+			Player p = (Player)sender;
+			int dist = 20;
+			if(args.length == 1)
+			{
+				try {
+					dist = Integer.parseInt(args[0]);
+				} catch (Exception ex) {
+					sender.sendMessage(plugin.messages.getString("entitylist.usage"));
+					return true;
+				}
+			}
+			int count = 0;
+			Map<String,Integer> ents = new HashMap<String, Integer>();
+			List<Entity> el = p.getWorld().getEntities();
+			for(Entity ent : el)
+			{
+				if(ent.getLocation().distance(p.getLocation())<=dist)
+				{
+					count++;
+					if(ents.containsKey(ent.getType().name()))
+					{
+						ents.put(ent.getType().name(), ents.get(ent.getType().name())+1);
+					}
+					else
+					{
+						ents.put(ent.getType().name(), 1);
+					}
+				}
+			}
+			Iterator<Entry<String,Integer>> it = ents.entrySet().iterator();
+			while(it.hasNext())
+			{
+				Entry<String,Integer> entry = it.next();
+				p.sendMessage(plugin.messages.getString("entitylist.color")+entry.getKey()+": "+entry.getValue());
+			}
+			p.sendMessage(plugin.messages.getString("entitylist.color")+plugin.messages.getString("entitylist.msg").replace("%i", Integer.toString(count)));
 		}
 		return false;
 	}
