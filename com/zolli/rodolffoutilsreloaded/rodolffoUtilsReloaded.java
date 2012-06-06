@@ -238,6 +238,10 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	    	    }
 	    	}, 200L, this.config.getLong("savealldelay")*60*20L);
 		}
+		else
+		{
+			log.info("[" + pdfile.getName() + "] Auto save disabled!");
+		}
 		
 		
 		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully enabled!");
