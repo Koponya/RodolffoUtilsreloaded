@@ -25,3 +25,6 @@ commands:
     description: Save or reload config
   fullenchant:
     description: Set the holding item all enchantment to max level
+  entitylist:
+    description: write the nearby entity's number
+    aliases: [el]

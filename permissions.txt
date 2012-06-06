@@ -1,3 +1,4 @@
-rur.admin 		- can reload and save the rur config files
+rur.admin 	- can reload and save the rur config files
 rur.fullenchant	- can use the /fullenchant command
 rur.tamedmob	- can view who is a animal's owner
+rur.entitylist	- can use /entitylist command

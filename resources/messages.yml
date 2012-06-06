@@ -48,3 +48,7 @@ rurcommand:
   usage: '§eHasználat: /rur reload|save'
   save: §aKonfig mentése sikeres
   reload: §aKonfig betöltése sikeres
+entitylist:
+  usage: '§dHasználat: /entitylist [körzet]'
+  color: §a
+  msg: §aÖsszesen %i entitás
