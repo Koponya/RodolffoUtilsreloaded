@@ -52,7 +52,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public FileConfiguration button;
 	
 	public Logger log;
-	private PluginDescriptionFile pdfile;
+	public PluginDescriptionFile pdfile;
 	private CommandExecutor commandExec;
 	private recipes recipes;
 	
