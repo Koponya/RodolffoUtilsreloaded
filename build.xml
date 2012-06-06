@@ -8,6 +8,7 @@
 	<property name="bukkit" value="bukkit.jar"/>
 	<property name="Vault" value="vault.jar"/>
 	<property name="SCS" value="scs.jar"/>
+	<property name="PEX" value="pex.jar"/>
 	
 	<target name="init">
 		<mkdir dir="${lib}"/>
@@ -19,6 +20,7 @@
 		<get src="http://dl.bukkit.org/downloads/bukkit/get/01025_1.2.5-R1.0/bukkit.jar" dest="${lib}/${bukkit}" usetimestamp="true"/>
 		<get src="http://dev.bukkit.org/media/files/587/723/Vault.jar" dest="${lib}/${Vault}" usetimestamp="true"/>
 		<get src="http://dev.bukkit.org/media/files/591/727/ShowCaseStandalone.jar" dest="${lib}/${SCS}" usetimestamp="true"/>
+		<get src="http://mc.coldline.hu/zolli/PermissionsEx.jar" dest="${lib}/${PEX}" usetimestamp="true"/>
 	</target>
 	
 	<target name="compile" depends="get_libs">
@@ -27,6 +29,7 @@
 			<pathelement location="${lib}/${bukkit}"/>
 			<pathelement location="${lib}/${Vault}"/>
 			<pathelement location="${lib}/${SCS}"/>
+			<pathelement location="${lib}/${PEX}"/>
 		</classpath>
 		</javac>
 	</target>
