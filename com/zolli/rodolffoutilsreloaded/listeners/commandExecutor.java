@@ -470,6 +470,28 @@ public class commandExecutor implements CommandExecutor {
 					
 				}
 				
+			} else if(args.length == 1 && args[0].equalsIgnoreCase("get")) {
+				
+				Set<String> confKey = plugin.config.getKeys(false);
+				Iterator<String> it = confKey.iterator();
+				
+				sender.sendMessage(plugin.messages.getString("config.allkey"));
+				
+				while(it.hasNext()) {
+					
+					String ck = it.next();
+					
+					if(plugin.config.isBoolean(ck)) {
+						sender.sendMessage("§e(BOOLEAN) " + "§6" + ck + " - §f" + plugin.config.getBoolean(ck));
+					} else if(plugin.config.isInt(ck)) {
+						sender.sendMessage("§e(INT) " + "§6" + ck + " - §f" + plugin.config.getInt(ck));
+					} else if(plugin.config.isString(ck)) {
+						sender.sendMessage("§e(STRING) " + "§6" + ck + " - §f" + plugin.config.getString(ck));
+					}
+					
+				}
+				
+				
 			} else {
 				
 				sender.sendMessage(plugin.messages.getString("rurcommand.usage"));
