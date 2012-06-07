@@ -43,12 +43,12 @@ public class playerListener implements Listener {
 		Player commandSender = e.getPlayer();
 		
 		if((!commandSender.isOp() || !plugin.perm.has(commandSender, "rur.allowSeeBukkitVer")) && (command.equalsIgnoreCase("/ver") || command.equalsIgnoreCase("/version"))) {
-			commandSender.sendMessage(plugin.config.getString("fakePluginsList"));
+			commandSender.sendMessage(plugin.config.getString("fakeBukkitVerString"));
 			e.setCancelled(true);
 		}
 		
 		if((!commandSender.isOp() || !plugin.perm.has(commandSender, "rur.allowSeeRealPlugins")) && (command.equalsIgnoreCase("/pl") || command.equalsIgnoreCase("/plugins"))) {
-			commandSender.sendMessage(plugin.config.getString("fakeBukkitVerString"));
+			commandSender.sendMessage(plugin.config.getString("fakePluginsList"));
 			e.setCancelled(true);
 		}
 		
