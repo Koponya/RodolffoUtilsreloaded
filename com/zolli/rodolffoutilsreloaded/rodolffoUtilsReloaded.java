@@ -66,6 +66,8 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public int pistonBugId;
 	public byte pistonBugData;
 	
+	private AutoSaveThread autoSave;
+	
 	private void setupScs() {	
 		for(Plugin p : getServer().getPluginManager().getPlugins()) {
 			
@@ -229,22 +231,15 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		}
 		
 		if(this.config.getInt("savealldelay")>0)
-		{
+		{//auto save
 			log.info("[" + pdfile.getName() + "] Auto save enabled for "+this.config.getInt("savealldelay")+" minutes!");
-			getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() 
-	    	{
-	    	    public void run() 
-	    	    {
-	    	    	log.info("[" + pdfile.getName() + "] Auto save start...");
-	    	    	getServer().dispatchCommand(getServer().getConsoleSender(), "save-all");
-	    	    }
-	    	}, 200L, this.config.getLong("savealldelay")*60*20L);
+			autoSave = new AutoSaveThread(this);
+			autoSave.start();
 		}
 		else
 		{
 			log.info("[" + pdfile.getName() + "] Auto save disabled!");
 		}
-		
 		
 		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully enabled!");
 		
@@ -253,6 +248,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public void onDisable() {
 		
 		this.saveConfiguration();
+		this.autoSave.running = false;
 		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully disabled!");
 		
 	}
