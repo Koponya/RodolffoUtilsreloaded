@@ -177,6 +177,7 @@ public class playerListener implements Listener {
 											
 											playerListener.this.pl.performCommand("spawn");
 											pl.sendMessage(plugin.messages.getString("promotion.successpromotion2"));
+											pl.getInventory().setItemInHand(new ItemStack(38, 1));
 											
 										}
 										
