@@ -14,11 +14,16 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.inventory.ItemStack;
+
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import com.zolli.rodolffoutilsreloaded.DelaydMessage;
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
@@ -293,4 +298,42 @@ public class playerListener implements Listener {
 			}
 		}
 	}
+	
+	/////////////////////////////////////////////////////
+	////////playerList name change///////////////////////
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void playerList3NameForJoin(PlayerLoginEvent e) {
+		setPlayerListName(e.getPlayer());
+	}
+
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void playerListNameForChat(PlayerChatEvent e) {
+		setPlayerListName(e.getPlayer());
+	}
+
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void playerListNameForCommand(PlayerCommandPreprocessEvent e) {
+		setPlayerListName(e.getPlayer());
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void playerListName(PlayerChangedWorldEvent e) {
+		setPlayerListName(e.getPlayer());
+	}
+	
+	private void setPlayerListName(Player p) {
+		try
+		{
+			String prefix = PermissionsEx.getUser(p).getPrefix();
+			String name = prefix.split("] ",2)[1];
+			name += p.getName();
+			if(name.length()>16) name = name.substring(0, 15);
+			p.setPlayerListName(name);
+		}
+		catch (Exception ex) 
+		{
+			plugin.log.warning("[" + plugin.pdfile.getName() + "] No PermissionsEx found, no use prefix");
+		}
+	}
+	//////////////////////////////////////////////////////
 }
