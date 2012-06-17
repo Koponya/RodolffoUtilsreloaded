@@ -67,6 +67,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public byte pistonBugData;
 	
 	private AutoSaveThread autoSave;
+	private LagDetectThread lagDetect;
 	
 	private void setupScs() {	
 		for(Plugin p : getServer().getPluginManager().getPlugins()) {
@@ -240,7 +241,8 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		{
 			log.info("[" + pdfile.getName() + "] Auto save disabled!");
 		}
-		
+		this.lagDetect = new LagDetectThread(this);
+		this.lagDetect.start();
 		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully enabled!");
 		
 	}
@@ -249,6 +251,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		this.saveConfiguration();
 		this.autoSave.running = false;
+		this.lagDetect.running = false;
 		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully disabled!");
 		
 	}
