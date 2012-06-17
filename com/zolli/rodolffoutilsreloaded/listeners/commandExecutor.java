@@ -28,7 +28,6 @@ public class commandExecutor implements CommandExecutor {
 	private Player unbannedPlayer;
 	private rodolffoUtilsReloaded plugin;
 	private textUtils tu = new textUtils();
-	public webUtils wu = new webUtils();
 	public commandExecutor(rodolffoUtilsReloaded instance) {
 		plugin = instance;
 	}
@@ -202,7 +201,7 @@ public class commandExecutor implements CommandExecutor {
 					if(mathcPlayerList.size() == 1) {
 						
 						bannedPlayer = mathcPlayerList.get(0);
-						String answer = wu.idBan(bannedPlayer.getName());
+						String answer = webUtils.idBan(bannedPlayer.getName());
 						
 						if(answer.equalsIgnoreCase("ok")) {
 							
@@ -243,7 +242,7 @@ public class commandExecutor implements CommandExecutor {
 					if(offlinePl != null) {
 						
 						bannedPlayer = offlinePl.getPlayer();
-						String answer = wu.idBan(bannedPlayer.getName());
+						String answer = webUtils.idBan(bannedPlayer.getName());
 						
 						if(answer.equalsIgnoreCase("ok")) {
 							
@@ -293,7 +292,7 @@ public class commandExecutor implements CommandExecutor {
 					if(mathcPlayerList.size() == 1) {
 						
 						unbannedPlayer = mathcPlayerList.get(0);
-						String answer = wu.idunBan(unbannedPlayer.getName());
+						String answer = webUtils.idunBan(unbannedPlayer.getName());
 						
 						if(answer.equalsIgnoreCase("ok")) {
 							
@@ -334,7 +333,7 @@ public class commandExecutor implements CommandExecutor {
 					if(offlinePl != null) {
 						
 						unbannedPlayer = offlinePl.getPlayer();
-						String answer = wu.idBan(unbannedPlayer.getName());
+						String answer = webUtils.idBan(unbannedPlayer.getName());
 						
 						if(answer.equalsIgnoreCase("ok")) {
 							

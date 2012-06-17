@@ -28,7 +28,6 @@ public class playerListener implements Listener {
 	
 	private rodolffoUtilsReloaded plugin;
 	public configUtils cu;
-	private webUtils wu = new webUtils();
 	private Player pl;
 	public playerListener(rodolffoUtilsReloaded instance) {
 		plugin = instance;
@@ -158,7 +157,7 @@ public class playerListener implements Listener {
 					
 					if(scanResult[0].equalsIgnoreCase("promote") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.promote"))) {
 						
-						String introductionStatus = wu.hasIntroduction(pl);
+						String introductionStatus = webUtils.hasIntroduction(pl);
 						
 						if(introductionStatus.equalsIgnoreCase("ok")) {
 							
@@ -252,7 +251,7 @@ public class playerListener implements Listener {
 		
 		if(plugin.perm.getPrimaryGroup(e.getPlayer()).equalsIgnoreCase("ujonc")) {
 			
-			String multiUsers = wu.multiUsers(e.getPlayer());
+			String multiUsers = webUtils.multiUsers(e.getPlayer());
 				
 			Player[] Players = plugin.getServer().getOnlinePlayers();
 				
