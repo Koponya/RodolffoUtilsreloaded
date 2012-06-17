@@ -114,7 +114,7 @@ public class playerListener implements Listener {
 		
 		pl = e.getPlayer();
 			
-		if(e.getClickedBlock() != null && e.getAction() != null && e.getClickedBlock().getTypeId() == 77 && e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+		if(e.getClickedBlock() != null && e.getAction() != null && e.getClickedBlock().getTypeId() == 77 && (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
 			
 			Location buttonLoc = e.getClickedBlock().getLocation();
 			String[] scanResult = cu.scanButton(buttonLoc);
