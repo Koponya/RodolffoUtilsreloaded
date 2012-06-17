@@ -20,6 +20,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.zolli.rodolffoutilsreloaded.DelaydMessage;
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 import com.zolli.rodolffoutilsreloaded.utils.configUtils;
 import com.zolli.rodolffoutilsreloaded.utils.webUtils;
@@ -277,4 +278,19 @@ public class playerListener implements Listener {
 		
 	}
 	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void whoIs(PlayerCommandPreprocessEvent e) {
+		if(e.getMessage().startsWith("/whois ")) {
+			String[] args = e.getMessage().split(" ");
+			Player p = e.getPlayer();
+			if(p.isOp() || plugin.perm.has(p, "essentials.whois")) {
+				List<Player> pl = plugin.getServer().matchPlayer(args[1]);
+				if(pl.size()>0 && pl.get(0).getName().equalsIgnoreCase(args[1])) {
+					String multiUsers = webUtils.multiUsers(pl.get(0));
+					if(multiUsers.equalsIgnoreCase("null")) multiUsers = "senki";
+					plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new DelaydMessage(p,"Â§9 - Közös gépen: "+multiUsers),2L);
+				}
+			}
+		}
+	}
 }
