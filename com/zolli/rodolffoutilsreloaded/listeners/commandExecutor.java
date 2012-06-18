@@ -512,17 +512,20 @@ public class commandExecutor implements CommandExecutor {
 			Player p = (Player)sender;
 			ItemStack is = p.getItemInHand();
 			Enchantment[] enc = Enchantment.values();
-			int num = 0;
+			int newNum = 0;
+			int upNum = 0;
 			for(int i=0;i<enc.length;i++)
 				try {
+					if(is.getEnchantmentLevel(enc[i])==0) newNum++;
 					if(args.length==1 && args[0].equalsIgnoreCase("extra")) {
+						if(is.getEnchantmentLevel(enc[i])<127) upNum++;
 						is.addUnsafeEnchantment(enc[i], 127);
 					} else {
+						if(is.getEnchantmentLevel(enc[i])<enc[i].getMaxLevel()) upNum++;
 						is.addEnchantment(enc[i], enc[i].getMaxLevel());
 					}
-					num++;
 				} catch (Exception ex) { /* ignore errors */ }
-			p.sendMessage(plugin.messages.getString("othercommand.fullenchant").replace("%i", Integer.toString(num)));
+			p.sendMessage(plugin.messages.getString("othercommand.fullenchant").replace("%new%", Integer.toString(newNum)).replace("%up%", Integer.toString(upNum)));
 			plugin.log.info(p.getName()+" enchanted a "+is.getType().name().toLowerCase().replace("_", " ")+" to full!");
 		}
 
