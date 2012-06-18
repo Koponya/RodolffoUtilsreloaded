@@ -20,7 +20,6 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.inventory.ItemStack;
 
 import ru.tehkode.permissions.bukkit.PermissionsEx;
@@ -302,7 +301,7 @@ public class playerListener implements Listener {
 	/////////////////////////////////////////////////////
 	////////playerList name change///////////////////////
 	@EventHandler(priority=EventPriority.NORMAL)
-	public void playerList3NameForJoin(PlayerLoginEvent e) {
+	public void playerListNameForJoin(PlayerJoinEvent e) {
 		setPlayerListName(e.getPlayer());
 	}
 
@@ -322,6 +321,7 @@ public class playerListener implements Listener {
 	}
 	
 	private void setPlayerListName(Player p) {
+		if(!p.getPlayerListName().equalsIgnoreCase(p.getName())) return;
 		try
 		{
 			String prefix = PermissionsEx.getUser(p).getPrefix();
