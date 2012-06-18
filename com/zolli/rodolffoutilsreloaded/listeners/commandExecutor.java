@@ -515,7 +515,11 @@ public class commandExecutor implements CommandExecutor {
 			int num = 0;
 			for(int i=0;i<enc.length;i++)
 				try {
-					is.addEnchantment(enc[i], enc[i].getMaxLevel());
+					if(args.length==1 && args[0].equalsIgnoreCase("extra")) {
+						is.addUnsafeEnchantment(enc[i], 127);
+					} else {
+						is.addEnchantment(enc[i], enc[i].getMaxLevel());
+					}
 					num++;
 				} catch (Exception ex) { /* ignore errors */ }
 			p.sendMessage(plugin.messages.getString("othercommand.fullenchant").replace("%i", Integer.toString(num)));
