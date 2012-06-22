@@ -1,7 +1,10 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -283,6 +286,44 @@ public class playerListener implements Listener {
 	}
 	
 	@EventHandler(priority=EventPriority.NORMAL)
+	public void getSlimeChunk(PlayerInteractEvent e) {
+		
+		Player pl = e.getPlayer();
+		ItemStack handItem = e.getPlayer().getItemInHand();
+		int handAmount = handItem.getAmount();
+		int newHandAmount = handAmount - 1;
+		long seedCode = pl.getLocation().getWorld().getSeed();
+		Chunk playerOnChunk = pl.getWorld().getChunkAt(e.getClickedBlock());
+		int chunkX = playerOnChunk.getX();
+		int chunkZ = playerOnChunk.getZ();
+		
+		if((e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && (handItem.getTypeId() == plugin.config.getInt("slimeChunkItem")) && (e.getClickedBlock() != null && e.getAction() != null)) {
+			
+			if(handAmount == 1) {
+				pl.setItemInHand(null);
+			} else {
+				handItem.setAmount(newHandAmount);
+			}
+			
+			Random rand = new Random(seedCode + chunkX * chunkX * 4987142 + chunkX * 5947611 + 
+									chunkZ * chunkZ * 4392871L + chunkZ * 389711 ^ 0x3AD8025F);
+			
+			if(rand.nextInt(10) == 0) {
+				
+				pl.sendMessage(plugin.messages.getString("slimeChunk.isSlimeChunk"));
+				
+			} else {
+				
+				pl.sendMessage(plugin.messages.getString("slimeChunk.isNotSlimeChunk"));
+				
+			}
+			
+		}
+		
+	}
+	
+	
+	@EventHandler(priority=EventPriority.NORMAL)
 	public void whoIs(PlayerCommandPreprocessEvent e) {
 		if(e.getMessage().startsWith("/whois ")) {
 			String[] args = e.getMessage().split(" ");
@@ -292,14 +333,12 @@ public class playerListener implements Listener {
 				if(pl.size()>0 && pl.get(0).getName().equalsIgnoreCase(args[1])) {
 					String multiUsers = webUtils.multiUsers(pl.get(0));
 					if(multiUsers.equalsIgnoreCase("null")) multiUsers = "senki";
-					plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new DelaydMessage(p,"Â§9 - Közös gépen: "+multiUsers),2L);
+					plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new DelaydMessage(p, plugin.messages.getString("common.multiUsersWhois")+multiUsers),2L);
 				}
 			}
 		}
 	}
 	
-	/////////////////////////////////////////////////////
-	////////playerList name change///////////////////////
 	@EventHandler(priority=EventPriority.NORMAL)
 	public void playerListNameForJoin(PlayerJoinEvent e) {
 		setPlayerListName(e.getPlayer());
@@ -335,5 +374,5 @@ public class playerListener implements Listener {
 			plugin.log.warning("[" + plugin.pdfile.getName() + "] No PermissionsEx found, no use prefix");
 		}
 	}
-	//////////////////////////////////////////////////////
+	
 }
