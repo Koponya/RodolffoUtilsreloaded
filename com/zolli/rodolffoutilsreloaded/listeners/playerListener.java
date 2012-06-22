@@ -333,14 +333,12 @@ public class playerListener implements Listener {
 				if(pl.size()>0 && pl.get(0).getName().equalsIgnoreCase(args[1])) {
 					String multiUsers = webUtils.multiUsers(pl.get(0));
 					if(multiUsers.equalsIgnoreCase("null")) multiUsers = "senki";
-					plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new DelaydMessage(p,"Â§9 - Közös gépen: "+multiUsers),2L);
+					plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new DelaydMessage(p,"§9 - Közös gépen: "+multiUsers),2L);
 				}
 			}
 		}
 	}
 	
-	/////////////////////////////////////////////////////
-	////////playerList name change///////////////////////
 	@EventHandler(priority=EventPriority.NORMAL)
 	public void playerListNameForJoin(PlayerJoinEvent e) {
 		setPlayerListName(e.getPlayer());
@@ -376,5 +374,5 @@ public class playerListener implements Listener {
 			plugin.log.warning("[" + plugin.pdfile.getName() + "] No PermissionsEx found, no use prefix");
 		}
 	}
-	//////////////////////////////////////////////////////
+	
 }
