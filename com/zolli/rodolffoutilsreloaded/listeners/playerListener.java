@@ -1,6 +1,5 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -367,7 +366,7 @@ public class playerListener implements Listener {
 			String name = prefix.split("] ",2)[1];
 			name += p.getName();
 			if(name.length()>16) name = name.substring(0, 15);
-			p.setPlayerListName(name);
+			p.setPlayerListName(name.replace("&", "§"));
 		}
 		catch (Exception ex) 
 		{
