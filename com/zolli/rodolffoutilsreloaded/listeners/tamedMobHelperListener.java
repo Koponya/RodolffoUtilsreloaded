@@ -37,7 +37,6 @@ public class tamedMobHelperListener implements Listener {
 				String prefix = null;
 				try
 				{
-					Class.forName("PermissionsEx");
 					prefix = PermissionsEx.getUser(p).getPrefix();
 				}
 				catch (Exception ex) 

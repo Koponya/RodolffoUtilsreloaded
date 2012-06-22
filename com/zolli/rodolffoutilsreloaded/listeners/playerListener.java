@@ -17,12 +17,17 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
+import ru.tehkode.permissions.bukkit.PermissionsEx;
+
+import com.zolli.rodolffoutilsreloaded.DelaydMessage;
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 import com.zolli.rodolffoutilsreloaded.utils.configUtils;
 import com.zolli.rodolffoutilsreloaded.utils.webUtils;
@@ -31,7 +36,6 @@ public class playerListener implements Listener {
 	
 	private rodolffoUtilsReloaded plugin;
 	public configUtils cu;
-	private webUtils wu = new webUtils();
 	private Player pl;
 	public playerListener(rodolffoUtilsReloaded instance) {
 		plugin = instance;
@@ -117,7 +121,7 @@ public class playerListener implements Listener {
 		
 		pl = e.getPlayer();
 			
-		if(e.getClickedBlock() != null && e.getAction() != null && e.getClickedBlock().getTypeId() == 77 && e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+		if(e.getClickedBlock() != null && e.getAction() != null && e.getClickedBlock().getTypeId() == 77 && (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
 			
 			Location buttonLoc = e.getClickedBlock().getLocation();
 			String[] scanResult = cu.scanButton(buttonLoc);
@@ -161,7 +165,7 @@ public class playerListener implements Listener {
 					
 					if(scanResult[0].equalsIgnoreCase("promote") && (pl.isOp() || plugin.perm.has(pl, "rur.specialButton.use.promote"))) {
 						
-						String introductionStatus = wu.hasIntroduction(pl);
+						String introductionStatus = webUtils.hasIntroduction(pl);
 						
 						if(introductionStatus.equalsIgnoreCase("ok")) {
 							
@@ -180,6 +184,7 @@ public class playerListener implements Listener {
 											
 											playerListener.this.pl.performCommand("spawn");
 											pl.sendMessage(plugin.messages.getString("promotion.successpromotion2"));
+											pl.getInventory().setItemInHand(new ItemStack(38, 1));
 											
 										}
 										
@@ -254,7 +259,7 @@ public class playerListener implements Listener {
 		
 		if(plugin.perm.getPrimaryGroup(e.getPlayer()).equalsIgnoreCase("ujonc")) {
 			
-			String multiUsers = wu.multiUsers(e.getPlayer());
+			String multiUsers = webUtils.multiUsers(e.getPlayer());
 				
 			Player[] Players = plugin.getServer().getOnlinePlayers();
 				
@@ -318,4 +323,58 @@ public class playerListener implements Listener {
 	}
 	
 	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void whoIs(PlayerCommandPreprocessEvent e) {
+		if(e.getMessage().startsWith("/whois ")) {
+			String[] args = e.getMessage().split(" ");
+			Player p = e.getPlayer();
+			if(p.isOp() || plugin.perm.has(p, "essentials.whois")) {
+				List<Player> pl = plugin.getServer().matchPlayer(args[1]);
+				if(pl.size()>0 && pl.get(0).getName().equalsIgnoreCase(args[1])) {
+					String multiUsers = webUtils.multiUsers(pl.get(0));
+					if(multiUsers.equalsIgnoreCase("null")) multiUsers = "senki";
+					plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new DelaydMessage(p,"Â§9 - Közös gépen: "+multiUsers),2L);
+				}
+			}
+		}
+	}
+	
+	/////////////////////////////////////////////////////
+	////////playerList name change///////////////////////
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void playerListNameForJoin(PlayerJoinEvent e) {
+		setPlayerListName(e.getPlayer());
+	}
+
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void playerListNameForChat(PlayerChatEvent e) {
+		setPlayerListName(e.getPlayer());
+	}
+
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void playerListNameForCommand(PlayerCommandPreprocessEvent e) {
+		setPlayerListName(e.getPlayer());
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void playerListName(PlayerChangedWorldEvent e) {
+		setPlayerListName(e.getPlayer());
+	}
+	
+	private void setPlayerListName(Player p) {
+		if(!p.getPlayerListName().equalsIgnoreCase(p.getName())) return;
+		try
+		{
+			String prefix = PermissionsEx.getUser(p).getPrefix();
+			String name = prefix.split("] ",2)[1];
+			name += p.getName();
+			if(name.length()>16) name = name.substring(0, 15);
+			p.setPlayerListName(name);
+		}
+		catch (Exception ex) 
+		{
+			plugin.log.warning("[" + plugin.pdfile.getName() + "] No PermissionsEx found, no use prefix");
+		}
+	}
+	//////////////////////////////////////////////////////
 }
