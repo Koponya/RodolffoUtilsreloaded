@@ -9,6 +9,7 @@ common:
   oneonly: §4Kérlek egyesével vedd ki az üvegeket!
   nomultiple: '§2Senki sincs közös gépen vele: %n'
   multiusers: '§4%n közös gépen vannak velük: '
+  multiUsersWhois: '§9 - Közös gépen: '
 login:
   login: §e(NAME) csatlakozott a játékhoz
   logout: §e(NAME) kilépett a játékból
