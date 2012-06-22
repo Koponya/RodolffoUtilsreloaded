@@ -56,3 +56,6 @@ entitylist:
   usage: '§dHasználat: /entitylist [körzet]'
   color: §a
   msg: §aÖsszesen %i entitás
+slimeChunk:
+  isSlimeChunk: '§2Ez egy slime chunk!'
+  isNotSlimeChunk: '§4Ezen a chunkon nincsenek slimeok!'
