@@ -1,5 +1,6 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -7,7 +8,6 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
@@ -285,47 +285,39 @@ public class playerListener implements Listener {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority=EventPriority.NORMAL)
 	public void getSlimeChunk(PlayerInteractEvent e) {
 		
-		Material[] inventoryBlocks = new Material[10];
-		inventoryBlocks = { Material.CHEST, Material.FURNACE };
+		Player pl = e.getPlayer();
+		ItemStack handItem = e.getPlayer().getItemInHand();
+		int handAmount = handItem.getAmount();
+		int newHandAmount = handAmount - 1;
+		long seedCode = pl.getLocation().getWorld().getSeed();
+		Chunk playerOnChunk = pl.getWorld().getChunkAt(e.getClickedBlock());
+		int chunkX = playerOnChunk.getX();
+		int chunkZ = playerOnChunk.getZ();
 		
-		if((e.getClickedBlock() != null) && !(e.getClickedBlock() instanceof ContainerBlock)) {
-		
-			Player pl = e.getPlayer();
-			ItemStack handItem = e.getPlayer().getItemInHand();
-			int handAmount = handItem.getAmount();
-			int newHandAmount = handAmount - 1;
-			long seedCode = pl.getLocation().getWorld().getSeed();
-			Chunk playerOnChunk = pl.getWorld().getChunkAt(e.getClickedBlock());
-			int chunkX = playerOnChunk.getX();
-			int chunkZ = playerOnChunk.getZ();
+		if((e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && (handItem.getTypeId() == plugin.config.getInt("slimeChunkItem")) && (e.getClickedBlock() != null && e.getAction() != null)) {
 			
-			if((e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && (handItem.getTypeId() == plugin.config.getInt("slimeChunkItem")) && (e.getClickedBlock() != null && e.getAction() != null)) {
+			if(handAmount == 1) {
+				pl.setItemInHand(null);
+			} else {
+				handItem.setAmount(newHandAmount);
+			}
+			
+			Random rand = new Random(seedCode + chunkX * chunkX * 4987142 + chunkX * 5947611 + 
+									chunkZ * chunkZ * 4392871L + chunkZ * 389711 ^ 0x3AD8025F);
+			
+			if(rand.nextInt(10) == 0) {
 				
-				if(handAmount == 1) {
-					pl.setItemInHand(null);
-				} else {
-					handItem.setAmount(newHandAmount);
-				}
+				pl.sendMessage(plugin.messages.getString("slimeChunk.isSlimeChunk"));
 				
-				Random rand = new Random(seedCode + chunkX * chunkX * 4987142 + chunkX * 5947611 + 
-										chunkZ * chunkZ * 4392871L + chunkZ * 389711 ^ 0x3AD8025F);
+			} else {
 				
-				if(rand.nextInt(10) == 0) {
-					
-					pl.sendMessage(plugin.messages.getString("slimeChunk.isSlimeChunk"));
-					
-				} else {
-					
-					pl.sendMessage(plugin.messages.getString("slimeChunk.isNotSlimeChunk"));
-					
-				}
+				pl.sendMessage(plugin.messages.getString("slimeChunk.isNotSlimeChunk"));
 				
 			}
-		
+			
 		}
 		
 	}
