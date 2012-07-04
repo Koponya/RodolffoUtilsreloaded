@@ -134,14 +134,14 @@ public class recipes {
 		myceliumRecipe.setIngredient('d', new MaterialData(3));
 		plugin.getServer().addRecipe(myceliumRecipe);
 		
-		ShapedRecipe xpBottleRecipe = new ShapedRecipe(new ItemStack(384, 1));
+		/*ShapedRecipe xpBottleRecipe = new ShapedRecipe(new ItemStack(384, 1));
 		xpBottleRecipe.shape(new String[] {" p ", "gbg", "lsl"});
 		xpBottleRecipe.setIngredient('p', new MaterialData(351, (byte) 5));
 		xpBottleRecipe.setIngredient('g', new MaterialData(266));
 		xpBottleRecipe.setIngredient('b', new MaterialData(374));
 		xpBottleRecipe.setIngredient('l', new MaterialData(348));
 		xpBottleRecipe.setIngredient('s', new MaterialData(353));
-		plugin.getServer().addRecipe(xpBottleRecipe);
+		plugin.getServer().addRecipe(xpBottleRecipe);*/
 		
 		FurnaceRecipe netherBrickRecipe = new FurnaceRecipe(new ItemStack(112, 1), Material.NETHERRACK);
 		plugin.getServer().addRecipe(netherBrickRecipe);
