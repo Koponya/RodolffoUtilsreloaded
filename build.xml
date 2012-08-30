@@ -24,7 +24,7 @@
 	</target>
 	
 	<target name="compile" depends="get_libs">
-		<javac srcdir="${src}" destdir="${classes}" target="1.6" includeantruntime="false" debug="on">
+		<javac srcdir="${src}" destdir="${classes}" target="1.6" source="1.6" includeantruntime="false" debug="on">
 		<classpath>
 			<pathelement location="${lib}/${bukkit}"/>
 			<pathelement location="${lib}/${Vault}"/>
