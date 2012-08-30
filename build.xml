@@ -17,9 +17,9 @@
 	</target>
 	
 	<target name="get_libs" depends="init">
-		<get src="http://dl.bukkit.org/downloads/bukkit/get/01025_1.2.5-R1.0/bukkit.jar" dest="${lib}/${bukkit}" usetimestamp="true"/>
-		<get src="http://dev.bukkit.org/media/files/587/723/Vault.jar" dest="${lib}/${Vault}" usetimestamp="true"/>
-		<get src="http://dev.bukkit.org/media/files/591/727/ShowCaseStandalone.jar" dest="${lib}/${SCS}" usetimestamp="true"/>
+		<get src="http://dl.bukkit.org/downloads/bukkit/get/01370_1.3.1-R2.0/bukkit.jar" dest="${lib}/${bukkit}" usetimestamp="true"/>
+		<get src="http://dev.bukkit.org/media/files/614/520/Vault.jar" dest="${lib}/${Vault}" usetimestamp="true"/>
+		<get src="http://dev.bukkit.org/media/files/617/638/ShowCaseStandalone.jar" dest="${lib}/${SCS}" usetimestamp="true"/>
 		<get src="http://mc.coldline.hu/zolli/PermissionsEx.jar" dest="${lib}/${PEX}" usetimestamp="true"/>
 	</target>
 	
