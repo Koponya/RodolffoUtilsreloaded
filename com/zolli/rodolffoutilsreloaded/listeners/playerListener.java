@@ -16,8 +16,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -79,6 +79,7 @@ public class playerListener implements Listener {
 				
 				entityPig.setSaddle(false);
 				entityPig.getWorld().dropItem(entityPig.getLocation(), new ItemStack(Material.SADDLE, 1));
+				e.setCancelled(true);
 				
 			}
 			
@@ -90,6 +91,8 @@ public class playerListener implements Listener {
 			
 			if(plugin.perm.has(player, "rur.rideSpider") && (entitySpider.getPassenger() == null)) {
 				entitySpider.setPassenger(player);
+			} else if(plugin.perm.has(player, "rur.rideSpider") && (entitySpider.getPassenger() == e.getPlayer())) {
+				entitySpider.eject();
 			}
 			
 		}
@@ -348,7 +351,7 @@ public class playerListener implements Listener {
 	}
 
 	@EventHandler(priority=EventPriority.NORMAL)
-	public void playerListNameForChat(PlayerChatEvent e) {
+	public void playerListNameForChat(AsyncPlayerChatEvent e) {
 		setPlayerListName(e.getPlayer());
 	}
 
