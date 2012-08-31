@@ -21,3 +21,4 @@ alsodisabledrops: true
 scsdelay: 2
 savealldelay: 30
 slimeChunkItem: 289
+explosionHeightLimit: 40

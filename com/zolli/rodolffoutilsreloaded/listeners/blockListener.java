@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
@@ -104,6 +106,17 @@ public class blockListener implements Listener {
 		if((e.getBlock().getLocation().getWorld().getName().equalsIgnoreCase("miner")) && (e.getBlock().getTypeId() == 12)) {
 			
 			e.setCancelled(true);
+			
+		}
+		
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void explodeHeight(EntityExplodeEvent e) {
+		
+		if(((e.getEntityType() == EntityType.PRIMED_TNT) || (e.getEntityType() == EntityType.CREEPER)) && (e.getEntity().getLocation().getY() < plugin.config.getInt("explosionHeightLimit"))) {
+			
+			e.blockList().clear();
 			
 		}
 		
