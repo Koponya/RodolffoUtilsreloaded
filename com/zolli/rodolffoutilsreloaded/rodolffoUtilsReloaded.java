@@ -26,6 +26,7 @@ import com.zolli.rodolffoutilsreloaded.listeners.entityListener;
 import com.zolli.rodolffoutilsreloaded.listeners.inventoryListener;
 import com.zolli.rodolffoutilsreloaded.listeners.playerListener;
 import com.zolli.rodolffoutilsreloaded.listeners.tamedMobHelperListener;
+import com.zolli.rodolffoutilsreloaded.utils.econHandler;
 import com.zolli.rodolffoutilsreloaded.utils.permHandler;
 import com.zolli.rodolffoutilsreloaded.utils.recipes;
 
@@ -39,7 +40,7 @@ import com.zolli.rodolffoutilsreloaded.utils.recipes;
 public class rodolffoUtilsReloaded extends JavaPlugin {
 	
 	private PluginManager pm;
-	public Economy econ = null;
+	public econHandler econ = null;
 	public permHandler perm = null;
 	public ShowCaseStandalone scs = null;
 	
@@ -83,16 +84,6 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 			
 		}
 	}
-	
-	/**
-	 * Get the most valuable economy system
-	 * @return econ null if valubale service not found
-	 */
-	private boolean setupEconomy() {
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        econ = rsp.getProvider();
-        return econ != null;
-    }
 	
 	/**
 	 * Copy a file to another location
@@ -190,6 +181,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public void onEnable() {
 		
 		perm = new permHandler(this);
+		econ = new econHandler(this);
 		
 		final playerListener playerListener = new playerListener(this);
 		final entityListener entityListener = new entityListener(this);
@@ -213,15 +205,6 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		getCommand("rur").setExecutor(commandExec);
 		getCommand("fullenchant").setExecutor(commandExec);
 		getCommand("entitylist").setExecutor(commandExec);
-		
-		if(pm.isPluginEnabled("Vault")) {
-			setupEconomy();
-			log.info("[" + pdfile.getName() + "] Hooked with " + econ.getName() + "!");
-			setupScs();
-		} else {
-			log.warning("[" + pdfile.getName() + "] Vault not found! Disabling plugin...");
-			pm.disablePlugin(this);
-		}
 		
 		if(this.config.getInt("savealldelay")>0)
 		{//auto save
