@@ -6,8 +6,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.logging.Logger;
 
-import net.milkbowl.vault.economy.Economy;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandExecutor;
@@ -16,7 +14,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.miykeal.showCaseStandalone.ShowCaseStandalone;
@@ -182,6 +179,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		perm = new permHandler(this);
 		econ = new econHandler(this);
+		setupScs();
 		
 		final playerListener playerListener = new playerListener(this);
 		final entityListener entityListener = new entityListener(this);
