@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -27,6 +26,7 @@ import com.zolli.rodolffoutilsreloaded.listeners.entityListener;
 import com.zolli.rodolffoutilsreloaded.listeners.inventoryListener;
 import com.zolli.rodolffoutilsreloaded.listeners.playerListener;
 import com.zolli.rodolffoutilsreloaded.listeners.tamedMobHelperListener;
+import com.zolli.rodolffoutilsreloaded.utils.permHandler;
 import com.zolli.rodolffoutilsreloaded.utils.recipes;
 
 /**
@@ -40,7 +40,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	
 	private PluginManager pm;
 	public Economy econ = null;
-	public Permission perm = null;
+	public permHandler perm = null;
 	public ShowCaseStandalone scs = null;
 	
 	private File configFile;
@@ -52,6 +52,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public FileConfiguration button;
 	
 	public Logger log;
+	public String logPrefix;
 	public PluginDescriptionFile pdfile;
 	private CommandExecutor commandExec;
 	private recipes recipes;
@@ -82,17 +83,6 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 			
 		}
 	}
-	
-	
-	/**
-	 * Get the most valuable permission system
-	 * @return perm null if service not found
-	 */
-	private boolean setupPermissions() {
-        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
-        perm = rsp.getProvider();
-        return perm != null;
-    }
 	
 	/**
 	 * Get the most valuable economy system
@@ -193,9 +183,13 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		recipes.createRecipes(this);
 		
+		logPrefix = "[" + pdfile.getName() + "] ";
+		
 	}
 	
 	public void onEnable() {
+		
+		perm = new permHandler(this);
 		
 		final playerListener playerListener = new playerListener(this);
 		final entityListener entityListener = new entityListener(this);
@@ -221,8 +215,6 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		getCommand("entitylist").setExecutor(commandExec);
 		
 		if(pm.isPluginEnabled("Vault")) {
-			setupPermissions();
-			log.info("[" + pdfile.getName() + "] Hooked with " + perm.getName() + "!");
 			setupEconomy();
 			log.info("[" + pdfile.getName() + "] Hooked with " + econ.getName() + "!");
 			setupScs();
