@@ -137,9 +137,9 @@ public class playerListener implements Listener {
 						
 						World currentWorld = pl.getLocation().getWorld();
 						
-						if(plugin.econ.getBalance(pl.getName()) >= Integer.parseInt(scanResult[1])) {
+						if(plugin.econ.hasEnought(pl, Integer.parseInt(scanResult[1]))) {
 							
-							plugin.econ.withdrawPlayer(pl.getName(), Integer.parseInt(scanResult[1]));
+							plugin.econ.withdraw(pl, Integer.parseInt(scanResult[1]));
 							currentWorld.setStorm(false);
 							pl.sendMessage(plugin.messages.getString("othercommand.sunny"));
 							
