@@ -1,9 +1,10 @@
 name: rodolffoUtils Reloaded
-version: 1.2
-authors: [Rodolffo, Zolli]
+version: 1.3
+authors: [Zolli, Koponya, Rodolffo]
 description: Various utilities for server admins. Rewrite by Zolli
 main: com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded
-depend: [Vault]
+load: POSTWORLD
+softdepend: [PermissionsEx,Permissions,GroupManager,Vault,Essentials,iConomy,BOSEconomy]
 commands:
   fakechat:
     aliases: [fc]
@@ -26,5 +27,5 @@ commands:
   fullenchant:
     description: Set the holding item all enchantment to max level
   entitylist:
-    description: write the nearby entity's number
+    description: write the nearby entity's amount
     aliases: [el]
