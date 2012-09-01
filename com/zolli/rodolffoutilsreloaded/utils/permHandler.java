@@ -63,12 +63,11 @@ public class permHandler {
 			return true;
 		}
 		
-		AnjoPermissionsHandler gmHandler = gmPlugin.getWorldsHolder().getWorldPermissions(pl);
-		
 		switch(handler) {
 			case PEX:
 				return pexPlugin.has(pl, node);
 			case GM:
+				AnjoPermissionsHandler gmHandler = gmPlugin.getWorldsHolder().getWorldPermissions(pl);
 				return gmHandler.has(pl, node);
 			case VAULT:
 				return vaultPermission.has(pl, node);
@@ -84,12 +83,11 @@ public class permHandler {
 			return true;
 		}
 		
-		AnjoPermissionsHandler gmHandler = gmPlugin.getWorldsHolder().getWorldPermissions(pl);
-		
 		switch(handler) {
 			case PEX:
 				return pexPlugin.has(pl, node);
 			case GM:
+				AnjoPermissionsHandler gmHandler = gmPlugin.getWorldsHolder().getWorldPermissions(pl);
 				return gmHandler.has(pl, node);
 			case VAULT:
 				return vaultPermission.has(pl, node);
@@ -102,11 +100,10 @@ public class permHandler {
 	public String getPrimaryGroup(Player pl) {
 		String word = pl.getLocation().getWorld().getName();
 		
-		PermissionUser user = pexPlugin.getUser(pl);
-		AnjoPermissionsHandler gmHandler;
-		
 		switch(handler) {
 			case PEX:
+				PermissionUser user = pexPlugin.getUser(pl);
+				
 				if(user.getGroupsNames(word).length > 0) {
 					return user.getGroupsNames(word)[0];
 				} else {
@@ -114,7 +111,7 @@ public class permHandler {
 				}
 			case GM:
 				if(word != null) {
-					gmHandler = gmPlugin.getWorldsHolder().getWorldPermissions(word);
+					AnjoPermissionsHandler gmHandler = gmPlugin.getWorldsHolder().getWorldPermissions(word);
 					return gmHandler.getGroup(pl.getName());
 				} else {
 					return null;
@@ -130,13 +127,12 @@ public class permHandler {
 	public boolean playerRemoveGroup(Player pl, String groupName) {
 		String word = pl.getLocation().getWorld().getName();
 		
-		OverloadedWorldHolder owh = gmPlugin.getWorldsHolder().getWorldData(word);
-		
 		switch(handler) {
 			case PEX:
 				pexPlugin.getUser(pl).removeGroup(groupName);
 				return true;
 			case GM:
+				OverloadedWorldHolder owh = gmPlugin.getWorldsHolder().getWorldData(word);
 				User user = owh.getUser(pl.getName());
 				
 				if(user == null) {
@@ -167,12 +163,11 @@ public class permHandler {
 	public boolean playerAddGroup(Player pl, String groupName) {
 		String world = pl.getLocation().getWorld().getName();
 		
-		PermissionGroup pexGroup = pexPlugin.getGroup(groupName);
-		PermissionUser pexUser = pexPlugin.getUser(pl);
-		OverloadedWorldHolder owh;
-		
 		switch(handler) {
 			case PEX:
+				PermissionGroup pexGroup = pexPlugin.getGroup(groupName);
+				PermissionUser pexUser = pexPlugin.getUser(pl);
+				
 				if((pexGroup == null) || (pexUser == null)) {
 					return false;
 				} else {
@@ -180,7 +175,7 @@ public class permHandler {
 					return true;
 				}
 			case GM:
-				owh = gmPlugin.getWorldsHolder().getWorldData(world);
+				OverloadedWorldHolder owh = gmPlugin.getWorldsHolder().getWorldData(world);
 				
 				if(owh == null) {
 					return false;
