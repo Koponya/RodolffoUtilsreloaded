@@ -28,6 +28,7 @@ import com.zolli.rodolffoutilsreloaded.utils.permHandler;
 import com.zolli.rodolffoutilsreloaded.utils.recipes;
 
 /**
+ * Main class of the plugin
  * 
  * @author Zolli
  * @version 1.2
@@ -68,22 +69,32 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	private AutoSaveThread autoSave;
 	private LagDetectThread lagDetect;
 	
-	private void setupScs() {	
+	/**
+	 * Fill the scs variable with one copy of the ShowCaseStandalone object
+	 * @return 
+	 */
+	
+	private ShowCaseStandalone setupScs() {	
+		ShowCaseStandalone showcase = null;
+		
 		for(Plugin p : getServer().getPluginManager().getPlugins()) {
-			
 			String cName = p.getClass().getName();
 			
 			if(cName.equals("com.miykeal.showCaseStandalone.ShowCaseStandalone")) {
-				
-				scs = (ShowCaseStandalone) p;
-				
+				showcase =  (ShowCaseStandalone) p;
 			}
-			
+		}
+		
+		if (showcase == null) {
+			return null;
+		} else {
+			return showcase;
 		}
 	}
 	
 	/**
 	 * Copy a file to another location
+	 * 
 	 * @param in an inputStream object
 	 * @param file file to copy
 	 */
@@ -179,7 +190,12 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		perm = new permHandler(this);
 		econ = new econHandler(this);
-		setupScs();
+		scs = setupScs();
+		
+		if(scs == null) {
+			this.log.warning(this.logPrefix + "ShowCaseStandalone not found! Disabling SCS support!");
+			pm.disablePlugin(this);
+		}
 		
 		final playerListener playerListener = new playerListener(this);
 		final entityListener entityListener = new entityListener(this);

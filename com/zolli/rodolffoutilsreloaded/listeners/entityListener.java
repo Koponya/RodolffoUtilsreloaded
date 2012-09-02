@@ -69,7 +69,7 @@ public class entityListener implements Listener {
 		Block b = e.getClickedBlock();
 		
 			
-		if(e.getAction() != null && b != null && plugin.scs.getShopHandler().isShopBlock(b)) {
+		if((plugin.scs != null) && (e.getAction() != null) && (b != null) && (plugin.scs.getShopHandler().isShopBlock(b))) {
 				
 			if(showcase.containsKey(pl.getName())) {
 					
