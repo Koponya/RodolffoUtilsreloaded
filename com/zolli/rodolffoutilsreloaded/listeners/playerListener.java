@@ -1,5 +1,6 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -24,6 +25,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.earth2me.essentials.User;
 import com.zolli.rodolffoutilsreloaded.DelaydMessage;
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 import com.zolli.rodolffoutilsreloaded.utils.configUtils;
@@ -232,6 +234,28 @@ public class playerListener implements Listener {
 		
 	}
 	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void toolGiving(PlayerJoinEvent e) {
+		Player pl = e.getPlayer();
+		
+		if(!this.isFirstJoin(pl)) {
+			String ItemList = "256;257;258;273;274;275;267;272;291;292;298;299;300;301;306;307;308;309";
+			int itemNum = 4;
+			int maxDamage = 100;
+			int minDamage = 40;
+			String[] items = ItemList.split(";");
+			int itemListCount = items.length;
+			Random random = new Random();
+			
+			for(int i = 0 ; i < itemNum ; i++ ) {
+				int randItem = random.nextInt(itemListCount);
+				int randDamage = random.nextInt(maxDamage - minDamage) + minDamage;
+				System.out.println("Random item is: " + randItem);
+				pl.getInventory().addItem(new ItemStack(Integer.parseInt(items[randItem]), 1, (short) randDamage));
+			}
+		}
+	}
+	
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void command(PlayerCommandPreprocessEvent e) {
 		
@@ -370,19 +394,38 @@ public class playerListener implements Listener {
 	 */
 	
 	private void setPlayerListName(Player p) {
+		String prefix = null;
+		
 		if(!p.getPlayerListName().equalsIgnoreCase(p.getName())) return;
-		try
-		{
-			String prefix = plugin.perm.getPrefix(p);
-			String name = prefix.split("] ",2)[1];
-			name += p.getName();
-			if(name.length()>16) name = name.substring(0, 15);
-			p.setPlayerListName(name.replace("&", "§"));
+			prefix = plugin.perm.getPrefix(p);
+			
+			if((prefix != null) && !(prefix.isEmpty())) {
+				String name = prefix.split("] ",2)[1];
+				name += p.getName();
+				if(name.length()>16) name = name.substring(0, 15);
+				p.setPlayerListName(name.replace("&", "§"));
+			}
+	}
+	
+	/**
+	 * Get the specified player joining server to first time
+	 * 
+	 * @param pl Player object
+	 * @return true if player joined first time, else false
+	 */
+	
+	public boolean isFirstJoin(Player pl) {
+		if((plugin.ess != null)) {
+			User essUser = plugin.ess.getUser(pl);
+			long firstJoin = (essUser.getFirstPlayed() / 1000L);
+			long currentDate = (new Date().getTime() / 1000L);
+			if((firstJoin+2) >= currentDate) {
+				return true;
+			} else {
+				return false;
+			}
 		}
-		catch (Exception ex) 
-		{
-			plugin.log.warning("[" + plugin.pdfile.getName() + "] No PermissionsEx found, no use prefix");
-		}
+		return false;
 	}
 	
 }
