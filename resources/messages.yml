@@ -1,6 +1,7 @@
 # Alltalános üzenetek
 common:
   noPerm: §4Nincs jogosultságod a parancs használatához!
+  noMoney: §4Nincs elég pénzed
   multipleMatch: '§6Több játékos is illeszkedik erre a névre:'
   noPlayerFound: §4Nem található játékos ezen a néven!
   badSyntax: '§4Hibás paraméter: '

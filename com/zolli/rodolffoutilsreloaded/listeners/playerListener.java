@@ -157,7 +157,7 @@ public class playerListener implements Listener {
 							
 						} else {
 							
-							pl.sendMessage(plugin.messages.getString("common.noPerm"));
+							pl.sendMessage(plugin.messages.getString("common.noMoney"));
 							
 						}
 						
