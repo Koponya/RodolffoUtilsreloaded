@@ -24,8 +24,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
-import ru.tehkode.permissions.bukkit.PermissionsEx;
-
 import com.zolli.rodolffoutilsreloaded.DelaydMessage;
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
 import com.zolli.rodolffoutilsreloaded.utils.configUtils;
@@ -365,11 +363,17 @@ public class playerListener implements Listener {
 		setPlayerListName(e.getPlayer());
 	}
 	
+	/**
+	 * Add the players prefix to player list
+	 * 
+	 * @param p Player object
+	 */
+	
 	private void setPlayerListName(Player p) {
 		if(!p.getPlayerListName().equalsIgnoreCase(p.getName())) return;
 		try
 		{
-			String prefix = PermissionsEx.getUser(p).getPrefix();
+			String prefix = plugin.perm.getPrefix(p);
 			String name = prefix.split("] ",2)[1];
 			name += p.getName();
 			if(name.length()>16) name = name.substring(0, 15);

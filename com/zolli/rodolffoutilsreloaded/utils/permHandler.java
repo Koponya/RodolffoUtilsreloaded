@@ -259,6 +259,22 @@ public class permHandler {
 		return false;
 	}
 	
+	public String getPrefix(Player pl) {
+		switch(handler) {
+			case PEX:
+				return pexPlugin.getUser(pl.getName()).getPrefix();
+			case GM:
+				AnjoPermissionsHandler gmHandler = gmPlugin.getWorldsHolder().getWorldPermissions(pl);
+				return gmHandler.getUserPrefix(pl.getName());
+			case VAULT:
+				throw new UnsupportedOperationException("getPrefix() method not supported by Vault!");
+			case BUKKIT:
+				throw new UnsupportedOperationException("getPrefix() method not supported by BukkitPerms!");
+		}
+		
+		return null;
+	}
+	
 	enum Perms {
 		GM,
 		PEX,
