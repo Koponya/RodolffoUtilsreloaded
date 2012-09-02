@@ -27,6 +27,13 @@ public class permHandler {
 	public static net.milkbowl.vault.permission.Permission vaultPermission;
 	Perms handler = null;
 	
+	/**
+	 * Main function of Permission handler. This class scan all available plugin
+	 * and get the most valuable plugin. When found this class return
+	 * 
+	 * @param plugin One object of the plugin main class
+	 */
+	
 	public permHandler(rodolffoUtilsReloaded plugin) {
 		this.plugin = plugin;
 		PluginManager pm = Bukkit.getServer().getPluginManager();
@@ -56,6 +63,16 @@ public class permHandler {
 		}
 	}
 	
+	/**
+	 * Check the specified player for given permission node.
+	 * Return true when command sent form console or given player
+	 * is OP on server, or player have given permission node, else false
+	 * 
+	 * @param sender The command sender
+	 * @param node Permission node
+	 * @return true when player has node, false if not
+	 */
+	
 	public boolean has(CommandSender sender, String node) {
 		Player pl = (Player) sender;
 		
@@ -77,6 +94,16 @@ public class permHandler {
 		return false;
 	}
 	
+	/**
+	 * Check the specified player for given permission node.
+	 * Return true when player is OP on server, or player
+	 *  have given permission node, else false
+	 * 
+	 * @param pl The player
+	 * @param node Permission node
+	 * @return true when player has node, false if not
+	 */
+	
 	public boolean has(Player pl, String node) {
 		
 		if(pl.isOp()) {
@@ -96,6 +123,13 @@ public class permHandler {
 		}
 		return false;
 	}
+	
+	/**
+	 * Get the primary group of the specified player
+	 * 
+	 * @param pl The checked player
+	 * @return The primary group name
+	 */
 	
 	public String getPrimaryGroup(Player pl) {
 		String word = pl.getLocation().getWorld().getName();
@@ -123,6 +157,14 @@ public class permHandler {
 		}
 		return null;
 	}
+	
+	/**
+	 * Remove the specified group from the given player
+	 * 
+	 * @param pl Player object
+	 * @param groupName The group removed from player
+	 * @return true when successfully removed, else false
+	 */
 	
 	public boolean playerRemoveGroup(Player pl, String groupName) {
 		String word = pl.getLocation().getWorld().getName();
@@ -159,6 +201,14 @@ public class permHandler {
 		}
 		return false;
 	}
+	
+	/**
+	 * Add specified group to the given player
+	 * 
+	 * @param pl Player object
+	 * @param groupName The group name of the added to player
+	 * @return true when successfully added, else false
+	 */
 	
 	public boolean playerAddGroup(Player pl, String groupName) {
 		String world = pl.getLocation().getWorld().getName();

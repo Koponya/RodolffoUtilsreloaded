@@ -26,6 +26,13 @@ public class econHandler {
 	private Accounts iConAccounts;
 	Econs handler = null;
 	
+	/**
+	 * Main function of Economy handler. This class scan all available plugin
+	 * and get the most valuable plugin. When found this class return
+	 * 
+	 * @param plugin One object of the plugin main class
+	 */
+	
 	public econHandler(rodolffoUtilsReloaded plugin) {
 		this.plugin = plugin;
 		PluginManager pm = Bukkit.getServer().getPluginManager();
@@ -70,6 +77,13 @@ public class econHandler {
 		}
 	}
 	
+	/**
+	 * Add specific amount to given player balance
+	 * 
+	 * @param pl Player object
+	 * @param amount The money they are added to the player balance
+	 */
+	
 	public void deposit(Player pl, int amount) {
 		String playerName = pl.getName();
 		
@@ -95,6 +109,13 @@ public class econHandler {
 				break;
 		}
 	}
+	
+	/**
+	 * Remove specified amount from given player balance
+	 * 
+	 * @param pl Player object
+	 * @param amount The money they are removed from the player balance
+	 */
 	
 	public void withdraw(Player pl, int amount) {
 		String playerName = pl.getName();
@@ -122,6 +143,14 @@ public class econHandler {
 		}
 	}
 	
+	/**
+	 * Check the given player has the specified amount
+	 * 
+	 * @param pl Player object
+	 * @param amount The amount the player checked for
+	 * @return true at least as much money than the specified, elswhere false
+	 */
+	
 	public boolean hasEnought(Player pl, int amount) {
 		String playerName = pl.getName();
 		
@@ -146,6 +175,13 @@ public class econHandler {
 		}
 		return false; 
 	}
+	
+	/**
+	 * Format the given amount. Attache the specified currency
+	 * 
+	 * @param amount Format amount
+	 * @return The formatted string
+	 */
 	
 	public String format(int amount) {
 		switch(handler) {
