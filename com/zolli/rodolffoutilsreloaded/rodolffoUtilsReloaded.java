@@ -16,6 +16,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.earth2me.essentials.Essentials;
 import com.miykeal.showCaseStandalone.ShowCaseStandalone;
 import com.zolli.rodolffoutilsreloaded.listeners.blockListener;
 import com.zolli.rodolffoutilsreloaded.listeners.commandExecutor;
@@ -41,6 +42,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public econHandler econ = null;
 	public permHandler perm = null;
 	public ShowCaseStandalone scs = null;
+	public Essentials ess = null;
 	
 	private File configFile;
 	private File messagesFile;
@@ -89,6 +91,24 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 			return null;
 		} else {
 			return showcase;
+		}
+	}
+	
+	private Essentials setupEssentials() {
+		Essentials essentials = null;
+		
+		for(Plugin p : getServer().getPluginManager().getPlugins()) {
+			String cName = p.getClass().getName();
+			
+			if(cName.equals("com.earth2me.essentials.Essentials")) {
+				essentials = (Essentials) p;
+			}
+		}
+		
+		if(essentials == null) {
+			return null;
+		} else {
+			return essentials;
 		}
 	}
 	
@@ -191,10 +211,14 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		perm = new permHandler(this);
 		econ = new econHandler(this);
 		scs = setupScs();
+		ess = setupEssentials();
 		
 		if(scs == null) {
 			this.log.warning(this.logPrefix + "ShowCaseStandalone not found! Disabling SCS support!");
-			pm.disablePlugin(this);
+		}
+		
+		if(ess == null) {
+			this.log.warning(this.logPrefix + "Essentials not forund! Disabling essentials support!");
 		}
 		
 		final playerListener playerListener = new playerListener(this);
