@@ -234,27 +234,16 @@ public class playerListener implements Listener {
 		
 	}
 	
-	@EventHandler(priority=EventPriority.NORMAL)
+	/*@EventHandler(priority=EventPriority.NORMAL)
 	public void toolGiving(PlayerJoinEvent e) {
 		Player pl = e.getPlayer();
 		
 		if(!this.isFirstJoin(pl)) {
-			String ItemList = "256;257;258;273;274;275;267;272;291;292;298;299;300;301;306;307;308;309";
-			int itemNum = 4;
-			int maxDamage = 100;
-			int minDamage = 40;
-			String[] items = ItemList.split(";");
-			int itemListCount = items.length;
-			Random random = new Random();
 			
-			for(int i = 0 ; i < itemNum ; i++ ) {
-				int randItem = random.nextInt(itemListCount);
-				int randDamage = random.nextInt(maxDamage - minDamage) + minDamage;
-				System.out.println("Random item is: " + randItem);
-				pl.getInventory().addItem(new ItemStack(Integer.parseInt(items[randItem]), 1, (short) randDamage));
-			}
+			
+			
 		}
-	}
+	}*/
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void command(PlayerCommandPreprocessEvent e) {
