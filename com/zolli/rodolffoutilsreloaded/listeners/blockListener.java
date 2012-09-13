@@ -114,7 +114,7 @@ public class blockListener implements Listener {
 	@EventHandler(priority=EventPriority.NORMAL)
 	public void explodeHeight(EntityExplodeEvent e) {
 		
-		if(((e.getEntityType() == EntityType.PRIMED_TNT) || (e.getEntityType() == EntityType.CREEPER)) && (e.getEntity().getLocation().getY() > plugin.config.getInt("explosionHeightLimit"))) {
+		if(((e.getEntityType() == EntityType.PRIMED_TNT) || (e.getEntityType() == EntityType.CREEPER)) && (e.getEntity()!=null && e.getEntity().getLocation().getY() > plugin.config.getInt("explosionHeightLimit"))) {
 			
 			e.blockList().clear();
 			
