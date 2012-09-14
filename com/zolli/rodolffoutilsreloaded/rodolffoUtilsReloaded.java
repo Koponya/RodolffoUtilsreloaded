@@ -71,6 +71,9 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	private AutoSaveThread autoSave;
 	private LagDetectThread lagDetect;
 	
+	public void setupDatabase() {
+	}
+	
 	/**
 	 * Fill the scs variable with one copy of the ShowCaseStandalone object
 	 * @return 
