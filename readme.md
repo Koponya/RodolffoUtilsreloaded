@@ -16,7 +16,7 @@ Currently this project is very undocumented, but i'm trying to make this more do
 
 ##Build Status
 
-[![Build Status](http://zolli.no-ip.org:8080/job/rodolffoUtils%20Reloaded/badge/icon)](http://192.168.1.100:8080/job/rodolffoUtils%20Reloaded/)
+[![Build Status](http://zolli.no-ip.org:8080/job/rodolffoUtils%20Reloaded/badge/icon)](http://zolli.no-ip.org:8080/job/rodolffoUtils%20Reloaded/)
 
 ##License
 
