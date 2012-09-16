@@ -14,6 +14,10 @@ This plugin comes with additinal build script. This script runs by [Ant](http://
 
 Currently this project is very undocumented, but i'm trying to make this more documented.
 
+##Build Status
+
+[![Build Status](http://zolli.no-ip.org:8080/job/rodolffoUtils%20Reloaded/badge/icon)](http://zolli.no-ip.org:8080/job/rodolffoUtils%20Reloaded/)
+
 ##License
 
 This project licensed under MTI License
