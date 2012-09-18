@@ -47,10 +47,12 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	private File configFile;
 	private File messagesFile;
 	private File buttonFile;
+	private File foundationStoneFile;
 	
 	public FileConfiguration config;
 	public FileConfiguration messages;
 	public FileConfiguration button;
+	public FileConfiguration foundationStone;
 	
 	public Logger log;
 	public String logPrefix;
@@ -70,9 +72,6 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	
 	private AutoSaveThread autoSave;
 	private LagDetectThread lagDetect;
-	
-	public void setupDatabase() {
-	}
 	
 	/**
 	 * Fill the scs variable with one copy of the ShowCaseStandalone object
@@ -152,6 +151,10 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 			buttonFile.getParentFile().mkdirs();
 			copy(getResource("buttons.yml"), buttonFile);
 		}
+		if(!foundationStoneFile.exists()) {
+			foundationStoneFile.getParentFile().mkdirs();
+			copy(getResource("foundationStone.yml"), foundationStoneFile);
+		}
 	}
 	
 	/**
@@ -162,6 +165,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 			config.load(configFile);
 			messages.load(messagesFile);
 			button.load(buttonFile);
+			foundationStone.load(foundationStoneFile);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -175,6 +179,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 			config.save(configFile);
 			messages.save(messagesFile);
 			button.save(buttonFile);
+			foundationStone.save(foundationStoneFile);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -185,9 +190,11 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		config = new YamlConfiguration();
 		messages = new YamlConfiguration();
 		button = new YamlConfiguration();
+		foundationStone = new YamlConfiguration();
 		configFile = new File(getDataFolder(), "config.yml");
 		messagesFile = new File(getDataFolder(), "messages.yml");
 		buttonFile = new File(getDataFolder(), "buttons.yml");
+		foundationStoneFile = new File(getDataFolder(), "foundationStone.yml");
 		
 		try {
             this.firstRun();
