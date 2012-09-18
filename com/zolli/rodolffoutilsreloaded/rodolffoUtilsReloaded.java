@@ -202,28 +202,11 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		pm = getServer().getPluginManager();
 		commandExec = new commandExecutor(this);
 		recipes = new recipes();
-		
 		recipes.createRecipes(this);
-		
 		logPrefix = "[" + pdfile.getName() + "] ";
-		
 	}
 	
-	public void onEnable() {
-		
-		perm = new permHandler(this);
-		econ = new econHandler(this);
-		scs = setupScs();
-		ess = setupEssentials();
-		
-		if(scs == null) {
-			this.log.warning(this.logPrefix + "ShowCaseStandalone not found! Disabling SCS support!");
-		}
-		
-		if(ess == null) {
-			this.log.warning(this.logPrefix + "Essentials not forund! Disabling essentials support!");
-		}
-		
+	public void registerListeners() {
 		final playerListener playerListener = new playerListener(this);
 		final entityListener entityListener = new entityListener(this);
 		final blockListener blockListener = new blockListener(this);
@@ -235,7 +218,9 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		pm.registerEvents(blockListener, this);
 		pm.registerEvents(inventoryListener, this);
 		pm.registerEvents(tamedMobHelperListener, this);
-		
+	}
+	
+	public void registerCommands() {
 		getCommand("achat").setExecutor(commandExec);
 		getCommand("fakechat").setExecutor(commandExec);
 		getCommand("definebutton").setExecutor(commandExec);
@@ -246,30 +231,43 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		getCommand("rur").setExecutor(commandExec);
 		getCommand("fullenchant").setExecutor(commandExec);
 		getCommand("entitylist").setExecutor(commandExec);
+	}
+	
+	public void onEnable() {
+		perm = new permHandler(this);
+		econ = new econHandler(this);
+		scs = this.setupScs();
+		ess = this.setupEssentials();
+		this.registerListeners();
+		this.registerCommands();
 		
-		if(this.config.getInt("savealldelay")>0)
-		{//auto save
-			log.info("[" + pdfile.getName() + "] Auto save enabled for "+this.config.getInt("savealldelay")+" minutes!");
+		if(scs == null) {
+			this.log.warning(this.logPrefix + "ShowCaseStandalone not found! Disabling SCS support!");
+		}
+		
+		if(ess == null) {
+			this.log.warning(this.logPrefix + "Essentials not forund! Disabling essentials support!");
+		}
+		
+		if(this.config.getInt("savealldelay")>0) {
+			log.info(this.logPrefix + "Auto save enabled for " + this.config.getInt("savealldelay") + " minutes!");
 			autoSave = new AutoSaveThread(this);
 			autoSave.start();
+		} else {
+			log.info(this.logPrefix + "Auto save disabled!");
 		}
-		else
-		{
-			log.info("[" + pdfile.getName() + "] Auto save disabled!");
-		}
+		
 		this.lagDetect = new LagDetectThread(this);
 		this.lagDetect.start();
-		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully enabled!");
 		
+		log.info(this.logPrefix + "Version: " + pdfile.getVersion() + " Sucessfully enabled!");
 	}
 	
 	public void onDisable() {
-		
 		this.saveConfiguration();
 		this.autoSave.running = false;
 		this.lagDetect.running = false;
-		log.info("[" + pdfile.getName() + "] Version: " + pdfile.getVersion() + " Sucessfully disabled!");
-		
+		log.info(this.logPrefix + "Version: " + pdfile.getVersion() + " Sucessfully disabled!");
 	}
 	
 }
