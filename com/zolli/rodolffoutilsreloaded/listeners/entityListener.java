@@ -53,7 +53,9 @@ public class entityListener implements Listener {
 				
 			} else {
 				
-				e.setCancelled(true);
+				if(pl.getItemInHand().getTypeId() != 296) {
+					e.setCancelled(true);
+				}
 				
 			}
 			
