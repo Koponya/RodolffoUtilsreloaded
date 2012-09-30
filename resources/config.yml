@@ -12,6 +12,7 @@ effecttimeonlevechange: 10
 showlevelchange: true
 showeffectonlevelchange: true
 appledropchance: 0.5
+enableXPBottles: false
 xpbottlecrafting: 50
 promotedtospawn: false
 spawncooldown: 5
