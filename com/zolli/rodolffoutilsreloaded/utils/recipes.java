@@ -134,6 +134,12 @@ public class recipes {
 		myceliumRecipe.setIngredient('d', new MaterialData(3));
 		plugin.getServer().addRecipe(myceliumRecipe);
 		
+		ShapedRecipe circleStoneRecipe = new ShapedRecipe(new ItemStack(98, 3));
+		circleStoneRecipe.shape(new String[] {"bbb", "bdb", "bbb"});
+		circleStoneRecipe.setIngredient('b', new MaterialData(98, (byte) 0));
+		circleStoneRecipe.setIngredient('d', new MaterialData(264));
+		plugin.getServer().addRecipe(circleStoneRecipe);
+		
 		/*ShapedRecipe xpBottleRecipe = new ShapedRecipe(new ItemStack(384, 1));
 		xpBottleRecipe.shape(new String[] {" p ", "gbg", "lsl"});
 		xpBottleRecipe.setIngredient('p', new MaterialData(351, (byte) 5));
