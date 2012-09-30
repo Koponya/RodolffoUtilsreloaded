@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.Location;
@@ -21,6 +23,7 @@ import com.miykeal.showCaseStandalone.ShowCaseStandalone;
 import com.zolli.rodolffoutilsreloaded.listeners.blockListener;
 import com.zolli.rodolffoutilsreloaded.listeners.commandExecutor;
 import com.zolli.rodolffoutilsreloaded.listeners.entityListener;
+import com.zolli.rodolffoutilsreloaded.listeners.foundationStoneListener;
 import com.zolli.rodolffoutilsreloaded.listeners.inventoryListener;
 import com.zolli.rodolffoutilsreloaded.listeners.playerListener;
 import com.zolli.rodolffoutilsreloaded.listeners.tamedMobHelperListener;
@@ -65,6 +68,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	public String selectType;
 	public String selectName;
 	public Location selectLoc;
+	public List<String> freezedPlayer = new ArrayList<String>();
 	
 	public Block pistonBugBlock;
 	public int pistonBugId;
@@ -219,12 +223,14 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		final blockListener blockListener = new blockListener(this);
 		final inventoryListener inventoryListener = new inventoryListener(this);
 		final tamedMobHelperListener tamedMobHelperListener = new tamedMobHelperListener(this);
+		final foundationStoneListener foundationStoneListener = new foundationStoneListener(this); 
 		
 		pm.registerEvents(playerListener, this);
 		pm.registerEvents(entityListener, this);
 		pm.registerEvents(blockListener, this);
 		pm.registerEvents(inventoryListener, this);
 		pm.registerEvents(tamedMobHelperListener, this);
+		pm.registerEvents(foundationStoneListener, this);
 	}
 	
 	public void registerCommands() {
@@ -238,6 +244,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		getCommand("rur").setExecutor(commandExec);
 		getCommand("fullenchant").setExecutor(commandExec);
 		getCommand("entitylist").setExecutor(commandExec);
+		getCommand("freeze").setExecutor(commandExec);
 	}
 	
 	public void onEnable() {

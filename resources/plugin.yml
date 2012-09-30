@@ -29,3 +29,5 @@ commands:
   entitylist:
     description: write the nearby entity's amount
     aliases: [el]
+  freeze:
+    description: Freez a player

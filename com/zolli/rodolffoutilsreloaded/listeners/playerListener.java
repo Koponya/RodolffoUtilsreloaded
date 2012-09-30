@@ -23,6 +23,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.earth2me.essentials.User;
@@ -374,6 +375,15 @@ public class playerListener implements Listener {
 	@EventHandler(priority=EventPriority.NORMAL)
 	public void playerListName(PlayerChangedWorldEvent e) {
 		setPlayerListName(e.getPlayer());
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void freezPlayer(PlayerMoveEvent e) {
+		String playerName = e.getPlayer().getName();
+		
+		if(plugin.freezedPlayer.contains(playerName)) {
+			e.setCancelled(true);
+		}
 	}
 	
 	/**

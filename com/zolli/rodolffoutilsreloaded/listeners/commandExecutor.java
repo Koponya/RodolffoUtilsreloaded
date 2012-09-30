@@ -26,6 +26,7 @@ public class commandExecutor implements CommandExecutor {
 	private String matchedPlayers = null;
 	private Player bannedPlayer;
 	private Player unbannedPlayer;
+	private Player freezedPlayer;
 	private rodolffoUtilsReloaded plugin;
 	private textUtils tu = new textUtils();
 	public commandExecutor(rodolffoUtilsReloaded instance) {
@@ -437,6 +438,49 @@ public class commandExecutor implements CommandExecutor {
 			}
 			p.sendMessage(plugin.messages.getString("entitylist.color")+plugin.messages.getString("entitylist.msg").replace("%i", Integer.toString(count)));
 		}
+		
+		if(command.getName().equalsIgnoreCase("freeze")) {
+			if (!sender.isOp() && !plugin.perm.has(sender, "rur.freeze")) {
+				sender.sendMessage(plugin.messages.getString("common.noperm"));
+				return true;
+			}
+			
+			if(args.length != 1) {
+				sender.sendMessage(plugin.messages.getString("freeze.usage"));
+				return true;
+			}
+			List<Player> mathcPlayerList = Bukkit.matchPlayer(args[0]);
+			
+			if(mathcPlayerList.isEmpty() == false) {
+				if(mathcPlayerList.size() == 1) {
+					freezedPlayer = mathcPlayerList.get(0);
+					String playerName = freezedPlayer.getName();
+					
+					if(plugin.freezedPlayer.contains(playerName)) {
+						plugin.freezedPlayer.remove(playerName);
+						sender.sendMessage(plugin.messages.getString("freeze.removed").replace("(PLAYER)", playerName));
+					} else {
+						plugin.freezedPlayer.add(playerName);
+						sender.sendMessage(plugin.messages.getString("freeze.sucess").replace("(PLAYER)", playerName));
+					}
+				} else {
+					sender.sendMessage(plugin.messages.getString("common.multipleMatch"));
+					
+					for(Player p : mathcPlayerList) {
+						if(matchedPlayers == null) {
+							matchedPlayers = p.getName() + ", ";
+						} else {
+							matchedPlayers = matchedPlayers + p.getName() + ", ";
+						}
+					}
+					sender.sendMessage("§2" + matchedPlayers);
+					matchedPlayers = null;
+				}
+			} else {
+				sender.sendMessage(plugin.messages.getString("common.noPlayerFound"));
+			}
+		}
+		
 		return false;
 	}
 

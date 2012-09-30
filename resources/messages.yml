@@ -61,3 +61,7 @@ entitylist:
 slimeChunk:
   isSlimeChunk: '§2Ez egy slime chunk!'
   isNotSlimeChunk: '§4Ezen a chunkon nincsenek slimeok!'
+freeze:
+  usage: '§4Használat: /freeze <player>'
+  sucess: '§2(PLAYER) lefagyasztva!'
+  removed: '§4(PLAYER) mostantól újra mozoghat!'
