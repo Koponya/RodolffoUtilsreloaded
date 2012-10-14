@@ -1,11 +1,15 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -14,6 +18,7 @@ import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
@@ -121,4 +126,16 @@ public class blockListener implements Listener {
 		}
 	}
 	
+	/*@EventHandler(priority=EventPriority.NORMAL)
+	public void plantSapling(LeavesDecayEvent e) {
+		Collection<ItemStack> drops = e.getBlock().getDrops();
+		Iterator<ItemStack> dropsIterator = drops.iterator();
+		Location blockLoc = e.getBlock().getLocation();
+		
+		while(dropsIterator.hasNext()) {
+			ItemStack drop = dropsIterator.next();
+			
+			
+		}
+	}*/
 }
