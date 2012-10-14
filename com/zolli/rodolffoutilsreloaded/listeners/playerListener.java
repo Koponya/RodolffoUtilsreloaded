@@ -85,15 +85,6 @@ public class playerListener implements Listener {
 				entityPig.setPassenger(player);
 				e.setCancelled(true);
 			}
-			
-			
-			/*if((entityPig.hasSaddle()) && (entityPig.getPassenger() == null) && (pl.isSneaking()) && (plugin.perm.has(player, "rur.getBackSaddle") || pl.isOp())) {
-				entityPig.setSaddle(false);
-				entityPig.getWorld().dropItem(entityPig.getLocation(), new ItemStack(Material.SADDLE, 1));
-				e.setCancelled(true);
-			} else if (entityPig.hasSaddle() && (entityPig.getPassenger() instanceof Player)) {
-				entityPig.eject();
-			}*/
 		}
 		
 		if(entity instanceof Spider) {
