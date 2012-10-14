@@ -214,7 +214,6 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		commandExec = new commandExecutor(this);
 		recipes = new recipes();
 		recipes.createRecipes(this);
-		logPrefix = "[" + pdfile.getName() + "] ";
 	}
 	
 	public void registerListeners() {
@@ -248,6 +247,7 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 	}
 	
 	public void onEnable() {
+		logPrefix = "[" + pdfile.getName() + "] ";
 		perm = new permHandler(this);
 		econ = new econHandler(this);
 		scs = this.setupScs();
