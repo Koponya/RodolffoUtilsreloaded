@@ -12,6 +12,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -440,6 +441,10 @@ public class commandExecutor implements CommandExecutor {
 		}
 		
 		if(command.getName().equalsIgnoreCase("freeze")) {
+			if(sender instanceof ConsoleCommandSender) {
+				System.out.println("You can only use this command In-Game!");
+			}
+			
 			if (!sender.isOp() && !plugin.perm.has(sender, "rur.freeze")) {
 				sender.sendMessage(plugin.messages.getString("common.noperm"));
 				return true;
