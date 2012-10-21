@@ -1,15 +1,11 @@
 package com.zolli.rodolffoutilsreloaded.listeners;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -18,7 +14,6 @@ import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.zolli.rodolffoutilsreloaded.rodolffoUtilsReloaded;
@@ -134,8 +129,18 @@ public class blockListener implements Listener {
 		
 		while(dropsIterator.hasNext()) {
 			ItemStack drop = dropsIterator.next();
+			int yLoc = (int) blockLoc.getY();
 			
-			
+			for(int i = yLoc ; i > yLoc - 15 ; i--) {
+				Location fallLoc = new Location(blockLoc.getWorld(), blockLoc.getX(), i, blockLoc.getZ());
+				Block block = fallLoc.getBlock();
+				
+				if(block.getType() == Material.GRASS) {
+					Location plantLoc = new Location(blockLoc.getWorld(), blockLoc.getX(), i+1, blockLoc.getZ());
+					Block plant = plantLoc.getBlock();
+					plant.setType(Material.DIAMOND_BLOCK);
+				}
+			}
 		}
 	}*/
 }
