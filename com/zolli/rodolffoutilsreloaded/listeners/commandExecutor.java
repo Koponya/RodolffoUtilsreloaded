@@ -27,7 +27,6 @@ public class commandExecutor implements CommandExecutor {
 	private String matchedPlayers = null;
 	private Player bannedPlayer;
 	private Player unbannedPlayer;
-	private Player freezedPlayer;
 	private rodolffoUtilsReloaded plugin;
 	private textUtils tu = new textUtils();
 	public commandExecutor(rodolffoUtilsReloaded instance) {
@@ -441,10 +440,6 @@ public class commandExecutor implements CommandExecutor {
 		}
 		
 		if(command.getName().equalsIgnoreCase("freeze")) {
-			if(sender instanceof ConsoleCommandSender) {
-				System.out.println("You can only use this command In-Game!");
-			}
-			
 			if (!sender.isOp() && !plugin.perm.has(sender, "rur.freeze")) {
 				sender.sendMessage(plugin.messages.getString("common.noperm"));
 				return true;
@@ -455,8 +450,9 @@ public class commandExecutor implements CommandExecutor {
 				return true;
 			}
 			List<Player> mathcPlayerList = Bukkit.matchPlayer(args[0]);
+			Player freezedPlayer;
 			
-			if(mathcPlayerList.isEmpty() == false) {
+			if(! (mathcPlayerList.isEmpty())) {
 				if(mathcPlayerList.size() == 1) {
 					freezedPlayer = mathcPlayerList.get(0);
 					String playerName = freezedPlayer.getName();
