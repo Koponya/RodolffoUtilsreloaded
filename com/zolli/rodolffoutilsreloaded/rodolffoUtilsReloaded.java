@@ -252,8 +252,6 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		ess = this.setupEssentials();
 		this.registerListeners();
 		this.registerCommands();
-		recipes = new recipes();
-		recipes.createRecipes(this);
 		
 		if(scs == null) {
 			this.log.warning(this.logPrefix + "ShowCaseStandalone not found! Disabling SCS support!");
@@ -273,6 +271,9 @@ public class rodolffoUtilsReloaded extends JavaPlugin {
 		
 		this.lagDetect = new LagDetectThread(this);
 		this.lagDetect.start();
+		
+		recipes = new recipes();
+		recipes.createRecipes(this);
 		
 		log.info(this.logPrefix + "Version: " + pdfile.getVersion() + " Sucessfully enabled!");
 	}
