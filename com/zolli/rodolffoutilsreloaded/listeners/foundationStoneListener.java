@@ -17,7 +17,7 @@ public class foundationStoneListener implements Listener {
 	
 	@EventHandler(priority=EventPriority.HIGH)
 	public void signPlace(SignChangeEvent e) {
-		
+
 	}
 	
 }
