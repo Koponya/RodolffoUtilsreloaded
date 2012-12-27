@@ -67,60 +67,6 @@ public class playerListener implements Listener {
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void giveBackSaddle(PlayerInteractEntityEvent e) {
-		Entity entity = e.getRightClicked();
-		Player player = e.getPlayer();
-		
-		if(entity instanceof Pig) {
-			Pig entityPig = (Pig) entity;
-			
-			if((entityPig.hasSaddle()) && !(entityPig.getPassenger() instanceof Player) && (player.isSneaking()) && (plugin.perm.has(player, "rur.getBackSaddle") || player.isOp())) {
-				entityPig.setSaddle(false);
-				entityPig.getWorld().dropItemNaturally(entityPig.getLocation(), new ItemStack(Material.SADDLE, 1));
-				e.setCancelled(true);
-			} else if((entityPig.hasSaddle()) && (entityPig.getPassenger() instanceof Player)) {
-				entityPig.eject();
-				e.setCancelled(true);
-			} else if((entityPig.hasSaddle()) && !(entityPig.getPassenger() instanceof Player)) {
-				entityPig.setPassenger(player);
-				e.setCancelled(true);
-			}
-		}
-		
-		if(entity instanceof Spider) {
-			
-			Spider entitySpider = (Spider) entity;
-			
-			if(plugin.perm.has(player, "rur.rideSpider") && (entitySpider.getPassenger() == null)) {
-				entitySpider.setPassenger(player);
-			} else if(plugin.perm.has(player, "rur.rideSpider") && (entitySpider.getPassenger() == e.getPlayer())) {
-				entitySpider.eject();
-			}
-			
-		}
-		
-	}
-	
-	@EventHandler(priority = EventPriority.NORMAL)
-	public void giveBackSaddleOnDeath(EntityDeathEvent e) {
-		
-		Entity entity = e.getEntity();
-		
-		if(e.getEntity() instanceof Pig) {
-			
-			Pig entityPig = (Pig) entity;
-			
-			if(entityPig.getKiller()!=null && plugin.perm.has(entityPig.getKiller(), "rur.getBackSaddle") && plugin.config.getBoolean("pigDropSaddleOnDeath")) {
-				
-				e.getDrops().add(new ItemStack(Material.SADDLE, 1));
-				
-			}
-			
-		}
-		
-	}
-	
-	@EventHandler(priority = EventPriority.NORMAL)
 	public void buttonPress(PlayerInteractEvent e) {
 		
 		pl = e.getPlayer();
